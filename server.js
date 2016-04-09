@@ -1,8 +1,8 @@
+/*
 //Uncomment this if you want to run this locally, and add a .env file.
-
 var dotenv = require('dotenv');
 dotenv.load();
-
+*/
 
 var express = require('express');
 var mongoose = require('mongoose');
