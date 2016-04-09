@@ -1,0 +1,176 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	/*font-family: 'codropsicons';
+	src:url('../fonts/codropsicons/codropsicons.eot');
+	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');*/
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+html, body, .container {
+	height: 100%;
+}
+
+body {
+	background: #fff;
+	color: #fff;
+	font-weight: 400;
+	font-size: 1em;
+	font-family: 'Raleway', Arial, sans-serif;
+	overflow: hidden;
+	overflow-y: scroll;
+	min-height: 590px;
+}
+
+a {
+	color: rgba(0,0,0,0.3);
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover, a:focus {
+	color: #9e61e4;
+}
+
+.box {
+	background-color: #dfc8ca;
+	padding: 6.25rem 1.25rem;
+}
+
+.box + .box {
+	margin-top: 2.5rem;
+}
+
+#logo {
+	margin-bottom: 20px;
+    border-radius: 25px;
+    background: url(../img/wwdcscholarlogo.jpg) no-repeat;
+    background-size:contain;
+    padding: 20px; 
+    width: 150px; 
+    height: 150px; 
+    margin-left: -40px;
+}
+
+#logoForm {
+	float: left;
+	margin-top: 40px;
+	margin-left: 30px;
+    border-radius: 25px;
+    background: url(../img/wwdcscholarlogo.jpg) no-repeat;
+    background-size:contain;
+    padding: 20px; 
+    width: 50px; 
+    height: 50px; 
+}
+
+
+
+h1.frontContent{
+	font-weight: normal;
+	color:#7853a2; 
+	padding-top:30px;
+}
+
+p.frontContent{
+	font-weight: normal;
+	color:#333333; 
+	margin-bottom:30px;
+}
+
+a.front {
+    display: inline-block;
+	outline: none;
+	cursor: pointer;
+	border: solid 2px #7853a2;
+	background: #fff;
+	text-align: center;
+	text-decoration: none;
+	color: #7853a2;
+	font: 14px/100% "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding: .5em 2em .55em;
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .3em;
+	margin-bottom: 30px;
+	margin-right: 30px;
+}
+
+
+a.front:hover {
+	background: #7853a2;
+	color: #fff;
+}
+
+a.front:active {
+	position: relative;
+	top: 1px;
+}
+
+a.footer {
+	color: #7853a2;
+	font-weight: bold;
+}
+
+a.footer:hover {
+	color: #823bd2;
+	font-weight: bold;
+}
+
+hr { 
+	border: 0; 
+	height: 0; 
+	border-top: 1px solid rgba(0, 0, 0, 0.1); 
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	margin-bottom: 10px;
+ }
+
+.content-container{
+	margin-left: -40px;
+	margin-right: 80px;
+}
+
+.form-post .fs-fields textarea {
+	padding: 0.25em;
+	width: 100%;
+	height: 400px;
+	border: 2px solid rgba(0,0,0,0.2);
+	background-color: transparent;
+	color: #7853a2;
+	opacity: 0.8;
+	font-weight: 700;
+	font-size: 0.85em;
+	resize: none;
+}
+
+@media screen and (max-width: 52.5em) {
+	#logoForm {
+		margin-left: 20px;
+	}
+
+	.js .fs-form-full .fs-fields > li {
+    position: absolute;
+    width: 120%;
+}
+
+/* For Safari */
+.invalid input:required:invalid {
+    background: #BE4C54;
+}
+
+.invalid input:required:valid {
+    background: #17D654 ;
+}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+}
+

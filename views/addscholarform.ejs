@@ -1,0 +1,171 @@
+<% layout('layout') -%> 
+
+<div class="container">
+
+    <div class="fs-form-wrap" id="fs-form-wrap">
+        <a href="/">
+        <div id="logoForm"></div>
+        </a>
+        <div class="fs-title">
+            <h1> Add yourself in </h1>
+        </div>
+
+
+<form id="addScholar" method="post" action="/addscholar" enctype = "multipart/form-data" class="fs-form fs-form-full" autocomplete="off">
+
+    <ol class="fs-fields">
+
+        <!-- WWDC Scholar -->
+        <!-- What batch are you? -->
+       <li data-input-trigger>
+            <label class="fs-field-label fs-anim-upper" for="batchWWDC" data-info="We will use this to add your profile in their respective batches">What Batch of WWDCScholars or WWDCStudents are you part of? Select all that apply.</label>
+            <div class="fs-radio-group fs-checkbox-custom clearfix fs-anim-lower" >
+                <span><input id="batchWWDC" name="batchWWDC" type="checkbox" value="2015" required/><label for="batchWWDC">2015</label></span>
+                <span><input id="batchWWDC" name="batchWWDC" type="checkbox" value="2014"/><label for="batchWWDC">2014</label></span>
+                <span><input id="batchWWDC" name="batchWWDC" type="checkbox" value="2013"/><label for="batchWWDC">2013</label></span>
+                <span><input id="batchWWDC" name="batchWWDC" type="checkbox" value="2012"/><label for="batchWWDC">2012</label></span>
+                <span><input id="batchWWDC" name="batchWWDC" type="checkbox" value="2011"/><label for="batchWWDC">2011</label></span>
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="firstName">First Name</label>
+            <input class="fs-anim-lower" id="firstName" name="firstName" type="text" placeholder="Tim" required/>
+        </li>
+
+         <li>
+            <label class="fs-field-label fs-anim-upper" for="lastName">Last Name?</label>
+            <input class="fs-anim-lower" id="lastName" name="lastName" type="text" placeholder="Cook" required/>
+        </li>
+
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="acceptanceEmail" data-info="This is for verification purposes only.">Upload a screenshot of your acceptance email</label>
+            <div class="fs-file-custom clearfix fs-anim-lower">
+                <input type="file" class="fs-anim-lower" id="acceptanceEmail" name="acceptanceEmail" type="text" placeholder="" required/>
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="email" data-info="So we can contact you">Email:</label>
+            <input type="email" class="fs-anim-lower" id="email" name="email" placeholder="your@email.com" required/>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="profilePic" data-info="This is how they would see you in your portfolio">Add a profile pic (250x250px in size or just make sure it's square.)"</label>
+            <div class="fs-file-custom clearfix fs-anim-lower">
+                <input type="file" class="fs-anim-lower" id="profilePic" name="profilePic" placeholder="" required/>
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="birthday" data-info="mm/dd/yyyy in format">Birthday</label>
+            <input type="date" class="fs-anim-lower" id="birthday" name="birthday" placeholder="mm/dd/yyyy" required/>
+        </li>
+
+        <!-- Age AutoCompute Based on the day they were scholars -->
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="age" data-info="">Age</label>
+            <input type="text" class="fs-anim-lower" id="age" name="age" pattern="[0-9]*" placeholder="15" required/>
+        </li>
+
+        <li data-input-trigger>
+            <label class="fs-field-label fs-anim-upper" for="gender" data-info="We will use this for data purposes only">Gender</label>
+            <div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
+                <span><input id="gender" name="gender" type="radio" value="Male"/><label for="gender" class="radio-male">Male</label></span>
+                <span><input id="gender" name="gender" type="radio" value="female"/><label for="gender" class="radio-female">Female</label></span>
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="location">Location</label>
+            <input type="text" class="fs-anim-lower" id="location" name="location" placeholder="San Francisco, California" required/>
+        </li>
+
+        <!-- TO DO: Add counter and then limit typing -->
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="shortBio">Write something about yourself (Limit 250 characters)</label>
+            <textarea class="fs-anim-lower" id="shortBio" name="shortBio" placeholder="Write something about yourself" required/></textarea>
+        </li>
+
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="screenshotOne" data-info="Showcase your winning app, minimum of 1, max of 4 screenshots">Upload a screenshot of your winning app. (Screenshot No. 1)</label>
+            <div class="fs-file-custom clearfix fs-anim-lower">
+                <input type="file" class="fs-anim-lower" id="screenshotOne" name="screenshotOne" placeholder="" required/>
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="screenshotTwo" data-info="Showcase your winning app, minimum of 1, max of 4 screenshots">Upload a screenshot of your winning app. (Screenshot No. 2)</label>
+            <div class="fs-file-custom clearfix fs-anim-lower">
+                <input type="file" class="fs-anim-lower" id="screenshotTwo" name="screenshotTwo" placeholder="">
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="screenshotThree" data-info="Showcase your winning app, minimum of 1, max of 4 screenshots">Upload a screenshot of your winning app. (Screenshot No. 3)</label>
+            <div class="fs-file-custom clearfix fs-anim-lower">
+                <input type="file" class="fs-anim-lower" id="screenshotThree" name="screenshotThree" placeholder="">
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="screenshotFour" data-info="Showcase your winning app, minimum of 1, max of 4 screenshots">Upload a screenshot of your winning app. (Screenshot No. 4)</label>
+            <div class="fs-file-custom clearfix fs-anim-lower">
+                <input type="file" class="fs-anim-lower" id="screenshotFour" name="screenshotFour" placeholder="">
+            </div>
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="videoLink" data-info="Show what you did in video style">Video Link</label>
+            <input type="text" class="fs-anim-lower" id="videoLink" name="videoLink" placeholder="www.youtube.com/yourvideo">
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="githubLinkApp" data-info="Showcase your winning app in code if you like it">Github Link for your winning app submission</label>
+            <input type="text" class="fs-anim-lower" id="githubLinkApp" name="githubLinkApp" placeholder="www.github.com/yourapplink">
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="twitter" data-info="Tell them how they will connect with you on Twitter">Twitter</label>
+            <input type="text" class="fs-anim-lower" id="twitter" name="twitter" type="text" placeholder="www.twitter.com/yourtwitterhandle">
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="facebook" data-info="Tell them how they with connect with you on Facebook">Facebook</label>
+            <input type="text" class="fs-anim-lower" id="facebook" name="facebook" type="text" placeholder="www.facebook.com/yourfacebookaccount">
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="github" data-info="Show them your skills with your Github Account">Github Account</label>
+            <input type="text" class="fs-anim-lower" id="github" name="github" type="text" placeholder="www.github.com/yourgithubaccount">
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="linkedin" data-info="Connect with others using Linkedin">Linkedin</label>
+            <input type="text" class="fs-anim-lower" id="linkedin" name="linkedin" type="text" placeholder="www.linkedin.com/yourlinkedaccount">
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="website" data-info="Show them what you got using your website">Website</label>
+            <input type="text" class="fs-anim-lower" id="website" name="website" type="text" placeholder="www.yourwebsite.com">
+        </li>
+
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="itunes" data-info="Show them your apps">App Store Developer Account Link</label>
+            <input type="text" class="fs-anim-lower" id="itunes" name="itunes" type="text" placeholder="www.itunes.com/youraccount">
+        </li>
+
+        
+    </ol><!-- /fs-fields -->
+
+    <button class="fs-submit" type="submit" id="submit">Add yourself in</button>
+
+</form>
+
+
+    </div><!-- /fs-form-wrap -->
+
+</div><!-- /container -->
+

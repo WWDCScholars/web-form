@@ -1,0 +1,86 @@
+<% layout('layout2') -%> 
+
+<!-- //post must be added by verified WWDCScholars or WWDCStudents, if you haven't added yourself in yet - Add Scholar form  -->
+
+<!-- //If you are waiting for verification and want to post already, just submit your post and add in you full name and email -->
+
+<div class="container">
+
+    <div class="fs-form-wrap form-post" id="fs-form-wrap">
+
+        <a href="/" target="_blank">
+        <div id="logoForm"></div>
+        </a>
+        <div class="fs-title">
+            <h1>Add your post</h1>
+        </div>
+
+        <form id="addPost" method="post" action="/addpost" enctype = "multipart/form-data" class="fs-form fs-form-full" autocomplete="off">
+
+            <ol class="fs-fields fs-post">  
+
+                <li>
+            	<div class="">
+                    <input type="text" name="title" id="title" placeholder="Title" title="A Title is required to submit post" required/>
+                </div>
+
+                <div class="">
+            	    <textarea name="content" rows="10" cols="80" placeholder="Start writing here..." title="Content is required to submit post" required/></textarea>
+            	</div>
+
+                <p>Resources:</p>
+
+            	<div class="">
+                	<input type="file" name="images" id="images" placeholder="Add Images here"> 
+                    <label class="infolabel" for="images">If you have any images about or related to this post, add the link here.</label>
+                </div>
+
+                <br>
+
+                <div class="">
+                    <input class="placeHold" type="text" name="videoLink" id="videoLink" placeholder="www.youtube.com/yourvideo">
+                     <label class="infolabel" for="videoLink">If you have any videos about this post, add the link here.</label>
+                </div>
+
+                <br>
+
+                <div class="">
+                    <input type="text" name="scholarName" id="scholarName" placeholder="Full Name" title="Please add your name so we can attribute the post to you" required/>
+                    <label class="infolabel" for="scholarName">Your Full Name as submitted on the wwdcscholar form</label>
+                </div>
+
+                <br>
+
+                <div class="">
+                    <input type="text" name="scholarLink" id="scholarLink" placeholder="http://wwdcscholars.com/WWDC-Scholars-Web-2015/detail.php?page=UNIQUEID">
+                    <label class="infolabel" for="scholarLink">Your Scholar Link found in WWDCScholars.com website</label>
+                </div>
+
+                <br>
+
+                <div class="">
+                    <input type="email" name="scholarEmail" id="scholarEmail" placeholder="your@email.com" title="email needed name@email.com" required/>
+                    <label class="infolabel" for="scholarEmail">If you haven't added yourself in the portfolio, add your email here. Don't forget to create your own portfolio too. <a href="/addscholar" target="_blank">Add Yourself here.</a></label>
+                </div>
+
+                <br>
+
+                <div class="form-tags">
+                    <input type="text" class="form-control" name="tags" id="tags" placeholder="Swift Lessons,Ebook" title="one tag is enough" required/>
+                    <label class="infolabel" for="tags">Add some tags about what topic are you talking about? Please separate by commas. Examples are: WWDC Experience, App's Out, Games, Swift Lessons, Objective C Lessons, Animation</label>
+                </div>
+
+            	<div class="center submitButtonPost">
+                    <button class="fs-submit-post" type="submit" id="submit">Submit Post</button>
+                </div>
+            </li>
+
+         </ol><!-- /fs-fields -->
+
+    </form>
+
+ </div>
+
+</div>
+
+
