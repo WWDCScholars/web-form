@@ -5,7 +5,9 @@ This year we want to consolidate all the previous batches of scholars known as W
 You can find out more about us at our portfolio website: http://www.wwdcscholars.com or download our app at https://itunes.apple.com/us/app/scholars-of-wwdc/id999731893?mt=8
 
 We are currently working on our new website and app for WWDCScholars. 
+
 Website: https://github.com/WWDCScholars/WWDC-Scholars-Web-2015
+
 iOS App: https://github.com/WWDCScholars/WWDCScholars-iOS
 
 We have bold plans this year including consolidating all the previous batches of scholars known as WWDCStudents and add in the upcoming scholars of 2016 and more.
