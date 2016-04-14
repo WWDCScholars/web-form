@@ -66,7 +66,7 @@
         <!-- Age AutoCompute Based on the day they were scholars -->
         <li>
             <label class="fs-field-label fs-anim-upper" for="age" data-info="">Age</label>
-            <input type="text" class="fs-anim-lower" id="age" name="age" pattern="[0-9]*" placeholder="15" required/>
+            <input type="number" class="fs-anim-lower" id="age" name="age" min="12" placeholder="15" required/>
         </li>
 
         <li data-input-trigger>
@@ -85,7 +85,7 @@
         <!-- TO DO: Add counter and then limit typing -->
         <li>
             <label class="fs-field-label fs-anim-upper" for="shortBio">Write something about yourself (Limit 250 characters)</label>
-            <textarea class="fs-anim-lower" id="shortBio" name="shortBio" placeholder="Write something about yourself" required/></textarea>
+            <textarea class="fs-anim-lower" id="shortBio" name="shortBio" maxlength="250" placeholder="Write something about yourself" required/></textarea>
         </li>
 
 
