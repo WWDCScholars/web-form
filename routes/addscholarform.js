@@ -103,6 +103,7 @@ router.post('/addscholar', function(req, res, next){
 			scholar.birthday = req.body.birthday;
 			scholar.age = req.body.age;
 			scholar.gender = req.body.gender;
+			scholar.iMessage = req.body.iMessageInfo;
 
 			// Move Longtitude Latitude generator in the Admin Dashboard
 			scholar.location = req.body.location;

@@ -25,6 +25,7 @@ var scholarSchema = new Schema({
     linkedin: String,
     website: String,
     itunes: String,
+    iMessage: String,
     numberOfTimesWWDCScholar: Number,
     screenshotOne: String,
     screenshotTwo: String,
