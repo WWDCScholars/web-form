@@ -108,14 +108,102 @@ router.post('/addscholar', function(req, res, next){
 			// Move Longtitude Latitude generator in the Admin Dashboard
 			scholar.location = req.body.location;
 
-			scholar.videoLink = "http://" + req.body.videoLink;
-			scholar.githubLinkApp = "http://" + req.body.githubLinkApp;
-			scholar.twitter = "http://" + req.body.twitter;
-			scholar.facebook = "http://" + req.body.facebook;
-			scholar.github = "http://" + req.body.github;
-			scholar.linkedin = "http://" + req.body.linkedin;
-			scholar.website = "http://" + req.body.website;
-			scholar.itunes = "http://" + req.body.itunes;
+			if (!req.body.videoLink) {
+
+
+			} else {
+
+				if (req.body.videoLink.substring(0,4) == 'http') {
+					scholar.videoLink = req.body.videoLink;
+				} else {
+					scholar.videoLink = "http://" + req.body.videoLink;
+				}
+			}
+
+			if (!req.body.githubLinkApp) {
+				
+			} else {
+
+				if (req.body.githubLinkApp.substring(0,4) == 'http') {
+					scholar.githubLinkApp = req.body.githubLinkApp;
+				} else {
+					scholar.githubLinkApp = "http://" + req.body.githubLinkApp;
+				}
+			
+			}
+			
+			if (!req.body.twitter) {
+				
+			} else {
+
+				if (req.body.twitter.substring(0,4) == 'http') {
+					scholar.twitter = req.body.twitter;
+				} else {
+					scholar.twitter = "http://" + req.body.twitter;
+				}
+
+			}
+
+			if (!req.body.facebook) {
+				
+			} else {
+
+				if (req.body.facebook.substring(0,4) == 'http') {
+					scholar.facebook = req.body.facebook;
+				} else {
+					scholar.facebook = "http://" + req.body.facebook;
+				}
+				
+			}
+
+			if (!req.body.github) {
+				
+			} else {
+
+				if (req.body.github.substring(0,4) == 'http') {
+					scholar.github = req.body.github;
+				} else {
+					scholar.github = "http://" + req.body.github;
+				}
+
+			}
+			
+			if (!req.body.linkedin) {
+				
+			} else {
+
+				if (req.body.linkedin.substring(0,4) == 'http') {
+					scholar.linkedin = req.body.linkedin;
+				} else {
+					scholar.linkedin = "http://" + req.body.linkedin;
+				}
+
+			}
+
+			if (!req.body.website) {
+				
+			} else {
+
+				if (req.body.website.substring(0,4) == 'http') {
+					scholar.website = req.body.website;
+				} else {
+					scholar.website = "http://" + req.body.website;
+				}
+
+			}
+			
+			if (!req.body.itunes) {
+				
+			} else {
+
+				if (req.body.itunes.substring(0,4) == 'http') {
+					scholar.itunes = req.body.itunes;
+				} else {
+					scholar.itunes = "http://" + req.body.itunes;
+				}
+				
+			}
+
 			
 			// batchWWDC
 			var batchWWDCItemsChecked = req.body.batchWWDC;
