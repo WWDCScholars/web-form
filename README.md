@@ -10,7 +10,7 @@ iOS App: https://github.com/WWDCScholars/WWDCScholars-iOS
 
 We have bold plans this year including consolidating all the previous batches of scholars known as WWDCStudents and add in the upcoming scholars of 2016 and more to our website and app.
 
-If you are a previous WWDCScholar or WWDCStudents and want to contribute to improve this form or have any questions, chat with us on [![Gitter](https://img.shields.io/badge/WWDCScholars-JOIN%20CHAT-604887.svg)](https://gitter.im/WWDCScholars/WWDCScholarsHQ)
+If you are a previous WWDCScholar or WWDCStudents and want to contribute to improve this form or have any questions, chat with us on  [![Join the chat!](https://img.shields.io/badge/WWDCScholars-JOIN%20CHAT-604887.svg)](https://gitter.im/WWDCScholars/WWDCScholarsHQ)
 
 If you've just heard about WWDCScholars and want to know more about it, you can check it out here at https://developer.apple.com/wwdc/scholarships/
 
