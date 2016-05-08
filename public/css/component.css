@@ -156,7 +156,7 @@
 
 /* Visibility control of elements */
 .fs-form-full .fs-fields > li,
-.fs-nav-dots, 
+.fs-nav-dots,
 .fs-progress,
 .fs-numbers,
 button.fs-continue,
@@ -553,6 +553,100 @@ input[type='checkbox']:checked {
 
 .fs-form-overview .fs-fields .fs-radio-custom input[type="radio"]:checked + label {
 	color: rgba(0,0,0,0.8);
+}
+
+/*////*/
+
+.fs-fields .fs-radio-app-type input[type="radio"] {
+	position: absolute;
+	display: block;
+	margin: 0 0 0 0;
+	width: 140px;
+	height: 140px;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.fs-fields > li .fs-radio-app-type span {
+	float: left;
+	position: relative;
+	margin-right: 3%;
+	max-width: 200px;
+	width: 140px;
+	height: 140px;
+	text-align: center;
+	font-weight: 700;
+	font-size: 50%;
+	font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgba(120, 83, 162, 0.6);
+	border-radius: 5px;
+	align-content: center;
+	-webkit-transition: background-color 0.3s;
+	transition: background-color 0.3s;
+}
+
+.fs-fields > li .fs-radio-app-type:focus {
+	border-color: rgba(120, 83, 162, 1);
+}
+
+.fs-fields > li .fs-radio-app-type span label {
+	color: rgba(0,0,0,0.4);
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+}
+
+.fs-form-overview .fs-fields > li .fs-radio-app-type span {
+	max-width: 140px;
+	min-width: 140px;
+	max-height: 140px;
+	min-height: 140px;
+
+}
+
+.fs-form-overview .fs-fields > li .fs-radio-app-type span {
+	font-size: 75%;
+}
+
+.fs-fields .fs-radio-app-type label {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	/*height: 100%;*/
+	content: '';
+	opacity: 0.5;
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	pointer-events: none;
+}
+
+.fs-fields > li .fs-radio-app-type span:hover,
+.fs-fields input[type="radio"]:hover {
+	background-color: rgba(120, 83, 162, 0.1);
+}
+
+.fs-fields .fs-radio-custom label:hover::after,
+.fs-fields input[type="radio"]:focus + label::after,
+.fs-fields input[type="radio"]:checked + label::after {
+	opacity: 1;
+	color: #fff;
+}
+
+.fs-fields .fs-radio-app-type input[type="radio"]:checked + label {
+	color: #7853a2;
+	opacity: 0.8;
+}
+
+.fs-form-overview .fs-fields .fs-radio-app-type input[type="radio"]:checked + label {
+	color: rgba(0,0,0,0.8);
+}
+
+.fs-fields > li .fs-radio-app-type span! > input[type="radio"]:checked{
+	background-color: rgba(120, 83, 162, 1);
 }
 
 /* textarea */

@@ -16,7 +16,7 @@ var upload = multer({
         region: process.env.REGION,
         filename: function (req, file, callback) {
 	  	var scholarName = req.body.firstName + req.body.lastName;
-	    callback(null, '2015_' + scholarName + '_' + file.fieldname + path.extname(file.originalname));
+	    callback(null, '2016_' + scholarName + '_' + file.fieldname + path.extname(file.originalname));
 	  	},
         contentType: multerS3.AUTO_CONTENT_TYPE
     })
@@ -121,7 +121,7 @@ router.post('/addscholar', function(req, res, next){
 			}
 
 			if (!req.body.githubLinkApp) {
-				
+
 			} else {
 
 				if (req.body.githubLinkApp.substring(0,4) == 'http') {
@@ -129,11 +129,11 @@ router.post('/addscholar', function(req, res, next){
 				} else {
 					scholar.githubLinkApp = "http://" + req.body.githubLinkApp;
 				}
-			
+
 			}
-			
+
 			if (!req.body.twitter) {
-				
+
 			} else {
 
 				if (req.body.twitter.substring(0,4) == 'http') {
@@ -145,7 +145,7 @@ router.post('/addscholar', function(req, res, next){
 			}
 
 			if (!req.body.facebook) {
-				
+
 			} else {
 
 				if (req.body.facebook.substring(0,4) == 'http') {
@@ -153,11 +153,11 @@ router.post('/addscholar', function(req, res, next){
 				} else {
 					scholar.facebook = "http://" + req.body.facebook;
 				}
-				
+
 			}
 
 			if (!req.body.github) {
-				
+
 			} else {
 
 				if (req.body.github.substring(0,4) == 'http') {
@@ -167,9 +167,9 @@ router.post('/addscholar', function(req, res, next){
 				}
 
 			}
-			
+
 			if (!req.body.linkedin) {
-				
+
 			} else {
 
 				if (req.body.linkedin.substring(0,4) == 'http') {
@@ -181,7 +181,7 @@ router.post('/addscholar', function(req, res, next){
 			}
 
 			if (!req.body.website) {
-				
+
 			} else {
 
 				if (req.body.website.substring(0,4) == 'http') {
@@ -191,9 +191,9 @@ router.post('/addscholar', function(req, res, next){
 				}
 
 			}
-			
+
 			if (!req.body.itunes) {
-				
+
 			} else {
 
 				if (req.body.itunes.substring(0,4) == 'http') {
@@ -201,10 +201,10 @@ router.post('/addscholar', function(req, res, next){
 				} else {
 					scholar.itunes = "http://" + req.body.itunes;
 				}
-				
+
 			}
 
-			
+
 			// batchWWDC
 			var batchWWDCItemsChecked = req.body.batchWWDC;
 			if (batchWWDCItemsChecked.constructor === Array){
@@ -220,7 +220,7 @@ router.post('/addscholar', function(req, res, next){
 				scholar.batchWWDC = batchWWDCItemsChecked;
 				scholar.numberOfTimesWWDCScholar = batchWWDCArray.length;
 			}
-	
+
 			scholar.shortBio = req.body.shortBio;
 			scholar.status = "Pending";
 			scholar.statusComment = "Submitted: " + Date.now() + '. <br>Admin, do something.';
@@ -230,9 +230,9 @@ router.post('/addscholar', function(req, res, next){
 					console.log("Scholar " + req.body.firstName + " " + req.body.lastName + " of Batch " + batchWWDCItemsChecked + " Saved");
 					res.redirect('/thankyou');
 				});
-					
+
 	});
-	
+
 });
 
 router.get('/thankyou', function(req, res, next){

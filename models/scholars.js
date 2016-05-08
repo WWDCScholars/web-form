@@ -11,7 +11,6 @@ var scholarSchema = new Schema({
     profilePic: String,
     smallPicture: String,
     birthday: Date,
-    age: { type: Number, min: 12, max: 65 },
     gender: String,
     location: String,
     latitude: Number,
@@ -36,7 +35,8 @@ var scholarSchema = new Schema({
     createdAt: {type: Date, default:Date.now},
     approvedOn: {type: Date},
     approvedBy: String,
-    updatedAt: {type: Date, default:Date.now}
+    updatedAt: {type: Date, default:Date.now},
+    password: String
 });
 
 module.exports = mongoose.model('Scholar', scholarSchema);

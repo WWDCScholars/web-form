@@ -1,8 +1,8 @@
-/*
+
 //Uncomment this if you want to run this locally, and add a .env file.
 var dotenv = require('dotenv');
 dotenv.load();
-*/
+
 
 var express = require('express');
 var mongoose = require('mongoose');
@@ -19,7 +19,7 @@ var Scholar = require('./models/scholars');
 var app = express();
 
 //connect to mongoose
-mongoose.connect(process.env.DB_URL_LOCAL, function(err){
+mongoose.connect(process.env.DB_URL, function(err){
 	if (err) {
 		console.log(err);
 	} else {
