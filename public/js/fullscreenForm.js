@@ -441,6 +441,10 @@
 				          error = 'INVALIDFILETYPE';
 				          input.value = '';
 				  }
+				}else if (input.id === 'birthday') {
+					if (!validateDate(input.value)) {
+						error = 'INAVLIDDATE';
+					}
 				}
 				else if( input.value === '' ) {
 					error = 'NOVAL';
@@ -469,6 +473,11 @@
 		return true;
 	}
 
+	function validateDate(testdate) {
+	    var date_regex = /^(|(0[1-9])|(1[0-2]))\/((0[1-9])|(1\d)|(2\d)|(3[0-1]))\/((\d{4}))$/ ;
+	    return date_regex.test(testdate);
+	}
+
 	function isEmail(email) {
 	  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	  return regex.test(email);
@@ -484,9 +493,12 @@
 			case 'INVALIDEMAIL' :
 				message = 'Please fill a valid email address';
 				break;
-				case 'INVALIDFILETYPE' :
-					message = 'Uploaded file is not in the correct format (png, jpg or jpeg)';
-					break;
+			case 'INVALIDFILETYPE' :
+				message = 'Uploaded file is not in the correct format (png, jpg or jpeg)';
+				break;
+			case 'INAVLIDDATE' :
+				message = 'Please enter a valid date of birth';
+				break;
 			// ...
 		};
 		this.msgError.innerHTML = message;

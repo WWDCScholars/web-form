@@ -1247,3 +1247,7 @@ input[type=text]::-ms-clear {
 }
 
 }
+
+.character-count {
+	font-size: 0.6em;
+}
