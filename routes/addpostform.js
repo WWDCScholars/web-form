@@ -16,7 +16,7 @@ var upload = multer({
         region: process.env.REGION,
         filename: function (req, file, callback) {
 	  	var blogPost = req.body.title;
-	    callback(null, '2015_' + blogPost + path.extname(file.originalname));
+	    callback(null, '2016_' + blogPost + path.extname(file.originalname));
 	  	},
         contentType: multerS3.AUTO_CONTENT_TYPE
     })

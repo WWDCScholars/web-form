@@ -6,6 +6,8 @@ var path = require('path');
 var fs = require('fs');
 
 var Scholar = require('../models/scholars');
+var SHA256 = require("crypto-js/sha256");
+var CryptoJS = require("crypto-js");
 
 var upload = multer({
     storage: multerS3({
@@ -104,6 +106,9 @@ router.post('/addscholar', function(req, res, next){
 			scholar.age = req.body.age;
 			scholar.gender = req.body.gender;
 			scholar.iMessage = req.body.iMessageInfo;
+
+      var hash = SHA256(req.body.password);
+      scholar.password = hash.toString(CryptoJS.enc.Hex);
 
 			// Move Longtitude Latitude generator in the Admin Dashboard
 			scholar.location = req.body.location;

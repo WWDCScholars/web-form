@@ -36,7 +36,7 @@ var scholarSchema = new Schema({
     approvedOn: {type: Date},
     approvedBy: String,
     updatedAt: {type: Date, default:Date.now},
-    password: String
+    password: { type: String, required: true, default: 'a1003c2f07c09d4ea39e7a72efa786bbc6d6ba6ab90b8a6604c20c15501cbf88' }
 });
 
 module.exports = mongoose.model('Scholar', scholarSchema);
