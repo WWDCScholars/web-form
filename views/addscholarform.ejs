@@ -65,11 +65,21 @@
             <input type="date" class="fs-anim-lower" id="birthday" name="birthday" placeholder="mm/dd/yyyy" required/>
         </li>
 
-        <li>
+<!--         <li>
             <label class="fs-field-label fs-anim-upper" for="gender" data-info="We will use this for data purposes only">Gender</label>
             <div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
+                <span><input id="gender" name="gender" type="radio" value="Male"/><label for="gender" class="radio-male"></label></span>
+                <span><input id="gender" name="gender" type="radio" value="Female"/><label for="gender" class="radio-female"></label></span>
+            </div>
+        </li> -->
+
+        <li data-input-trigger>
+            <label class="fs-field-label fs-anim-upper" for="app_type" data-info="We will use this for data purposes only">Gender</label>
+            <div class="fs-radio-group fs-radio-app-type clearfix fs-anim-lower">
                 <span><input id="gender" name="gender" type="radio" value="Male"/><label for="gender" class="radio-male">Male</label></span>
-                <span><input id="gender" name="gender" type="radio" value="female"/><label for="gender" class="radio-female">Female</label></span>
+                <span><input id="gender" name="gender" type="radio" value="Female"/><label for="gender" class="radio-male">Female</label></span>
+                <span><input id="gender" name="gender" type="radio" value="Others"/><label for="gender" class="radio-others">Others</label></span>
+                <span><input id="gender" name="gender" type="radio" value="DoNotDisclose"/><label for="genderx" class="radio-notdisclose">Do not want to disclose</label></span>
             </div>
         </li>
 
@@ -81,7 +91,7 @@
         <li>
         <label class="fs-field-label fs-anim-upper" for="shortBio" id="shortBioLabel" >Write something about yourself (Limit 250 characters)</label>
         <textarea class="fs-anim-lower" id="shortBio" name="shortBio" maxlength="250" placeholder="Write something about yourself" required/></textarea>
-        <label class="fs-anim-lower character-count" id="charCount" >250 out of 250 characters</label>
+        <label class="fs-anim-lower character-count" id="charCount">250 out of 250 characters</label>
         </li>
 
         <li data-input-trigger>
@@ -92,6 +102,8 @@
                 <span><input id="app_type" name="app_type" type="radio" value="Both"/><label for="app_type" class="radio-both">Both</label></span>
             </div>
         </li>
+
+        <!-- If Appstore or both, link on the app store -->
 
         <li>
             <label class="fs-field-label fs-anim-upper" for="screenshotOne" data-info="Showcase your winning app, minimum of 1, max of 4 screenshots">Upload a screenshot of your winning app. (Screenshot No. 1)</label>
@@ -166,10 +178,12 @@
             <input type="text" class="fs-anim-lower" id="itunes" name="itunes" type="text" placeholder="www.itunes.com/youraccount">
         </li>
 
+        <!--Password -->
         <li>
            <label class="fs-field-label fs-anim-upper" for="lastName">Last but not least: Please enter a password.<br/>You can later edit your details using this password.</label>
            <input class="fs-anim-lower" id="password" name="password" type="password" placeholder="Password" required/>
         </li>
+       
     </ol><!-- /fs-fields -->
 
     <button class="fs-submit" type="submit" id="submit">Add yourself in</button>
