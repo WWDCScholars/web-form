@@ -106,12 +106,26 @@ router.post('/addscholar', function(req, res, next){
 			scholar.age = req.body.age;
 			scholar.gender = req.body.gender;
 			scholar.iMessage = req.body.iMessageInfo;
+			scholar.appType = req.body.app_type;
 
       var hash = SHA256(req.body.password);
       scholar.password = hash.toString(CryptoJS.enc.Hex);
 
 			// Move Longtitude Latitude generator in the Admin Dashboard
 			scholar.location = req.body.location;
+
+			if (!req.body.appStoreSubmissionLink) {
+
+			} else {
+
+				if (req.body.appStoreSubmissionLink.substring(0,4) == 'http') {
+					scholar.appStoreSubmissionLink = req.body.appStoreSubmissionLink;
+				} else {
+					scholar.appStoreSubmissionLink = "https://" + req.body.appStoreSubmissionLink;
+				}
+
+			}
+
 
 			if (!req.body.videoLink) {
 
@@ -208,7 +222,6 @@ router.post('/addscholar', function(req, res, next){
 				}
 
 			}
-
 
 			// batchWWDC
 			var batchWWDCItemsChecked = req.body.batchWWDC;

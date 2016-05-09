@@ -79,7 +79,7 @@
                 <span><input id="gender" name="gender" type="radio" value="Male"/><label for="gender" class="radio-male">Male</label></span>
                 <span><input id="gender" name="gender" type="radio" value="Female"/><label for="gender" class="radio-male">Female</label></span>
                 <span><input id="gender" name="gender" type="radio" value="Others"/><label for="gender" class="radio-others">Others</label></span>
-                <span><input id="gender" name="gender" type="radio" value="DoNotDisclose"/><label for="genderx" class="radio-notdisclose">Do not want to disclose</label></span>
+                <span><input id="gender" name="gender" type="radio" value="DoNotDisclose" required/><label for="gender" class="radio-notdisclose" >Don't want to disclose</label></span>
             </div>
         </li>
 
@@ -89,21 +89,25 @@
         </li>
 
         <li>
-        <label class="fs-field-label fs-anim-upper" for="shortBio" id="shortBioLabel" >Write something about yourself (Limit 250 characters)</label>
+        <label class="fs-field-label fs-anim-upper" for="shortBio" id="shortBioLabel"> Write something about yourself (Limit 250 characters)</label>
         <textarea class="fs-anim-lower" id="shortBio" name="shortBio" maxlength="250" placeholder="Write something about yourself" required/></textarea>
         <label class="fs-anim-lower character-count" id="charCount">250 out of 250 characters</label>
         </li>
 
-        <li data-input-trigger>
-            <label class="fs-field-label fs-anim-upper" for="app_type" data-info="We will use this for data purposes only">What app have you submitted?</label>
+        <li data-input-trigger id="appStoreLink">
+            <label class="fs-field-label fs-anim-upper" for="app_type" data-info="">What have you submitted for the WWDC Scholarship?</label>
             <div class="fs-radio-group fs-radio-app-type clearfix fs-anim-lower">
-                <span><input id="app_type" name="app_type" type="radio" value="Online"/><label for="app_type" class="radio-online">App Store</label></span>
-                <span><input id="app_type" name="app_type" type="radio" value="Offline"/><label for="app_type" class="radio-offline">Offline</label></span>
+                <span><input id="app_type" name="app_type" type="radio" value="Online" required/><label for="app_type" class="radio-online">App Store</label></span>
+                <span><input id="app_type" name="app_type" type="radio" value="Offline" /><label for="app_type" class="radio-offline">Offline</label></span>
                 <span><input id="app_type" name="app_type" type="radio" value="Both"/><label for="app_type" class="radio-both">Both</label></span>
             </div>
         </li>
 
         <!-- If Appstore or both, link on the app store -->
+        <li>
+            <label class="fs-field-label fs-anim-upper" for="appStoreSubmissionLink" data-info="If you have submitted via app store, add the link below.">Winning App Submitted Link</label>
+            <input type="text" class="fs-anim-lower" id="appStoreSubmissionLink" name="appStoreSubmissionLink" placeholder="itunes.apple.com/us/app/scholars-of-wwdc/id999731893?mt=8">
+        </li>
 
         <li>
             <label class="fs-field-label fs-anim-upper" for="screenshotOne" data-info="Showcase your winning app, minimum of 1, max of 4 screenshots">Upload a screenshot of your winning app. (Screenshot No. 1)</label>
@@ -195,7 +199,7 @@
 
 </div><!-- /container -->
 <script>
-$( "#shortBio" ).bind('input propertychange',
+$("#shortBio").bind('input propertychange',
       function() {
         var len = $( "#shortBio" ).val().length;
         if (len >= 500) {
@@ -204,4 +208,59 @@ $( "#shortBio" ).bind('input propertychange',
           $('#charCount').text((250 - len).toString()+" out of 250 characters");
         }
       });
-    </script>
+</script>
+
+<script>
+
+// $(document).ready(function() {
+
+
+$('#app_type').change(function () {
+    // var appTypeValue = $('#addScholar input[name=app_type]:checked').val()
+
+    var appType = $('input[name=app_type]');
+    var appTypeValue = appType.filter(':checked').val();
+
+    console.log(appTypeValue);
+    // if (appTypeValue == 'Online') {
+    //     console.log("Online");
+    // } else if (appTypeValue == 'Offline') {
+    //     console.log("Offline");
+    // } else if (appTypeValue == 'Both') {
+    //     console.log("Both");
+    // }
+}).change();
+
+  // $('#app_type').click(function() {
+  //   console.log($('#app_type').val());
+  // }).click();
+
+// });
+
+//value changes upon click
+
+// var appTypeVal = $("#app_type").val()
+
+// console.log(appTypeVal)
+
+// if (appTypeVal == "Online" || appTypeVal == "Both") {
+//     $("#appStoreLink").append('<li>
+//             <label class="fs-field-label fs-anim-upper" for="location">Location</label>
+//             <input type="text" class="fs-anim-lower" id="location" name="location" placeholder="San Francisco, California" required/>
+//         </li>')
+// } else {
+//     console.log(appTypeVal)
+// }
+//append li
+
+
+
+// if (appTypeVal === "Online" || appTypeVal === "Both" ){
+//     $("#appStoreLink").show()
+// }
+
+// if (appTypeVal === "Offline") {
+//     $("#appStoreLink").hide()
+// }
+
+</script>

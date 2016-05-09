@@ -16,6 +16,8 @@ var scholarSchema = new Schema({
     latitude: Number,
     longtitude: Number,
     shortBio: String,
+    appType: String,
+    appStoreSubmissionLink: String,
     videoLink: String,
     githubLinkApp: String,
     twitter: String,
