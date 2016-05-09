@@ -421,17 +421,22 @@
 							++checked;
 						}
 					} );
+					
 					if( !checked ) {
 						error = 'NOVAL';
 					}
-				}else if (input.id === 'email'){
+
+				} else if( input.value === '' ) {
+					error = 'NOVAL';
+				} else if (input.id === 'email'){
 					// Do email check
 					if (!isEmail(input.value)) {
 						error = 'INVALIDEMAIL';
 					}
 				}else if (input.type === "file") {
 					var ext = input.value.match(/\.(.+)$/)[1];
-				  switch (ext) {
+				  	
+				  	switch (ext) {
 				      case 'jpg':
 				      case 'jpeg':
 				      case 'png':
@@ -445,9 +450,7 @@
 						error = 'INAVLIDDATE';
 					}
 				}
-				else if( input.value === '' ) {
-					error = 'NOVAL';
-				}
+				
 				break;
 
 			case 'select' :
