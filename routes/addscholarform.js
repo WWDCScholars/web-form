@@ -25,11 +25,11 @@ var upload = multer({
 }).fields([{name: 'acceptanceEmail', maxCount: 1},{name: 'profilePic', maxCount: 1},{name: 'screenshotOne', maxCount: 1},{name: 'screenshotTwo', maxCount: 1},{name: 'screenshotThree', maxCount: 1},{name: 'screenshotFour', maxCount: 1}]);
 
 //route
-router.get('/addscholar', function(req, res, next){
+router.get('/', function(req, res, next){
 	res.render('addscholarform');
 });
 
-router.post('/addscholar', function(req, res, next){
+router.post('/', function(req, res, next){
 	var scholar = new Scholar();
 
 	//Middleware

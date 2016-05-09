@@ -12,7 +12,7 @@
         </div>
 
 
-<form id="addScholar" method="post" action="/addscholar" enctype = "multipart/form-data" class="fs-form fs-form-full" autocomplete="off">
+<form id="addScholar" method="post" action="/" enctype = "multipart/form-data" class="fs-form fs-form-full" autocomplete="off">
 
     <ol class="fs-fields">
 
@@ -84,7 +84,7 @@
         </li>
 
         <li>
-            <label class="fs-field-label fs-anim-upper" for="location">Location</label>
+            <label class="fs-field-label fs-anim-upper" for="location" data-info="Add in your City, State, Country">Location</label>
             <input type="text" class="fs-anim-lower" id="location" name="location" placeholder="San Francisco, California" required/>
         </li>
 
@@ -209,6 +209,21 @@ $("#shortBio").bind('input propertychange',
         }
       });
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script>
+    var autocomplete;
+    function initialize() {
+        autocomplete = new google.maps.places.Autocomplete(
+        /** @type {HTMLInputElement} */
+        $('#location'),
+        // (document.getElementById('autocomplete')),
+        { types: ['geocode'] });
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      });
+    }
+</script>
+
 
 <script>
 
