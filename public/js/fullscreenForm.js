@@ -475,10 +475,19 @@
 		return true;
 	}
 
+	// function validateDate(testdate) {
+	//     var date_regex = /^(|(0[1-9])|(1[0-2]))\/((0[1-9])|(1\d)|(2\d)|(3[0-1]))\/((\d{4}))$/ ;
+	//     return date_regex.test(testdate);
+	// }
+
+
+	//YYYY-MM-DD
+	//in chrome it always returns the value of YYYY-MM-DD
 	function validateDate(testdate) {
-	    var date_regex = /^(|(0[1-9])|(1[0-2]))\/((0[1-9])|(1\d)|(2\d)|(3[0-1]))\/((\d{4}))$/ ;
-	    return date_regex.test(testdate);
+    	var date_regex = /^(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))$/ ;
+    	return date_regex.test(testdate);
 	}
+	
 
 	function isEmail(email) {
 	  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
