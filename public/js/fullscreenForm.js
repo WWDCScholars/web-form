@@ -423,7 +423,7 @@
 					} );
 					
 					if( !checked ) {
-						error = 'NOVAL';
+						error = 'NOVALUE';
 					}
 
 				} else if( input.value === '' ) {
@@ -433,7 +433,7 @@
 					if (!isEmail(input.value)) {
 						error = 'INVALIDEMAIL';
 					}
-				}else if (input.type === "file") {
+				} else if (input.type === "file") {
 					var ext = input.value.match(/\.(.+)$/)[1];
 				  	
 				  	switch (ext) {
@@ -447,7 +447,7 @@
 				  }
 				}else if (input.id === 'birthday') {
 					if (!validateDate(input.value)) {
-						error = 'INAVLIDDATE';
+						error = 'INVALIDDATE';
 					}
 				}
 				
@@ -498,6 +498,9 @@
 	FForm.prototype._showError = function( err ) {
 		var message = '';
 		switch( err ) {
+			case 'NOVALUE':
+				message = 'Please select from the following choices before continuing';
+				break;
 			case 'NOVAL' :
 				message = 'Please fill the field before continuing';
 				break;
@@ -507,7 +510,7 @@
 			case 'INVALIDFILETYPE' :
 				message = 'Uploaded file is not in the correct format (png, jpg or jpeg)';
 				break;
-			case 'INAVLIDDATE' :
+			case 'INVALIDDATE' :
 				message = 'Please enter a valid date of birth';
 				break;
 			// ...
