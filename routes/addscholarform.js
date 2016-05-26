@@ -42,7 +42,7 @@ router.post('/', function(req, res, next){
 
 			} else {
 				var imageNameAcceptanceEmail = req.files.acceptanceEmail[0].key;
-				scholar.acceptanceEmail = s3BucketURL + imageNameAcceptanceEmail;
+				scholar.acceptanceEmail2016 = s3BucketURL + imageNameAcceptanceEmail;
 
 				imageNo++;
 				console.log(imageNo);
@@ -62,7 +62,7 @@ router.post('/', function(req, res, next){
 
 			} else {
 				var imageNameScreenshotOne = req.files.screenshotOne[0].key;
-				scholar.screenshotOne = s3BucketURL + imageNameScreenshotOne;
+				scholar.screenshotOne2016 = s3BucketURL + imageNameScreenshotOne;
 
 				imageNo++;
 				console.log(imageNo);
@@ -73,7 +73,7 @@ router.post('/', function(req, res, next){
 
 			} else {
 				var imageNameScreenshotTwo = req.files.screenshotTwo[0].key;
-				scholar.screenshotTwo = s3BucketURL + imageNameScreenshotTwo;
+				scholar.screenshotTwo2016 = s3BucketURL + imageNameScreenshotTwo;
 
 				imageNo++;
 				console.log(imageNo);
@@ -83,7 +83,7 @@ router.post('/', function(req, res, next){
 
 			} else {
 				var imageNameScreenshotThree = req.files.screenshotThree[0].key;
-				scholar.screenshotThree = s3BucketURL + imageNameScreenshotThree;
+				scholar.screenshotThree2016 = s3BucketURL + imageNameScreenshotThree;
 
 				imageNo++;
 				console.log(imageNo);
@@ -93,7 +93,7 @@ router.post('/', function(req, res, next){
 
 			} else {
 				var imageNameScreenshotFour = req.files.screenshotFour[0].key;
-				scholar.screenshotFour = s3BucketURL + imageNameScreenshotFour;
+				scholar.screenshotFour2016 = s3BucketURL + imageNameScreenshotFour;
 
 				imageNo++;
 				console.log(imageNo);
@@ -106,10 +106,10 @@ router.post('/', function(req, res, next){
 			scholar.age = req.body.age;
 			scholar.gender = req.body.gender;
 			scholar.iMessage = req.body.iMessageInfo;
-			scholar.appType = req.body.app_type;
+			scholar.appType2016 = req.body.app_type;
 
-      var hash = SHA256(req.body.password);
-      scholar.password = hash.toString(CryptoJS.enc.Hex);
+      		var hash = SHA256(req.body.password);
+      		scholar.password = hash.toString(CryptoJS.enc.Hex);
 
 			// Move Longtitude Latitude generator in the Admin Dashboard
 			scholar.location = req.body.location;
@@ -119,9 +119,9 @@ router.post('/', function(req, res, next){
 			} else {
 
 				if (req.body.appStoreSubmissionLink.substring(0,4) == 'http') {
-					scholar.appStoreSubmissionLink = req.body.appStoreSubmissionLink;
+					scholar.appStoreSubmissionLink2016 = req.body.appStoreSubmissionLink;
 				} else {
-					scholar.appStoreSubmissionLink = "https://" + req.body.appStoreSubmissionLink;
+					scholar.appStoreSubmissionLink2016 = "https://" + req.body.appStoreSubmissionLink;
 				}
 
 			}
@@ -133,9 +133,9 @@ router.post('/', function(req, res, next){
 			} else {
 
 				if (req.body.videoLink.substring(0,4) == 'http') {
-					scholar.videoLink = req.body.videoLink;
+					scholar.videoLink2016 = req.body.videoLink;
 				} else {
-					scholar.videoLink = "http://" + req.body.videoLink;
+					scholar.videoLink2016 = "http://" + req.body.videoLink;
 				}
 			}
 
@@ -144,9 +144,9 @@ router.post('/', function(req, res, next){
 			} else {
 
 				if (req.body.githubLinkApp.substring(0,4) == 'http') {
-					scholar.githubLinkApp = req.body.githubLinkApp;
+					scholar.githubLinkApp2016 = req.body.githubLinkApp;
 				} else {
-					scholar.githubLinkApp = "http://" + req.body.githubLinkApp;
+					scholar.githubLinkApp2016 = "http://" + req.body.githubLinkApp;
 				}
 
 			}
