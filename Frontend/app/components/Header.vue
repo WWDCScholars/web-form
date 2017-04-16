@@ -1,5 +1,5 @@
 <template lang="pug">
-header
+header.container.title
   h1 WWDCScholars17
 </template>
 
