@@ -1,6 +1,10 @@
 <template lang="pug">
-header.container.title
-  h1 WWDCScholars17
+header(:class="routeClass").container-fluid.title
+  .container
+    h1
+      .wwdc WWDC
+      .scholars Scholars
+    img(src="/images/wwdcscholars-logo.png").logo
 </template>
 
 <script>
@@ -12,7 +16,11 @@ export default {
 
     }
   },
-  computed: {},
+  computed: {
+    routeClass () {
+      return 'header-' + this.$route.path.split('/').filter(part => Boolean(part)).join('-')
+    }
+  },
   mounted() {},
   methods: {},
   components: {}

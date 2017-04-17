@@ -60,11 +60,6 @@ module.exports = {
     module: '{}'
   },
 
-  // babel: {
-  //   presets: ['es2015'],
-  //   plugins: []
-  // },
-
   devServer: {
     historyApiFallback: true,
     noInfo: true,
@@ -80,7 +75,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['Public/*.js', 'Public/*.json', 'Public/js', 'Public/css'], {
       root: __dirname,
-      verbose: false
+      verbose: true
     }),
     new WriteFilePlugin(),
     new ExtractTextPlugin({
