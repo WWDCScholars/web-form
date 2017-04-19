@@ -32,8 +32,9 @@
       .form-comment(v-if="field.comment") {{ field.comment }}
 
   .form-cta-group
-    button().form-cta.form-cta-secondary.form-cta-left Previous
-    button().form-cta.form-cta-primary.form-cta-right Continue
+    button(v-if="currentStepNumber != 0", v-on:click="previousStep").form-cta.form-cta-secondary.form-cta-left Previous
+    button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep").form-cta.form-cta-primary.form-cta-right Continue
+    button(v-if="currentStepNumber === stepCount - 1", v-on:click="submit").form-cta.form-cta-primary.form-cta-right Submit
 </template>
 
 <script>
@@ -54,10 +55,26 @@ export default {
   computed: {
     colorClass () {
       return 'form-color-' + this.step.color
+    },
+    currentStepNumber () {
+      return this.step.slug.split('-')[0]
+    },
+    stepCount () {
+      return this.$store.steps.length
     }
   },
   mounted() {},
-  methods: {},
+  methods: {
+    nextStep () {
+
+    },
+    previousStep () {
+
+    },
+    submit () {
+
+    }
+  },
   components: {}
 }
 </script>

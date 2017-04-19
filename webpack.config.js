@@ -84,6 +84,12 @@ module.exports = {
     })
   ],
 
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js'
+    }
+  },
+
   devtool: 'eval-source-map'
 }
 

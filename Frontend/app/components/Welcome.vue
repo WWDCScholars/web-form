@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'welcome',
-  store: ['wwdcs', 'steps'],
+  store: ['steps'],
   data () {
     return {
       step: this.$store.steps[0]
@@ -33,8 +33,3 @@ export default {
 
 <style lang="css">
 </style>
-
-//- .form.form-fluid
-//-   .form-checkbox(v-for="wwdc in wwdcs")
-//-     input(type="checkbox", name="attended", :value="wwdc", :id="wwdc")
-//-     label(:for="wwdc") {{ wwdc }}
