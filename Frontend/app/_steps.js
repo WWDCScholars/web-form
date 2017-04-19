@@ -2,17 +2,30 @@ export default [
 
   {
     slug: '0-basic',
-    title: 'Let\'s begin with some basics',
-    fields: [
-      { name: 'firstName', type: 'text', placeholder: 'Tim' },
-      { name: 'lastName', type: 'text', placeholder: 'Cook' },
-      { name: 'acceptanceEmail', type: 'file', placeholder: '' },
-      { name: 'email', type: 'text', placeholder: 'tim@apple.com' },
-      { name: 'appliedAs', type: 'radio', options: [
-        { name: 'student', text: 'Student' },
-        { name: 'stem', text: 'Member or Alumni of a STEM Organization' },
-        { name: 'both', text: 'Both' },
-      ] }
+    title: 'Let\'s get you signed up...',
+    color: 'red',
+    groups: [
+      {
+        title: 'Please upload a profile image',
+        fields: [
+          { name: 'profileImage', type: 'file', comment: 'It\'s important that this is an image of you' }
+        ]
+      },
+      {
+        title: 'Enter some basic details about yourself',
+        fields: [
+          { name: 'firstName', type: 'text', placeholder: 'First Name', class: 'form-width-50' },
+          { name: 'lastName', type: 'text', placeholder: 'Last Name', class: 'form-width-50' },
+          { name: 'email', type: 'email', placeholder: 'Email' },
+          { name: 'dateOfBirth', type: 'date', placeholder: 'Date of Birth (dd/mm/yyyy)' }
+        ]
+      },
+      {
+        title: 'Gender',
+        fields: [
+          { name: 'gender', type: 'radio', options: ['male', 'female', 'other'] }
+        ]
+      }
     ]
   },
 

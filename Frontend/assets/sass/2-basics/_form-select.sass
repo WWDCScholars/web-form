@@ -1,0 +1,32 @@
+.form-select
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+  align-items: center
+  margin-top: -15px
+
+  .form-option
+    position: relative
+    margin: 15px 15px 0 0
+
+    label
+      display: block
+      font-weight: normal
+      border: 1px solid $form-border-color
+      width: 100px
+      padding: 10px
+      text-transform: uppercase
+      border-radius: 6px
+      cursor: pointer
+      color: $sch-gray
+      background-color: $background-gray
+      text-align: center
+      transition: background-color 100ms linear, border-color 100ms linear, color 100ms linear
+
+      &:hover
+        background-color: darken($background-gray, 6%)
+
+    input
+      appearance: none
+      outline: none
+      position: absolute

@@ -1,10 +1,11 @@
 <template lang="pug">
-header(:class="routeClass").container-fluid.title
+header(:class="routeClass").container-fluid
   .container
     h1
       .wwdc WWDC
       .scholars Scholars
-    router-link(:to="{ name: 'welcome' }"): img(src="/images/wwdcscholars-logo.png").logo
+    .progress Step 1 of 3
+    //- router-link(:to="{ name: 'welcome' }"): img(src="/images/wwdcscholars-logo.png").logo
 </template>
 
 <script>

@@ -1,0 +1,29 @@
+@mixin clearfix()
+  &:before, &:after
+    content: " "
+    display: table
+
+  &:after
+    clear: both
+
+@mixin container-fixed()
+  margin-right: auto
+  margin-left: auto
+  padding-left: 15px
+  padding-right: 15px
+  +clearfix
+
+.container
+  +container-fixed
+
+  @media (min-width: $screen-sm-min)
+    width: $container-sm
+
+  @media (min-width: $screen-md-min)
+    width: $container-md
+
+  @media (min-width: $screen-lg-min)
+    width: $container-lg
+
+.container-fluid
+  +container-fixed

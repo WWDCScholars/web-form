@@ -1,0 +1,58 @@
+.form
+
+.form-fluid
+  display: flex
+  flex-wrap: wrap
+
+.form-group
+  width: 100%
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+  align-items: center
+  margin-bottom: 30px
+
+  h4
+    width: 100%
+
+  .form-field
+    width: 100%
+    flex-grow: 1
+    margin: 15px 15px 0 0
+
+  .form-width-50
+    width: calc(50% - 15px - 15px)
+
+.form-comment
+  color: $sch-gray
+  margin-top: 15px
+
+.form-cta-group
+  margin-top: 80px
+
+.form-cta
+  background-color: $white
+  width: 160px
+  padding: 10px
+  border: 1px solid transparent
+  border-radius: 6px
+  text-transform: uppercase
+  transition: border-color 100ms linear, background-color 100ms linear
+
+  &.form-cta-right
+    float: right
+
+  &.form-cta-left
+    float: left
+
+.form-input
+  width: 100%
+  font-size: 1em
+  padding: 10px 15px
+  border: 1px solid $form-border-color
+  border-radius: 6px
+  color: $sch-gray
+  transition: border-color 100ms linear, box-shadow 100ms linear
+
+  &::placeholder
+    color: lighten($sch-gray, 24%)
