@@ -1,11 +1,10 @@
 import Vue from 'vue'
 
 // Vue plugins
-// import Http from 'vue-resource'
 import Router from 'vue-router'
 import Store from 'vue-stash'
-// import Events from 'vue-events'
+import VueClip from 'vue-clip'
 
-[Router, Store].forEach(Plugin => Vue.use(Plugin))
+[Router, Store, VueClip].forEach(Plugin => Vue.use(Plugin))
 
 export { Vue, Router }

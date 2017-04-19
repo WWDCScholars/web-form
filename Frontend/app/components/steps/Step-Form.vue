@@ -12,8 +12,18 @@
 
       // *TYPE file
       .form-file(v-else-if="field.type === 'file'")
-        input(type="file", :name="field.name")
-        label(:for="field.name")
+        vue-clip(:options="options")
+          template(slot="clip-uploader-action")
+            div
+              .dz-message.form-file-placeholder: .form-file-icon
+
+          template(slot="clip-uploader-body", scope="props")
+            div(v-for="file in props.files").form-file-preview
+              img(:src="file.dataUrl", :alt="file.name")
+              .file-progress
+                .file-progress-inner
+                  .file-progress-circle.file-progress-left
+                  .file-progress-circle.file-progress-right
 
 
       // *TYPE all
@@ -33,7 +43,12 @@ export default {
   props: ['step'],
   data () {
     return {
-
+      options: {
+        url: '/asdf',
+        paramName: 'file',
+        uploadMultiple: false,
+        // acceptedFiles: ['image/*']
+      }
     }
   },
   computed: {
