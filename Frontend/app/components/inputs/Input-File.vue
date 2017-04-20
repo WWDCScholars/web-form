@@ -24,7 +24,17 @@ export default {
       return this.model.length
     }
   },
-  mounted() {},
+  mounted() {
+    for (var m = 0; m < this.model.length; m++) {
+      const fm = this.model[m]
+      if (fm) {
+        const el = this.getFileElement(m)
+        const preview = el.children[2]
+        preview.src = fm
+        preview.classList.add('show')
+      }
+    }
+  },
   methods: {
     fileAdd () {
       if (this.fileCount >= this.field.max) {
@@ -35,6 +45,9 @@ export default {
     },
     getFileIndex (el) {
       return this.$refs.files.indexOf(el)
+    },
+    getFileElement (index) {
+      return this.$refs.files[index]
     },
     onFileInputChange (event) {
       const input = event.srcElement
