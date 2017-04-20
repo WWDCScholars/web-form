@@ -11,23 +11,14 @@
           label(v-bind:for="option") {{ option }}
 
       // *TYPE file
-      .form-file(v-else-if="field.type === 'file')
-      //- .form-file(v-else-if="field.type === 'file'")
-      //-   vue-clip(:options="options")
-      //-     template(slot="clip-uploader-action")
-      //-       div
-      //-         .dz-message.form-file-placeholder: .form-file-icon
-      //-
-      //-     template(slot="clip-uploader-body", scope="props")
-      //-       div(v-for="file in props.files").form-file-preview
-      //-         img(:src="file.dataUrl", :alt="file.name")
-      //-         .file-progress
-      //-           .file-progress-inner
-      //-             .file-progress-circle.file-progress-left
-      //-             .file-progress-circle.file-progress-right
+      input-file(v-else-if="field.type === 'file'", :field="field", v-model="field.model", @input="evaluateCompletion")
 
+      // *TYPE email
+      .form-input(v-else-if="field.type === 'email'")
+        input(type="email", :name="field.name", :id="field.name", :required="field.required" @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
+        label(:for="field.name").form-title {{ field.placeholder }}
 
-      // *TYPE all
+      // *TYPE text
       .form-input(v-else-if="field.type === 'text'")
         input(type="text", :name="field.name", :id="field.name", :required="field.required" @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
         label(:for="field.name").form-title {{ field.placeholder }}
@@ -36,7 +27,7 @@
 
   .form-cta-group
     button(v-if="currentStepNumber != 0", v-on:click="previousStep").form-cta.form-cta-secondary.form-cta-left Previous
-    button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep").form-cta.form-cta-primary.form-cta-right Continue
+    button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep", :disabled="!stepCompleted").form-cta.form-cta-primary.form-cta-right Continue
     button(v-if="currentStepNumber === stepCount - 1", v-on:click="submit").form-cta.form-cta-primary.form-cta-right Submit
 </template>
 
@@ -47,12 +38,7 @@ export default {
   props: ['step'],
   data () {
     return {
-      options: {
-        url: '/asdf',
-        paramName: 'file',
-        uploadMultiple: false,
-        // acceptedFiles: ['image/*']
-      }
+      stepCompleted: false
     }
   },
   computed: {
@@ -75,6 +61,7 @@ export default {
         for (var f = 0; f < group.fields.length; f++) {
           const field = group.fields[f]
           if (field.required != false) {
+            console.log(field.name, (field.model != undefined))
             if (!field.model) {
               completed = false
             }
@@ -87,9 +74,9 @@ export default {
     onFocusOut (event) {
       const src = event.srcElement
       if (src.value != '') {
-        src.nextSibling.className = 'form-title input-has-value'
+        src.nextSibling.classList.add('input-has-value')
       } else {
-        src.nextSibling.className = 'form-title'
+        src.nextSibling.classList.remove('input-has-value')
       }
     },
 
@@ -103,7 +90,9 @@ export default {
 
     }
   },
-  components: {}
+  components: {
+    'input-file': require('../inputs/Input-File.vue')
+  }
 }
 </script>
 
