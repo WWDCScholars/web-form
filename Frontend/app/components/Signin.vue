@@ -1,6 +1,6 @@
 <template lang="pug">
 .container.color-gray
-  h2.color-green Welcome to WWDCScholars!
+  h2.color-blue Welcome to WWDCScholars!
 
   div(id="apple-sign-in-button")
 </template>
