@@ -38,7 +38,7 @@ export default {
       }
     },
     removeFile (event) {
-      const preview = this.$reds.preview
+      const preview = this.$refs.preview
       this.fileValue = ''
       preview.src = ''
       preview.classList.remove('show')

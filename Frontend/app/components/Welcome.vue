@@ -11,6 +11,7 @@
   hr
 
   step-form(:step="step")
+  div(id="apple-sign-out-button")
 </template>
 
 <script>

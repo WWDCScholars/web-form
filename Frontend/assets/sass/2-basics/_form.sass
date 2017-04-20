@@ -54,7 +54,8 @@
   width: 100%
   position: relative
 
-  input
+  input, textarea
+    position: relative
     width: 100%
     font-size: 1em
     padding: 15px 15px 5px 15px
@@ -73,10 +74,21 @@
     transition: all 100ms linear
 
   input:focus + .form-title
-    top: 12px
+    top: 11px
     font-size: 12px
 
   .form-title.input-has-value
-    top: 12px
+    top: 11px
     font-size: 12px
     color: lighten($sch-gray, 24%)
+
+  .form-optional-mark
+    color: $sch-gray1
+    position: absolute
+    top: 50%
+    right: 15px
+    transform: translateY(-50%)
+    font-size: 0.9em
+
+  .form-title.input-has-value + .form-optional-mark
+    display: none

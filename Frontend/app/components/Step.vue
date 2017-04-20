@@ -1,18 +1,15 @@
 <template lang="pug">
-.container.code.step
-  h2 /* {{ step.title }} */
-  step-form(:fields="step.fields")
-  router-link(:to="'step'").code-button.color-green done()
+.container
+  step-form(:step="step")
 </template>
 
 <script>
-import steps from '../_steps'
 export default {
   name: 'welcome',
-  store: [],
+  store: ['steps'],
   data () {
     return {
-      step: steps[this.$route.params.step.split('-')[0]],
+      step: this.$store.steps[this.$route.params.step.split('-')[0]],
     }
   },
   computed: {},
