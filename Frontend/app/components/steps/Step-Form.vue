@@ -19,9 +19,7 @@
         label(:for="field.name").form-title {{ field.placeholder }}
 
       // *TYPE date
-      .form-input(v-else-if="field.type === 'date'")
-        input(type="date", :name="field.name", :id="field.name", :required="field.required" @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
-        label(:for="field.name").form-title {{ field.placeholder }}
+      input-date(v-else-if="field.type === 'date'", :field="field", v-model="field.model", @input="evaluateCompletion")
 
       //*TYPE textarea
       .form-input(v-else-if="field.type === 'textarea'")
@@ -152,7 +150,8 @@ export default {
     }
   },
   components: {
-    'input-file': require('../inputs/Input-File.vue')
+    'input-file': require('../inputs/Input-File.vue'),
+    'input-date': require('../inputs/Input-Date.vue')
   }
 }
 </script>
