@@ -1,6 +1,6 @@
 <template lang="pug">
 .form-input.form-date
-  Flatpickr(:options="fpOptions", v-model="model")
+  Flatpickr(:options="fpOptions", v-model="model", :id="field.name")
   label(:for="field.name", ref="label").form-title {{ field.placeholder }}
 </template>
 
