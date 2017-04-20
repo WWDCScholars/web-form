@@ -9,12 +9,23 @@ export default {
   store: ['steps'],
   data () {
     return {
-      step: this.$store.steps[this.$route.params.step.split('-')[0]],
+      step: null,
     }
   },
   computed: {},
-  mounted() {},
-  methods: {},
+  mounted () {},
+  created () {
+    this.changeStep()
+  },
+  watch: {
+    '$route': 'changeStep'
+  },
+  methods: {
+    changeStep () {
+      this.step = this.$store.steps[this.$route.params.step.split('-')[0]]
+      window.scrollTo(0, 0)
+    }
+  },
   components: {
     'step-form': require('./steps/Step-Form.vue')
   }
