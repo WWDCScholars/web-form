@@ -64,7 +64,7 @@ var steps = [
     }, {
       title: 'Upload some screenshots that showcase your playground submission',
       fields: [
-        { name: 'submissionScreenshot', type: 'file', class: 'form-file-wide', multiple: true }
+        { name: 'submissionScreenshot', type: 'file', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
       ]
     }, {
       title: 'Is your submission available to view anywhere else? Let us know!',
@@ -83,11 +83,16 @@ var steps = [
 // Initialize models of steps
 for (var s = 0; s < steps.length; s++) {
   const step = steps[s]
+  step.finished = false
   for (var g = 0; g < step.groups.length; g++) {
     const group = step.groups[g]
     for (var f = 0; f < group.fields.length; f++) {
       const field = group.fields[f]
-      field.model = ''
+      if (field.type === 'file') {
+        field.model = ['']
+      } else {
+        field.model = ''
+      }
       if (field.required != false) {
         field.required = true
       }
