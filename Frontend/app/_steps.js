@@ -7,7 +7,7 @@ var steps = [
     groups: [{
         title: 'Please upload a profile image',
         fields: [
-          { name: 'profileImage', type: 'file', comment: 'It\'s important that this is an image of you' }
+          { name: 'profileImage', type: 'file', accept: 'image/*', comment: 'It\'s important that this is an image of you' }
         ]
       }, {
         title: 'Enter some basic details about yourself',
@@ -59,12 +59,12 @@ var steps = [
     groups: [{
       title: 'Please provide a screenshot of your acceptance email for this year to validate your profile',
       fields: [
-        { name: 'acceptance', type: 'file', class: 'form-file-wide' }
+        { name: 'acceptance', type: 'file', accept: 'image/*', class: 'form-file-wide' }
       ]
     }, {
       title: 'Upload some screenshots that showcase your playground submission',
       fields: [
-        { name: 'submissionScreenshot', type: 'file', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
+        { name: 'submissionScreenshot', type: 'file', accept: 'image/*', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
       ]
     }, {
       title: 'Is your submission available to view anywhere else? Let us know!',

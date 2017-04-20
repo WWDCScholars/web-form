@@ -1,7 +1,7 @@
 <template lang="pug">
 .form-file-wrapper
   .form-file(ref="files", v-for="fileModel in model")
-    input(type="file", :name="field.name", @change="onFileInputChange")
+    input(type="file", :name="field.name", @change="onFileInputChange", :accept="field.accept")
     .form-file-icon
     img(src="", ref="preview").form-file-preview
     button(@click="removeFile").form-file-remove
