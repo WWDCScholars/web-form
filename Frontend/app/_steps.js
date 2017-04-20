@@ -1,4 +1,4 @@
-export default [
+var steps = [
 
   {
     slug: '0-basic',
@@ -52,40 +52,47 @@ export default [
     }]
   },
 
-  // {
-  //   slug: '2-app',
-  //   title: 'Be proud and stand tall, show the world your winning project',
-  //   fields: [
-  //     { name: 'appSubmittedType', type: 'radio', options: [
-  //       { name: 'playground', text: 'Playground' },
-  //       { name: 'playgroundbook', text: 'Playground Book' }
-  //     ] },
-  //     { name: 'linkToPlayground', type: 'text', placeholder: 'github.com/me/myPlayground' },
-  //     { name: 'screenshots', type: 'file', multiple: true },
-  //     { name: 'videoLink', type: 'text', placeholder: 'youtube.com' }
-  //   ]
-  // },
-  //
-  // {
-  //   slug: '3-contact',
-  //   title: 'Tell the world how they can connect with you',
-  //   fields: [
-  //     { name: 'iMessageAccount', type: 'text', placeholder: 'me@icloud.com or cellphone number', required: false },
-  //     { name: 'githubAccount', type: 'text', placeholder: 'github.com/me', required: false },
-  //     { name: 'twitterAccount', type: 'text', placeholder: 'twitter.com/me', required: false },
-  //     { name: 'facebookAccount', type: 'text', placeholder: 'facebook.com/me', required: false },
-  //     { name: 'linkedInAccount', type: 'text', placeholder: 'linkedin.com/me', required: false },
-  //     { name: 'webseit', type: 'text', placeholder: 'my-website.me', required: false }
-  //   ]
-  // },
-  //
-  // {
-  //   slug: '4-account',
-  //   title: 'Wrapping up submission',
-  //   fields: [
-  //     { name: 'appStoreAccountLink', type: 'text', placeholder: 'itunes.apple.com/us/developer/me', comment: 'Show your apps on the App Store; add your App Store developer link (DO NOT USE SHORT URL)', required: false },
-  //     { name: 'password', type: 'password', comment: 'Password for your acccount' }
-  //   ]
-  // }
+  {
+    slug: '2-application',
+    title: 'Now for the fun part. Show us your submission!',
+    color: 'green',
+    groups: [{
+      title: 'Please provide a screenshot of your acceptance email for this year to validate your profile',
+      fields: [
+        { name: 'acceptance', type: 'file', class: 'form-file-wide' }
+      ]
+    }, {
+      title: 'Upload some screenshots that showcase your playground submission',
+      fields: [
+        { name: 'submissionScreenshot', type: 'file', class: 'form-file-wide', multiple: true }
+      ]
+    }, {
+      title: 'Is your submission available to view anywhere else? Let us know!',
+      fields: [
+        { name: 'submissionYoutube', type: 'url', placeholder: 'YouTube URL', required: false },
+        { name: 'submissionGithub', type: 'url', placeholder: 'GitHub URL', required: false }
+      ]
+    }, {
+      title: 'You\'re good to go! Hit submit and we will review your profile as soon as possible!',
+      fields: []
+    }]
+  }
 
 ]
+
+// Initialize models of steps
+for (var s = 0; s < steps.length; s++) {
+  const step = steps[s]
+  for (var g = 0; g < step.groups.length; g++) {
+    const group = step.groups[g]
+    for (var f = 0; f < group.fields.length; f++) {
+      const field = group.fields[f]
+      field.model = ''
+      if (field.required != false) {
+        field.required = true
+      }
+    }
+  }
+}
+
+export default steps
