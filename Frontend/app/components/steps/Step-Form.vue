@@ -51,7 +51,7 @@
 
   .form-cta-group
     button(v-if="currentStepNumber != 0", v-on:click="previousStep").form-cta.form-cta-secondary.form-cta-left Previous
-    button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep", :disabled="!stepCompleted").form-cta.form-cta-primary.form-cta-right Continue
+    button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep", :disabled="!step.finished").form-cta.form-cta-primary.form-cta-right Continue
     button(v-if="currentStepNumber === stepCount - 1", v-on:click="submit", :disabled="!submittable").form-cta.form-cta-primary.form-cta-right Submit
 </template>
 
@@ -62,7 +62,6 @@ export default {
   props: ['step'],
   data () {
     return {
-      stepCompleted: false,
       submittable: false
     }
   },
@@ -77,19 +76,22 @@ export default {
       return this.$store.steps.length
     }
   },
-  created () {
-    // Initialize models & set input classes
-    // for (var g = 0; g < this.step.groups.length; g++) {
-    //   const group = this.step.groups[g]
-    //   for (var f = 0; f < group.fields.length; f++) {
-    //     const field = group.fields[f]
-    //     if (field.model.length > 0) {
-    //       const el = document.getElementById(field.name)
-    //       console.log(el.nextSibling)
-    //       // el.nextSibling.classList.add('input-has-value')
-    //     }
-    //   }
-    // }
+  mounted () {
+    // Set input classes
+    for (var g = 0; g < this.step.groups.length; g++) {
+      const group = this.step.groups[g]
+      for (var f = 0; f < group.fields.length; f++) {
+        const field = group.fields[f]
+        if (field.placeholder && field.model.length > 0) {
+          const el = document.getElementById(field.name).nextSibling
+          el.classList.add('no-transition')
+          el.classList.add('input-has-value')
+          setTimeout(() => {
+            el.classList.remove('no-transition')
+          }, 200)
+        }
+      }
+    }
   },
   methods: {
     evaluateCompletion () {
@@ -98,15 +100,33 @@ export default {
         const group = this.step.groups[g]
         for (var f = 0; f < group.fields.length; f++) {
           const field = group.fields[f]
+          // TODO: Input validation
           if (field.required != false) {
-            if (!field.model) {
+            if (field.type === 'file') {
+              for (var fn = 0; fn < field.min; fn++) {
+                if (!field.model[fn]) {
+                  completed = false
+                }
+              }
+            } else if (!field.model) {
               completed = false
             }
           }
         }
       }
+      this.step.finished = completed
 
-      this.stepCompleted = completed
+      // If last step check submittable status
+      if (this.currentStepNumber === this.stepCount - 1) {
+        var submittable = true
+        for (var s = 0; s < this.$store.steps.length; s++) {
+          const step = this.$store.steps[s]
+          if (!step.finished) {
+            submittable = false
+          }
+        }
+        this.submittable = submittable
+      }
     },
     onFocusOut (event) {
       const src = event.srcElement
@@ -118,18 +138,17 @@ export default {
     },
 
     nextStep () {
-      if (!this.stepCompleted) {
+      if (!this.step.finished) {
         return
       }
-      console.log(this.$store.steps)
       const next = this.$store.steps[this.currentStepNumber + 1]
       this.$router.push({ name: 'step', params: { step: next.slug } })
     },
     previousStep () {
-
+      this.$router.go(-1)
     },
     submit () {
-
+      console.log('SUBMIT')
     }
   },
   components: {
