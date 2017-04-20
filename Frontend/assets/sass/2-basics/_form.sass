@@ -47,12 +47,31 @@
 
 .form-input
   width: 100%
-  font-size: 1em
-  padding: 10px 15px
-  border: 1px solid $form-border-color
-  border-radius: 6px
-  color: $sch-gray
-  transition: border-color 100ms linear, box-shadow 100ms linear
+  position: relative
 
-  &::placeholder
+  input
+    width: 100%
+    font-size: 1em
+    padding: 15px 15px 5px 15px
+    border: 1px solid $form-border-color
+    border-radius: 6px
+    color: $sch-gray
+    transition: border-color 100ms linear, box-shadow 100ms linear
+
+  .form-title
+    position: absolute
+    top: 50%
+    left: 15px
+    transform: translateY(-50%)
+    color: lighten($sch-gray, 24%)
+    pointer-events: none
+    transition: all 100ms linear
+
+  input:focus + .form-title
+    top: 12px
+    font-size: 12px
+
+  .form-title.input-has-value
+    top: 12px
+    font-size: 12px
     color: lighten($sch-gray, 24%)
