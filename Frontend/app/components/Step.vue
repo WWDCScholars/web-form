@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+.container.container-outer
   step-form(:step="step")
 </template>
 

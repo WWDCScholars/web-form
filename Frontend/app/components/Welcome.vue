@@ -1,5 +1,5 @@
 <template lang="pug">
-.container.color-gray
+.container.container-outer.color-gray
   h2.color-blue Welcome to WWDCScholars!
   h3.color-blue Are you a Scholarship Winner?
   p.

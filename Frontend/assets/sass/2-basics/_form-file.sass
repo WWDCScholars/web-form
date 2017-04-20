@@ -6,6 +6,7 @@
   border: 1px solid $form-border-color
   border-radius: 6px
   cursor: pointer
+  margin-right: 15px
   transition: border-color 100ms linear, box-shadow 100ms linear
 
   input
@@ -66,3 +67,34 @@
 
 .form-file-preview.show + .form-file-remove
   display: block
+
+.form-file-wrapper
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+
+  .form-file-add
+    width: 125px
+    height: 125px
+    background-color: $white
+    border: 1px solid $form-border-color
+    border-radius: 6px
+    background-image: url("/images/add-icon.png")
+    background-repeat: no-repeat
+    background-size: 40px 40px
+    background-position: center
+    margin-right: 15px
+
+.form-file-wide
+  .form-file
+    width: 150px
+    height: 100px
+
+    .form-file-preview
+      width: 88px
+      height: 70px
+
+  .form-file-wrapper
+    .form-file-add
+      width: 150px
+      height: 100px
