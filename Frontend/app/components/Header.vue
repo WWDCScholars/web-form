@@ -4,8 +4,7 @@ header(:class="routeClass").container-fluid
     h1
       .wwdc WWDC
       .scholars Scholars
-    .progress Step 1 of 3
-    //- router-link(:to="{ name: 'welcome' }"): img(src="/images/wwdcscholars-logo.png").logo
+    //- .progress Step 1 of 3
 </template>
 
 <script>
