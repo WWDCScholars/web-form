@@ -11,6 +11,7 @@ const auth = {
 
   user: {},
 
+scholar: {},
   // CloudKit stuff
   ck: {},
 
@@ -81,6 +82,7 @@ const auth = {
 
             } else {
               var scholar = response.records[0];
+              self.scholar = scholar;
               var wwdcYears = scholar.fields.wwdcYears.value
               var socialMediaRef = scholar.fields.socialMedia
 
@@ -175,8 +177,11 @@ const auth = {
     fields.scholar.wwdcYearInfos = [{ recordName: wwdcYearInfoRecord.recordName, action: 'DELETE_SELF' }]
     fields.scholar.socialMedia = { recordName: socialMediaRecord.recordName, action: 'DELETE_SELF' }
 
+
+    console.log(self.scholar.recordName);
+    console.log(self.scholar.recordChangeTag);
     // Save scholar
-    let scholar = await this._ckSave('Scholar', fields.scholar)
+    let scholar = await this._ckSave('Scholar', fields.scholar, self.scholar.recordName, self.scholar.recordChangeTag)
 
     let userRecord = await this._ckGetUser(this.user)
     let user = await this._ckLinkScholar(userRecord, scholar)
@@ -212,9 +217,9 @@ const auth = {
     })
   },
 
-  async _ckSave(recordType, data) {
+  async _ckSave(recordType, data, id, recordChangeTag) {
     return new Promise((resolve, reject) => {
-      this._ckSaveRecords('PUBLIC', null, null, recordType, null, null, null, null, null, null, null, data, null, (errors, response, zoneID, databaseScope) => {
+      this._ckSaveRecords('PUBLIC', id, recordChangeTag, recordType, null, null, null, null, null, null, null, data, null, (errors, response, zoneID, databaseScope) => {
         if (errors) {
           return reject(errors)
         }
