@@ -1,10 +1,11 @@
 <template lang="pug">
 .form-input.form-date
-  Flatpickr(:options="fpOptions", v-model="model", :id="field.name")
+  Flatpickr(:options="fpOptions", v-model="timestamp", :id="field.name")
   label(:for="field.name", ref="label").form-title {{ field.placeholder }}
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'input-date',
   props: ['value', 'field'],
@@ -15,15 +16,20 @@ export default {
       datepicker: null,
       fpOptions: {
         dateFormat: 'd/m/Y'
-      }
+      },
+      timestamp: ''
     }
   },
   computed: {},
-  mounted () {},
+  mounted () {
+    if (this.model) {
+      this.timestamp = moment(this.model).format("DD/MM/YYYY")
+    }
+  },
   methods: {
     onValueChanged () {
       const label = this.$refs.label
-      if (this.model != '') {
+      if (this.timestamp != '') {
         label.classList.add('no-transition')
         label.classList.add('input-has-value')
         setTimeout(() => {
@@ -32,11 +38,14 @@ export default {
       } else {
         label.classList.remove('input-has-value')
       }
-      this.$emit('input', this.model)
+
+      const ts = moment(this.timestamp, "DD/MM/YYYY").valueOf()
+      this.model = ts
+      this.$emit('input', ts)
     }
   },
   watch: {
-    'model': 'onValueChanged'
+    'timestamp': 'onValueChanged'
   },
   components: {}
 }
