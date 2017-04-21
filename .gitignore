@@ -70,5 +70,8 @@ typings/
 
 ### Vue App ###
 
-# Compiles Resources
-Public/
+# Compiled Resources
+Public/*.js
+Public/*.json
+Public/css
+Public/js
