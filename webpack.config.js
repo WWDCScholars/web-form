@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const BabiliPlugin = require('babili-webpack-plugin')
 
 module.exports = {
   // main entry of the app
@@ -94,15 +95,12 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = 'source-map'
+  module.exports.devtool = false
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: '"production"' }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: { warnings: false }
-    }),
+    new BabiliPlugin()
     // new webpack.loaderOptionsPlugin({ minimize: true })
   ])
 }
