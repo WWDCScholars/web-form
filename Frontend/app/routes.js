@@ -3,6 +3,12 @@ import steps from './_steps'
 export default [
 
   {
+    path: '/error',
+    name: 'error',
+    component: require('./components/Error.vue')
+  },
+
+  {
     path: '/',
     name: 'welcome',
     component: require('./components/Welcome.vue'),
