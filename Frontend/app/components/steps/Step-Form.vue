@@ -151,7 +151,9 @@ export default {
       }
 
       try {
+        this.showModal = true
         let scholar = await this.$store.auth.ckSubmitModel(this.$store.steps)
+        this.showModal = false
 
         this.$router.push({ name: 'thankyou' })
       } catch (errors) {
