@@ -30,6 +30,7 @@
     "vue-router": "^2.4.0",
     "vue-stash": "^2.0.1-beta",
     "vue-template-compiler": "^2.2.6",
+    "vue2-google-maps": "^0.7.5",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.2",
     "write-file-webpack-plugin": "^4.0.2"

@@ -27,17 +27,13 @@
         .form-comment {{ field.maxCharacters - field.model.length }} / {{ field.maxCharacters }} characters remaining
 
       // *TYPE location
-      .form-input(v-else-if="field.type === 'location'")
-        input(type="text", :name="field.name", :id="field.name", :required="field.required", @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
-        label(:for="field.name").form-title {{ field.placeholder }}
+      input-location(v-else-if="field.type === 'location'", :field="field", v-model="field.model", @input="evaluateCompletion")
 
-      // *TYPE location
+      // *TYPE url
       .form-input(v-else-if="field.type === 'url'")
         input(type="url", :name="field.name", :id="field.name", :required="field.required", @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
         label(:for="field.name").form-title {{ field.placeholder }}
         .form-optional-mark(v-if="!field.required") Optional
-
-        //- .form-input-map MAP
 
       // *TYPE text
       .form-input(v-else-if="field.type === 'text'")
@@ -146,12 +142,17 @@ export default {
       this.$router.go(-1)
     },
     submit () {
-      console.log('SUBMIT')
+      if (!this.submittable) {
+        return
+      }
+
+      this.$store.auth.ckSubmitModel(this.$store.steps)
     }
   },
   components: {
     'input-file': require('../inputs/Input-File.vue'),
-    'input-date': require('../inputs/Input-Date.vue')
+    'input-date': require('../inputs/Input-Date.vue'),
+    'input-location': require('../inputs/Input-Location.vue')
   }
 }
 </script>
