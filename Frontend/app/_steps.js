@@ -4,8 +4,10 @@ var steps = [
     slug: '0-basic',
     title: 'Let\'s get you signed up...',
     color: 'red',
+    ckParameterName: 'scholar',
     groups: [{
         title: 'Please upload a profile image',
+        ckParameterName: 'wwdcYearInfo',
         fields: [
           { name: 'profileImage', type: 'file', accept: 'image/*', comment: 'It\'s important that this is an image of you' }
         ]
@@ -15,7 +17,7 @@ var steps = [
           { name: 'firstName', type: 'text', placeholder: 'First Name', class: 'form-width-50' },
           { name: 'lastName', type: 'text', placeholder: 'Last Name', class: 'form-width-50' },
           { name: 'email', type: 'email', placeholder: 'Email' },
-          { name: 'dateOfBirth', type: 'date', placeholder: 'Date of Birth (dd/mm/yyyy)' }
+          { name: 'birthday', type: 'date', placeholder: 'Date of Birth (dd/mm/yyyy)' }
         ]
       }, {
         title: 'Gender',
@@ -29,6 +31,7 @@ var steps = [
     slug: '1-about',
     title: 'A little more information to help you connect...',
     color: 'red2',
+    ckParameterName: 'scholar',
     groups: [{
       title: 'Describe yourself in less than 300 characters',
       fields: [
@@ -41,6 +44,7 @@ var steps = [
       ]
     }, {
       title: 'Where else can people find you?',
+      ckParameterName: 'socialMediaReference',
       fields: [
         { name: 'website', type: 'url', placeholder: 'Personal Website URL', required: false },
         { name: 'github', type: 'url', placeholder: 'GitHub URL', required: false },
@@ -56,21 +60,27 @@ var steps = [
     slug: '2-application',
     title: 'Now for the fun part. Show us your submission!',
     color: 'green',
+    ckParameterName: 'wwdcYearInfo',
     groups: [{
+      title: 'What applicant group(s) do you fall under?',
+      fields: [
+        { name: 'appliedAs', type: 'radio', options: ['student', 'stem', 'both'] }
+      ]
+    }, {
       title: 'Please provide a screenshot of your acceptance email for this year to validate your profile',
       fields: [
-        { name: 'acceptance', type: 'file', accept: 'image/*', class: 'form-file-wide' }
+        { name: 'acceptanceEmail', type: 'file', accept: 'image/*', class: 'form-file-wide' }
       ]
     }, {
       title: 'Upload some screenshots that showcase your playground submission',
       fields: [
-        { name: 'submissionScreenshot', type: 'file', accept: 'image/*', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
+        { name: 'screenshots', type: 'file', accept: 'image/*', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
       ]
     }, {
       title: 'Is your submission available to view anywhere else? Let us know!',
       fields: [
-        { name: 'submissionYoutube', type: 'url', placeholder: 'YouTube URL', required: false },
-        { name: 'submissionGithub', type: 'url', placeholder: 'GitHub URL', required: false }
+        { name: 'videoLink', type: 'url', placeholder: 'YouTube URL', required: false },
+        { name: 'githubAppLink', type: 'url', placeholder: 'GitHub URL', required: false }
       ]
     }, {
       title: 'You\'re good to go! Hit submit and we will review your profile as soon as possible!',
