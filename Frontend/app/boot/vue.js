@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import config from '../config'
 
 // Vue plugins
 import Router from 'vue-router'
@@ -9,8 +10,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyCkl5vVa7FTE4yuB0la0gF9dxdlRj7ps3A',
-    // v: 'OPTIONAL VERSION NUMBER',
+    key: config.googleMaps.apiKey,
     libraries: 'places' // If place input is needed
   }
 })

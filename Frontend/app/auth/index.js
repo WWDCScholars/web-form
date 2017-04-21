@@ -1,4 +1,5 @@
 import { serializeSteps } from './stephandling'
+import config from '../config'
 
 const auth = {
   router: {},
@@ -17,14 +18,12 @@ const auth = {
     this.CloudKit = window.CloudKit
     this.CloudKit.configure({
       containers: [{
-        // containerIdentifier: 'iCloud.de.moritzsternemann.TIL',
-        containerIdentifier: 'iCloud.com.wwdcscholars.WWDCScholars',
+        containerIdentifier: config.cloudKit.containerIdentifier,
         apiTokenAuth: {
-          // apiToken: 'd9d92006d77e1e706b833d78d371f4c1815f59027d7b1f46edebfc0e78b8a751',
-          apiToken: '953f4dbcd6285a925e8224506af8ceebf1436360bd3b025272a2f732370c19c8',
+          apiToken: config.cloudKit.apiToken,
           persist: true
         },
-        environment: 'development'
+        environment: config.cloudKit.environment
       }]
     })
 
@@ -132,8 +131,8 @@ const auth = {
         }
 
         // Render the fetched record.
-        console.log("Hi!");
-        console.log(record);
+        // console.log("Hi!");
+        // console.log(record);
       }
     });
   },
@@ -160,13 +159,13 @@ const auth = {
     fields.scholar.wwdcYears = [{ recordName: 'WWDC 2017', action: 'NONE' }]
 
     var wwdcYearInfoRecord = null,
-    scholarSocialMediaRecord = null
+    socialMediaRecord = null
 
     // Save WWDCYearInfo
     try {
-      [wwdcYearInfoRecord, scholarSocialMediaRecord] = await Promise.all([
+      [wwdcYearInfoRecord, socialMediaRecord] = await Promise.all([
         this._ckSave('WWDCYearInfo', fields.wwdcYearInfo),
-        this._ckSave('ScholarSocialMedia', fields.socialMediaReference)
+        this._ckSave('ScholarSocialMedia', fields.socialMedia)
       ])
     } catch (errors) {
       // TODO:
@@ -174,7 +173,7 @@ const auth = {
     }
 
     fields.scholar.wwdcYearInfos = [{ recordName: wwdcYearInfoRecord.recordName, action: 'DELETE_SELF' }]
-    fields.scholar.socialMediaReference = { recordName: scholarSocialMediaRecord.recordName, action: 'DELETE_SELF' }
+    fields.scholar.socialMedia = { recordName: socialMediaRecord.recordName, action: 'DELETE_SELF' }
 
     // Save scholar
     let scholar = await this._ckSave('Scholar', fields.scholar)

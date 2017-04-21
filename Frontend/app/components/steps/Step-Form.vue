@@ -157,6 +157,7 @@ export default {
 
         this.$router.push({ name: 'thankyou' })
       } catch (errors) {
+        console.error(errors)
         this.$router.push({ name: 'error' })
       }
     }

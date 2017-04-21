@@ -3,7 +3,7 @@ const stephandling = {
     var ret = {
       scholar: {},
       wwdcYearInfo: {},
-      socialMediaReference: {}
+      socialMedia: {}
     }
 
     for (var s = 0; s < steps.length; s++) {
@@ -48,8 +48,6 @@ const stephandling = {
       }
     }
 
-    // ret.scholar.wwdcYearInfos = [ret.wwdcYearInfo]
-    // ret.scholar.socialMediaReference = ret.socialMediaReference
     return ret
   }
 }

@@ -44,7 +44,7 @@ var steps = [
       ]
     }, {
       title: 'Where else can people find you?',
-      ckParameterName: 'socialMediaReference',
+      ckParameterName: 'socialMedia',
       fields: [
         { name: 'website', type: 'url', placeholder: 'Personal Website URL', required: false },
         { name: 'github', type: 'url', placeholder: 'GitHub URL', required: false },
