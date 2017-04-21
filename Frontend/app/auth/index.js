@@ -12,7 +12,7 @@ const auth = {
 
   // CloudKit stuff
   ck: {},
-  
+
   _ckConfigureCloudKit () {
     this.CloudKit = window.CloudKit
     this.CloudKit.configure({
@@ -54,6 +54,7 @@ const auth = {
       CloudKit.DatabaseScope["PUBLIC"]
     )
 
+    let self = this
     database.fetchRecords(userIdentity.userRecordName)
     .then(function(response) {
       if (response.hasErrors) {
@@ -68,7 +69,7 @@ const auth = {
         if (scholarReference === undefined) {
           // Scholar isn't linked yet or doesn't exist at all
 
-          this.router.replace({ name: 'welcome' });
+          self.router.replace({ name: 'welcome' });
         } else {
           // Scholar already existing
 
@@ -89,7 +90,7 @@ const auth = {
 
                 if (obj.recordName === 'WWDC 2017') {
                   console.log("Contains WWDC 2017, to thankyou");
-                  auth.router.push({ name: 'thankyou' })
+                  self.router.push({ name: 'thankyou' })
                   return;
                 }
               }
@@ -123,7 +124,8 @@ const auth = {
                     }
                   }
 
-                  auth.router.replace({ name: 'welcome' });
+                  self.router.replace({ name: 'welcome' })
+                  // auth.router.replace({ name: 'welcome' });
                 }
               });
             }
