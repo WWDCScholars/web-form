@@ -1,3 +1,9 @@
+function isDOMElement (o) {
+  return (
+    typeof HTMLElement === 'object' ? o instanceof HTMLElement : o && typeof o === 'object' && o !== null && o.nodeType === 1 && typeof o.nodeName === 'string'
+  )
+}
+
 const stephandling = {
   serializeSteps (steps) {
     var ret = {
@@ -29,6 +35,7 @@ const stephandling = {
             })
             ret[currentParameterName][field.name] = { latitude: latLong[0], longitude: latLong[1] }
           } else if (field.type === 'file') {
+            if (!isDOMElement(field.model)) { continue }
             if (field.multiple === true) {
               var fileField = []
               for (var m = 0; m < field.model.length; m++) {

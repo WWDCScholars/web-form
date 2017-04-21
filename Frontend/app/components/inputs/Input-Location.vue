@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'input-date',
+  name: 'input-location',
   props: ['value', 'field'],
   store: [],
   data () {
@@ -25,15 +25,20 @@ export default {
   },
   computed: {},
   mounted () {
+    if (!this.model) {
+      return
+    }
     const split = this.model.split(',')
-    if (split != 2) {
+    if (split.length != 2) {
       return
     }
 
     const latLong = split.map((string) => {
       return !isNaN(string) ? parseFloat(string) : 0
     })
-    this.center = { lat: latLong[0], lon: latLong[1] }
+    this.center = { lat: latLong[0], lng: latLong[1] }
+    this.zoom = 7
+    this.$emit('input', this.model)
   },
   methods: {
     setPlace (place) {

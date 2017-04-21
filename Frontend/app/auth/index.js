@@ -11,7 +11,7 @@ const auth = {
 
   user: {},
 
-scholar: {},
+  scholar: {},
   // CloudKit stuff
   ck: {},
 
@@ -81,8 +81,10 @@ scholar: {},
               self.router.push({ name: 'error' })
 
             } else {
-              var scholar = response.records[0];
-              self.scholar = scholar;
+              let scholar = response.records[0]
+              console.log(scholar)
+              self.scholar = scholar
+              console.log(self.scholar)
               var wwdcYears = scholar.fields.wwdcYears.value
               var socialMediaRef = scholar.fields.socialMedia
 
@@ -115,7 +117,12 @@ scholar: {},
                       for (var f = 0; f < group.fields.length; f++) {
                         const field = group.fields[f]
                         if (scholar.fields[field.name]) {
-                          field.model = scholar.fields[field.name].value
+                          if (field.type === 'location') {
+                            let lf = scholar.fields[field.name].value
+                            field.model = lf.latitude + ',' + lf.longitude
+                          } else {
+                            field.model = scholar.fields[field.name].value
+                          }
                         } else if (socialMedia.fields[field.name]) {
                           console.log(field.name);
                           field.model = socialMedia.fields[field.name].value
@@ -178,10 +185,10 @@ scholar: {},
     fields.scholar.socialMedia = { recordName: socialMediaRecord.recordName, action: 'DELETE_SELF' }
 
 
-    console.log(self.scholar.recordName);
-    console.log(self.scholar.recordChangeTag);
+    console.log(this.scholar.recordName)
+    console.log(this.scholar.recordChangeTag)
     // Save scholar
-    let scholar = await this._ckSave('Scholar', fields.scholar, self.scholar.recordName, self.scholar.recordChangeTag)
+    let scholar = await this._ckSave('Scholar', fields.scholar, this.scholar.recordName, this.scholar.recordChangeTag)
 
     let userRecord = await this._ckGetUser(this.user)
     let user = await this._ckLinkScholar(userRecord, scholar)
@@ -217,9 +224,9 @@ scholar: {},
     })
   },
 
-  async _ckSave(recordType, data, id, recordChangeTag) {
+  async _ckSave(recordType, data, recordName, recordChangeTag) {
     return new Promise((resolve, reject) => {
-      this._ckSaveRecords('PUBLIC', id, recordChangeTag, recordType, null, null, null, null, null, null, null, data, null, (errors, response, zoneID, databaseScope) => {
+      this._ckSaveRecords('PUBLIC', recordName, recordChangeTag, recordType, null, null, null, null, null, null, null, data, null, (errors, response, zoneID, databaseScope) => {
         if (errors) {
           return reject(errors)
         }
