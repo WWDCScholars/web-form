@@ -60,9 +60,8 @@ const auth = {
     database.fetchRecords(userIdentity.userRecordName)
     .then(function(response) {
       if (response.hasErrors) {
-
-        // Handle the errors in your app.
-        throw response.errors[0];
+        console.error(response.errors[0])
+        self.router.push({ name: 'error' })
 
       } else {
         var record = response.records[0];
@@ -78,9 +77,8 @@ const auth = {
           database.fetchRecords(scholarReference.value.recordName)
           .then(function(response) {
             if (response.hasErrors) {
-
-              // Handle the errors in your app.
-              throw response.errors[0];
+              console.error(response.errors[0])
+              self.router.push({ name: 'error' })
 
             } else {
               var scholar = response.records[0];
@@ -102,9 +100,8 @@ const auth = {
               database.fetchRecords(socialMediaRef.value.recordName)
               .then(function(socialResponse) {
                 if (socialResponse.hasErrors) {
-
-                  // Handle the errors in your app.
-                  throw socialResponse.errors[0];
+                  console.error(response.errors[0])
+                  self.router.push({ name: 'error' })
 
                 } else {
                   var socialMedia = socialResponse.records[0];
