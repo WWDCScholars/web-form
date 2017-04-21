@@ -12,14 +12,14 @@ const auth = {
 
   // CloudKit stuff
   ck: {},
-  
+
   _ckConfigureCloudKit () {
     this.CloudKit = window.CloudKit
     this.CloudKit.configure({
       containers: [{
-        containerIdentifier: 'iCloud.de.moritzsternemann.TIL',
+        containerIdentifier: 'iCloud.com.wwdcscholars.WWDCScholars',
         apiTokenAuth: {
-          apiToken: 'd9d92006d77e1e706b833d78d371f4c1815f59027d7b1f46edebfc0e78b8a751',
+          apiToken: '953f4dbcd6285a925e8224506af8ceebf1436360bd3b025272a2f732370c19c8',
           persist: true
         },
         environment: 'development'
@@ -68,7 +68,8 @@ const auth = {
         if (scholarReference === undefined) {
           // Scholar isn't linked yet or doesn't exist at all
 
-          this.router.replace({ name: 'welcome' });
+          auth.router.push({ name: 'link' })
+          // this.router.replace({ name: 'welcome' });
         } else {
           // Scholar already existing
 
