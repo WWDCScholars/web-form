@@ -4,14 +4,16 @@
   h3.color-blue.link-header Have you signed up for an account before?
 
 
-  .form.form-color-blue.link-button-group(v-if="!hasSignedUpBefore")
+  .form.form-color-blue.link-button-group
     button(@click="signedUpBefore").form-cta.form-cta-secondary Signed Up Before
     button(@click="newScholar").form-cta.form-cta-primary New Scholar
 
-  .form.form-color-blue.link-form(v-else)
-    .form-input
-      input(type="email", ref="signedUpBefore_email", id="email", @focusout="onFocusOut")
-      label(for="email").form-title Email
+  .form.form-color-blue.link-form(v-if="hasSignedUpBefore")
+    .form-field
+      .form-input
+        input(type="email", ref="signedUpBefore_email", id="email", @focusout="onFocusOut")
+        label(for="email").form-title Email
+      .form-comment {{ errorComment }}
 
     button(@click="link").form-cta.form-cta-primary.form-cta-right Link
 </template>
@@ -22,7 +24,8 @@ export default {
   store: ['auth'],
   data () {
     return {
-      hasSignedUpBefore: false
+      hasSignedUpBefore: false,
+      errorComment: ''
     }
   },
   computed: {},
@@ -43,35 +46,60 @@ export default {
       this.hasSignedUpBefore = true
     },
     link () {
-      //this.$auth.push({ name: 'welcome' })
+      let emailValue = this.$refs.signedUpBefore_email.value
+      if (emailValue.length < 4) {
+        return
+      }
+
       let database = this.auth.ck.container.getDatabaseWithDatabaseScope(
-        CloudKit.DatabaseScope["PUBLIC"]
+        CloudKit.DatabaseScope['PUBLIC']
       )
-      database.fetchRecords(this.$refs.signedUpBefore_email.value)
-        .then(function(scholarByEmail) {
-          console.log(scholarByEmail);
+      let self = this
+      database.performQuery({
+        recordType: 'Scholar',
+        filterBy: [{
+          comparator: 'EQUALS',
+          fieldName: 'email',
+          fieldValue: {value: emailValue}
+        }]
+      }, {
+        desiredKeys: ['recordName'],
+        resultsLimit: 1
+      })
+      // database.fetchRecords(emailValue)
+        .then(function (response) {
           if (response.hasErrors) {
-
-            // Handle the errors in your app.
-            throw response.errors[0];
-
+            if (response.errors[0].ckErrorCode === 'NOT_FOUND') {
+              self.errorComment = 'Your email address could not be found. Are you sure it is the one you used in the past?'
+            }
           } else {
-            var scholar = response.records[0];
-            //todo: gewt current user identity record id
-            let userIdentity = this.auth.user
+            let scholar = response.records[0];
+            let userIdentity = self.auth.user
 
             database.fetchRecords(userIdentity.userRecordName)
-            .then(function(response) {
-              if (response.hasErrors) {
+              .then(function (response) {
+                if (response.hasErrors) {
 
-                // Handle the errors in your app.
-                throw response.errors[0];
+                  // Handle the errors in your app.
+                  throw response.errors[0];
+                } else {
+                  let record = response.records[0];
+                  let fields = {
+                    scholar: { recordName: scholar.recordName, action: 'NONE' }
+                  }
 
-              } else {
-                let record = response.records[0];
-                // todo: set scholar to reference to object with id `scholar.id` and save
-              }
-            });
+                  self.auth._ckSaveRecords('PRIVATE', record.recordName, record.recordChangeTag, 'Users', null, null, null, null, null, null, null, fields, null, (errors, response, zoneID, databaseScope) => {
+                    if (errors) {
+                      console.error(errors[0])
+                      self.$router.push({ name: 'error' })
+                      return
+                    }
+
+                    // Linking successful
+                    self.$router.push({ name: 'welcome' })
+                  })
+                }
+              });
           }
         });
     }
