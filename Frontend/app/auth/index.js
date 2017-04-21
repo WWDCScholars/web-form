@@ -178,7 +178,38 @@ const auth = {
     // Save scholar
     let scholar = await this._ckSave('Scholar', fields.scholar)
 
+    let userRecord = await this._ckGetUser(this.user)
+    let user = await this._ckLinkScholar(userRecord, scholar)
+
     return scholar
+  },
+
+  async _ckLinkScholar (userRecord, scholar) {
+    return new Promise((resolve, reject) => {
+      this._ckSaveRecords('PUBLIC', userRecord.recordName, userRecord.recordChangeTag, 'Users', null, null, null, null, null, null, null, { scholar: {recordName: scholar.recordName, action: 'NONE'} }, null, (errors, response, zoneID, databaseScope) => {
+         if (errors) {
+           return reject(errors)
+         }
+         resolve(response.records[0])
+       })
+    })
+  },
+
+  async _ckGetUser (userIdentity) {
+    let container = this.ck.container
+    let database = container.getDatabaseWithDatabaseScope(
+      this.CloudKit.DatabaseScope['PUBLIC']
+    )
+
+    return new Promise((resolve, reject) => {
+      database.fetchRecords(userIdentity.userRecordName)
+        .then(function (response) {
+          if (response.hasErrors) {
+            return reject(errors)
+          }
+          resolve(response.records[0])
+        })
+    })
   },
 
   async _ckSave(recordType, data) {
@@ -194,8 +225,7 @@ const auth = {
 
   _ckSaveRecords (databaseScope, recordName, recordChangeTag, recordType, zoneName, forRecordName, forRecordChangeTag, publicPermission, ownerRecordName, participants, parentRecordName, fields, createShortGUID, callback) {
     const container = this.ck.container
-    const database = container.publicCloudDatabase
-    // const database = container.getDatabaseWithDatabaseScope(this.CloudKit.DatabaseScope[databaseScope])
+    const database = container.getDatabaseWithDatabaseScope(this.CloudKit.DatabaseScope[databaseScope])
 
     const options = {}
 

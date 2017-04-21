@@ -1,7 +1,7 @@
 <template lang="pug">
 .step-form.form(:class="colorClass")
   modal(v-if="showModal")
-    h3(slot="header").color-green Beaming your data to space...
+    h3(slot="header").color-green Beaming your profile to space...
     div(slot="body").spinner.modal-spinner
   h3 {{ step.title }}
   .form-group(v-for="group in step.groups")
