@@ -58,7 +58,7 @@ var steps = [
 
   {
     slug: '2-application',
-    title: 'Now for the fun part. Show us your submission!',
+    title: 'Now for the fun part. Show us your WWDC 2017 submission!',
     color: 'green',
     ckParameterName: 'wwdcYearInfo',
     groups: [{
