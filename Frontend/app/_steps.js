@@ -9,7 +9,7 @@ var steps = [
         title: 'Please upload a profile image',
         ckParameterName: 'wwdcYearInfo',
         fields: [
-          { name: 'profileImage', type: 'file', accept: 'image/*', comment: 'It\'s important that this is an image of you' }
+          { name: 'profilePicture', type: 'file', accept: 'image/*', comment: 'This needs to be an image of you with a resolution of at least 250x250' }
         ]
       }, {
         title: 'Enter some basic details about yourself',
