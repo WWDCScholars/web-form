@@ -18,10 +18,6 @@ export default {
     return {
       model: this.value,
       datepicker: null,
-      fpOptions: {
-        dateFormat: 'd/m/Y',
-        maxDate: Date()
-      },
       timestamp: ''
     }
   },
@@ -29,7 +25,8 @@ export default {
   mounted () {
     this.datepicker = document.getElementsByClassName('flatpickr').flatpickr({
       maxDate: new Date(),
-      dateFormat: 'd/m/Y'
+      dateFormat: 'd/m/Y',
+      disableMobile: true
     })
 
     if (this.model) {

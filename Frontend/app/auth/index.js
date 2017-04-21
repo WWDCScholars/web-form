@@ -292,6 +292,7 @@ const auth = {
         }
       })
     }
+    console.log(record)
 
     return database.saveRecords(record, options)
     .then(function (response) {
