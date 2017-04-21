@@ -1,11 +1,15 @@
 <template lang="pug">
 .form-input.form-date
-  Flatpickr(:options="fpOptions", v-model="timestamp", :id="field.name")
+  input(type="text", v-model="timestamp", :id="field.name").flatpickr
+  //- Flatpickr(:options="fpOptions", v-model="timestamp", :id="field.name")
+  //- .form-input-date
+    //- input(type="number", min="1", max="31", )
   label(:for="field.name", ref="label").form-title {{ field.placeholder }}
 </template>
 
 <script>
 import moment from 'moment'
+const Flatpickr = require('flatpickr')
 export default {
   name: 'input-date',
   props: ['value', 'field'],
@@ -15,15 +19,22 @@ export default {
       model: this.value,
       datepicker: null,
       fpOptions: {
-        dateFormat: 'd/m/Y'
+        dateFormat: 'd/m/Y',
+        maxDate: Date()
       },
       timestamp: ''
     }
   },
   computed: {},
   mounted () {
+    this.datepicker = document.getElementsByClassName('flatpickr').flatpickr({
+      maxDate: new Date(),
+      dateFormat: 'd/m/Y'
+    })
+
     if (this.model) {
       this.timestamp = moment(this.model).format("DD/MM/YYYY")
+      this.datepicker.jumpToDate(this.timestamp)
     }
   },
   methods: {
