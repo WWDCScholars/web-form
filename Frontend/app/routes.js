@@ -37,6 +37,12 @@ export default [
     name: 'signin',
     component: require('./components/Signin.vue'),
     meta: { requiresAnonymous: true }
+  },
+  {
+    path: '/link',
+    name: 'link',
+    component: require('./components/Link.vue'),
+    meta: { requiresAuth: true }
   }
 
 ]
