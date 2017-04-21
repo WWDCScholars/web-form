@@ -10,8 +10,8 @@ const stephandling = {
       const step = steps[s]
       var currentParameterName = step.ckParameterName
 
-      for (var g = 0; g < steps.groups.length; g++) {
-        const group = steps.groups[g]
+      for (var g = 0; g < step.groups.length; g++) {
+        const group = step.groups[g]
         if (group.ckParameterName) {
           currentParameterName = group.ckParameterName
         }
@@ -19,32 +19,38 @@ const stephandling = {
         for (var f = 0; f < group.fields.length; f++) {
           const field = group.fields[f]
 
+          if (!field.model) { // if model is empty
+            continue
+          }
+
           if (field.type === 'location') {
             const latLong = field.model.split(',').map((string) => {
-              return !isNaN(string) ? parseInt(string) : undefined
+              return !isNaN(string) ? parseFloat(string) : undefined
             })
-            ret[currentParameterName][field.name] = { value: { latitude: latLong[0], longitude: latLong[1] } }
+            ret[currentParameterName][field.name] = { latitude: latLong[0], longitude: latLong[1] }
           } else if (field.type === 'file') {
-            if (field.model.length > 1) {
+            if (field.multiple === true) {
               var fileField = []
-              for (var m = 0; m < field.model; m++) {
+              for (var m = 0; m < field.model.length; m++) {
                 const fileModel = field.model[m]
-                fileField.push({ value: fileModel })
+                fileField.push(fileModel)
               }
               ret[currentParameterName][field.name] = fileField
             } else {
-              ret[currentParameterName][field.name] = { value: field.model[0] }
+              ret[currentParameterName][field.name] = field.model[0]
             }
           } else {
-            ret[currentParameterName][field.name] = { value: field.model }
+            ret[currentParameterName][field.name] = field.model
           }
         }
+
+        currentParameterName = step.ckParameterName
       }
     }
 
-    scholar.wwdcYearInfos = [wwdcYearInfo]
-    scholar.socialMediaReference = socialMediaReference
-    return scholar
+    // ret.scholar.wwdcYearInfos = [ret.wwdcYearInfo]
+    // ret.scholar.socialMediaReference = ret.socialMediaReference
+    return ret
   }
 }
 

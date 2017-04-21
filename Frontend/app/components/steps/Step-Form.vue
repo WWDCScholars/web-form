@@ -141,12 +141,17 @@ export default {
     previousStep () {
       this.$router.go(-1)
     },
-    submit () {
+    async submit () {
       if (!this.submittable) {
         return
       }
 
-      this.$store.auth.ckSubmitModel(this.$store.steps)
+      try {
+        let scholar = await this.$store.auth.ckSubmitModel(this.$store.steps)
+      } catch (errors) {
+        // TODO:
+        throw errors
+      }
     }
   },
   components: {
