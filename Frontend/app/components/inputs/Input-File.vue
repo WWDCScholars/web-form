@@ -30,8 +30,7 @@ export default {
       if (fm) {
         const el = this.getFileElement(m)
         const preview = el.children[2]
-        preview.src = fm
-        preview.classList.add('show')
+        this.displayPreview(fm, preview)
       }
     }
   },
@@ -49,31 +48,35 @@ export default {
     getFileElement (index) {
       return this.$refs.files[index]
     },
+    displayPreview (file, previewElement) {
+      const reader = new FileReader()
+
+      reader.onload = function (e) {
+        const value = e.target.result
+        previewElement.src = value
+        previewElement.classList.add('show')
+      }
+
+      reader.readAsDataURL(file)
+    },
     onFileInputChange (event) {
       const input = event.srcElement
       if (input.files && input.files[0]) {
-        const self = this
-        const reader = new FileReader()
+        const file = input.files[0]
         const preview = input.nextSibling.nextSibling
+        this.displayPreview(file, preview)
 
-        reader.onload = function (e) {
-          const index = self.getFileIndex(input.parentElement)
-          const val = e.target.result
-          self.model[index] = val
-          preview.src = val
-          preview.classList.add('show')
+        const index = this.getFileIndex(input.parentElement)
+        this.model[index] = file
 
-          self.$emit('input', self.model)
-        }
-
-        reader.readAsDataURL(input.files[0])
+        this.$emit('input', this.model)
       }
     },
     removeFile (event) {
       const parent = event.srcElement.parentElement
       const index = this.getFileIndex(parent)
       const preview = parent.children[2]
-      this.model[index] = ''
+      this.model[index] = {}
       preview.src = ''
       preview.classList.remove('show')
       this.$emit('input', this.model)

@@ -99,7 +99,7 @@ for (var s = 0; s < steps.length; s++) {
     for (var f = 0; f < group.fields.length; f++) {
       const field = group.fields[f]
       if (field.type === 'file') {
-        field.model = ['']
+        field.model = [0]
       } else {
         field.model = ''
       }
