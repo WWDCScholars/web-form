@@ -33,7 +33,36 @@ export default {
       this.hasSignedUpBefore = true
     },
     link () {
+      //this.$auth.push({ name: 'welcome' })
+      var database = this.auth.ck.container.getDatabaseWithDatabaseScope(
+        CloudKit.DatabaseScope["PUBLIC"]
+      )
+      database.fetchRecords(this.$refs.signedUpBefore_email.value)
+      .then(function(scholarByEmail) {
+        console.log(scholarByEmail);
+        if (response.hasErrors) {
 
+          // Handle the errors in your app.
+          throw response.errors[0];
+
+        } else {
+          var scholar = response.records[0];
+            //todo: gewt current user identity record id
+
+            database.fetchRecords(userIdentity.userRecordName)
+            .then(function(response) {
+              if (response.hasErrors) {
+
+                // Handle the errors in your app.
+                throw response.errors[0];
+
+              } else {
+                var record = response.records[0];
+                  // todo: set scholar to reference to object with id `scholar.id` and save
+                }
+                });
+          }
+      });
     }
   },
   components: {}
