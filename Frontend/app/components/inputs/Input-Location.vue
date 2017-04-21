@@ -1,7 +1,7 @@
 <template lang="pug">
 .form-location
   .form-input
-    gmap-autocomplete(@place_changed="setPlace", :id="field.name", placeholder="", @focusout.native="onFocusOut")
+    gmap-autocomplete(@place_changed="setPlace", :id="field.name", placeholder="", @focusout.native="onFocusOut", ref="input")
     //- input(type="text", name="foobar", :id="field.name")
     label(:for="field.name", ref="label").form-title {{ field.placeholder }}
 
