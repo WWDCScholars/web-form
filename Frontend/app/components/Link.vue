@@ -88,7 +88,7 @@ export default {
                     scholar: { recordName: scholar.recordName, action: 'NONE' }
                   }
 
-                  self.auth._ckSaveRecords('PRIVATE', record.recordName, record.recordChangeTag, 'Users', null, null, null, null, null, null, null, fields, null, (errors, response, zoneID, databaseScope) => {
+                  self.auth._ckSaveRecords('PUBLIC', record.recordName, record.recordChangeTag, 'Users', null, null, null, null, null, null, null, fields, null, (errors, response, zoneID, databaseScope) => {
                     if (errors) {
                       console.error(errors[0])
                       self.$router.push({ name: 'error' })
