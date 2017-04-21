@@ -39,13 +39,7 @@ const auth = {
     })
   },
   _ckGotoAuthenticatedState (userIdentity) {
-    // console.log('gotoAuthenticatedState', this)
-    const name = userIdentity.nameComponents
-    if (name) {
-      // console.log('NAME', name.givenName + ' ' + name.familyName)
-    } else {
-      // console.log('NAME', userIdentity.userRecordName)
-    }
+    console.log('gotoAuthenticatedState', this)
     this.user.isAuthenticated = true
 
     this.ck.container
@@ -65,6 +59,8 @@ const auth = {
       .whenUserSignsIn()
       .then(this._ckGotoAuthenticatedState.bind(this))
       .catch(this._ckGotoUnauthenticatedState.bind(this))
+
+    this.router.replace({ name: 'signin' })
   }
 }
 

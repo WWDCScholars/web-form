@@ -1,10 +1,10 @@
 <template lang="pug">
 header(:class="routeClass").container-fluid
-  .container
-    h1
-      .wwdc WWDC
-      .scholars Scholars
-    //- .progress Step 1 of 3
+  h1
+    .wwdc WWDC
+    .scholars Scholars
+  //- .progress Step 1 of 3
+  div(id="apple-sign-out-button")
 </template>
 
 <script>
