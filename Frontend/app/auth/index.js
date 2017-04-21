@@ -81,16 +81,53 @@ const auth = {
                                 } else {
                                     var scholar = response.records[0];
                                     var wwdcYears = scholar.fields.wwdcYears.value
+                                    var socialMediaRef = scholar.fields.socialMedia
 
                                     for (var i = 0; i < wwdcYears.length; i++) {
                                         var obj = wwdcYears[i];
 
                                         if (obj.recordName === 'WWDC 2017') {
-                                        console.log("Contains WWDC 2017, to thankyou");
-                                            auth.router.push({ name: 'thankyou' })
+                                            console.log("Contains WWDC 2017, to thankyou");
+                                            auth.router.push({
+                                                name: 'thankyou'
+                                            })
                                             return;
                                         }
                                     }
+
+                                    console.log("Scholar exists but hasn't filled form");
+                                    console.log("Fetching social media");
+                                    database.fetchRecords(socialMediaRef.value.recordName)
+                                        .then(function(socialResponse) {
+                                            if (socialResponse.hasErrors) {
+
+                                                // Handle the errors in your app.
+                                                throw socialResponse.errors[0];
+
+                                            } else {
+                                                var socialMedia = socialResponse.records[0];
+                                                console.log(socialMedia);
+                                                var steps = auth.vm.$store.steps
+                                                for (var s = 0; s < steps.length; s++) {
+                                                    const step = steps[s]
+                                                    for (var g = 0; g < step.groups.length; g++) {
+                                                        const group = step.groups[g]
+                                                        for (var f = 0; f < group.fields.length; f++) {
+                                                            const field = group.fields[f]
+                                                            if (scholar.fields[field.name]) {
+                                                                field.model = scholar.fields[field.name].value
+                                                            } else if (socialMedia.fields[field.name]) {
+                                                              console.log(field.name);
+                                                              field.model = socialMedia.fields[field.name].value
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                auth.router.replace({
+                                                    name: 'welcome'
+                                                });
+                                            }
+                                        });
                                 }
                             });
 
