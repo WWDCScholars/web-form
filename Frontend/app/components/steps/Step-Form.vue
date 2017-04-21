@@ -1,5 +1,8 @@
 <template lang="pug">
 .step-form.form(:class="colorClass")
+  modal(v-if="showModal")
+    h3(slot="header").color-green Beaming your data to space...
+    div(slot="body").spinner.modal-spinner
   h3 {{ step.title }}
   .form-group(v-for="group in step.groups")
     h4 {{ group.title }}
@@ -56,6 +59,7 @@ export default {
   props: ['step'],
   data () {
     return {
+      showModal: false,
       submittable: false
     }
   },
@@ -148,13 +152,18 @@ export default {
 
       try {
         let scholar = await this.$store.auth.ckSubmitModel(this.$store.steps)
+
+        this.$router.push({ name: 'thankyou' })
       } catch (errors) {
         // TODO:
         throw errors
+
+        this.$router.push({ name: 'error' })
       }
     }
   },
   components: {
+    'modal': require('../Modal.vue'),
     'input-file': require('../inputs/Input-File.vue'),
     'input-date': require('../inputs/Input-Date.vue'),
     'input-location': require('../inputs/Input-Location.vue')
