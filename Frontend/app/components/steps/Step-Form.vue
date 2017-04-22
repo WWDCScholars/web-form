@@ -90,6 +90,7 @@ export default {
         }
       }
     }
+    this.evaluateCompletion()
   },
   methods: {
     evaluateCompletion () {

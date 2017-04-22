@@ -135,7 +135,12 @@ export default {
                                 for (var f = 0; f < group.fields.length; f++) {
                                   const field = group.fields[f]
                                   if (scholar.fields[field.name]) {
-                                    field.model = scholar.fields[field.name].value
+                                    if (field.type === 'location') {
+                                      let lf = scholar.fields[field.name].value
+                                      field.model = lf.latitude + ',' + lf.longitude
+                                    } else {
+                                      field.model = scholar.fields[field.name].value
+                                    }
                                   } else if (socialMedia.fields[field.name]) {
                                     console.log(field.name);
                                     field.model = socialMedia.fields[field.name].value
