@@ -102,7 +102,7 @@ export default {
           // TODO: Input validation
           if (field.required != false) {
             if (field.type === 'file') {
-              for (var fn = 0; fn < field.min; fn++) {
+              for (var fn = 0; fn < (field.min ? field.min : 1); fn++) {
                 if (!field.model[fn]) {
                   completed = false
                 }

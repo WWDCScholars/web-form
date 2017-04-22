@@ -1,8 +1,7 @@
 <template lang="pug">
 .form-location
   .form-input
-    gmap-autocomplete(@place_changed="setPlace", :id="field.name", placeholder="", @focusout.native="onFocusOut", ref="input")
-    //- input(type="text", name="foobar", :id="field.name")
+    gmap-autocomplete(@place_changed="setPlace", :id="field.name", placeholder="", @focusout.native="onFocusOut", ref="input", :value="inputValue")
     label(:for="field.name", ref="label").form-title {{ field.placeholder }}
 
   gmap-map(:center="center", :zoom="zoom").form-input-map
@@ -20,7 +19,8 @@ export default {
     return {
       model: this.value,
       center: { lat: 0, lng: 0 },
-      zoom: 1
+      zoom: 1,
+      inputValue: ''
     }
   },
   computed: {},
@@ -38,6 +38,7 @@ export default {
     })
     this.center = { lat: latLong[0], lng: latLong[1] }
     this.zoom = 7
+    this.inputValue = this.model
     this.$emit('input', this.model)
   },
   methods: {
