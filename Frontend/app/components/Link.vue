@@ -126,6 +126,7 @@ export default {
 
                           } else {
                             var socialMedia = socialResponse.records[0];
+                            self.auth.scholarSocialMedia = socialMedia
                             console.log(socialMedia);
                             var steps = self.auth.vm.$store.steps
                             for (var s = 0; s < steps.length; s++) {

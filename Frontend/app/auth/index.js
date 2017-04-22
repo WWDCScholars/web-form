@@ -12,6 +12,7 @@ const auth = {
   user: {},
 
   scholar: {},
+  scholarSocialMedia: undefined,
   // CloudKit stuff
   ck: {},
 
@@ -84,7 +85,6 @@ const auth = {
               let scholar = response.records[0]
               console.log(scholar)
               self.scholar = scholar
-              console.log(self.scholar)
               var wwdcYears = scholar.fields.wwdcYears.value
               var socialMediaRef = scholar.fields.socialMedia
 
@@ -108,6 +108,7 @@ const auth = {
 
                 } else {
                   var socialMedia = socialResponse.records[0];
+                  self.scholarSocialMedia = socialMedia
                   console.log(socialMedia);
                   var steps = auth.vm.$store.steps
                   for (var s = 0; s < steps.length; s++) {
@@ -174,7 +175,7 @@ const auth = {
     try {
       [wwdcYearInfoRecord, socialMediaRecord] = await Promise.all([
         this._ckSave('WWDCYearInfo', fields.wwdcYearInfo),
-        this._ckSave('ScholarSocialMedia', fields.socialMedia)
+        this._ckSave('ScholarSocialMedia', fields.socialMedia, this.scholarSocialMedia.recordName, this.scholarSocialMedia.recordChangeTag)
       ])
     } catch (errors) {
       // TODO:
