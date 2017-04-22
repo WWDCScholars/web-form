@@ -25,7 +25,9 @@ export default {
     }
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    document.getElementById('app').classList.add('app-page-100')
+  },
   methods: {},
   components: {}
 }
