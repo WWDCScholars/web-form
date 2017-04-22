@@ -55,7 +55,7 @@
 <script>
 export default {
   name: 'step-form',
-  store: ['steps'],
+  store: ['auth', 'steps'],
   props: ['step'],
   data () {
     return {
@@ -107,6 +107,8 @@ export default {
                   completed = false
                 }
               }
+            } else if (field.name === 'email') {
+              this.$store.auth.user.email = field.model
             } else if (!field.model) {
               completed = false
             }

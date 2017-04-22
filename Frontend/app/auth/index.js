@@ -12,7 +12,7 @@ const auth = {
   user: {},
 
   scholar: {},
-  scholarSocialMedia: undefined,
+  scholarSocialMedia: {},
   // CloudKit stuff
   ck: {},
 
@@ -177,24 +177,30 @@ const auth = {
         this._ckSave('WWDCYearInfo', fields.wwdcYearInfo),
         this._ckSave('ScholarSocialMedia', fields.socialMedia, this.scholarSocialMedia.recordName, this.scholarSocialMedia.recordChangeTag)
       ])
+
+      fields.scholar.wwdcYearInfos = [{ recordName: wwdcYearInfoRecord.recordName, action: 'DELETE_SELF' }]
+      fields.scholar.socialMedia = { recordName: socialMediaRecord.recordName, action: 'DELETE_SELF' }
+
+      // Find old scholar silently instead of creating a new one with user provided email address
+      if (this.user.email) {
+        let oldScholar = await this._ckGetScholarByEmail(this.user.email)
+        if (oldScholar) {
+          this.scholar.recordName = oldScholar.recordName
+          this.scholar.recordChangeTag = oldScholar.recordChangeTag
+        }
+      }
+
+      // Save scholar
+      let scholar = await this._ckSave('Scholar', fields.scholar, this.scholar.recordName, this.scholar.recordChangeTag)
+
+      let userRecord = await this._ckGetUser(this.user)
+      let user = await this._ckLinkScholar(userRecord, scholar)
+
+      return scholar
     } catch (errors) {
       // TODO:
       throw errors
     }
-
-    fields.scholar.wwdcYearInfos = [{ recordName: wwdcYearInfoRecord.recordName, action: 'DELETE_SELF' }]
-    fields.scholar.socialMedia = { recordName: socialMediaRecord.recordName, action: 'DELETE_SELF' }
-
-
-    console.log(this.scholar.recordName)
-    console.log(this.scholar.recordChangeTag)
-    // Save scholar
-    let scholar = await this._ckSave('Scholar', fields.scholar, this.scholar.recordName, this.scholar.recordChangeTag)
-
-    let userRecord = await this._ckGetUser(this.user)
-    let user = await this._ckLinkScholar(userRecord, scholar)
-
-    return scholar
   },
 
   async _ckLinkScholar (userRecord, scholar) {
@@ -205,6 +211,37 @@ const auth = {
          }
          resolve(response.records[0])
        })
+    })
+  },
+
+  async _ckGetScholarByEmail (email) {
+    let container = this.ck.container
+    let database = container.getDatabaseWithDatabaseScope(
+      this.CloudKit.DatabaseScope['PUBLIC']
+    )
+
+    return new Promise((resolve, reject) => {
+      database.performQuery({
+        recordType: 'Scholar',
+        filterBy: [{
+          comparator: 'EQUALS',
+          fieldName: 'email',
+          fieldValue: {value: email}
+        }]
+      }, {
+        desiredKeys: ['recordName', 'recordChangeTag'],
+        resultsLimit: 1
+      })
+      .then(function (response) {
+        if (response.hasErrors) {
+          return reject(response.errors)
+        } else if (response.records.length != 1) {
+          resolve()
+        } else {
+          let scholar = response.records[0];
+          resolve(scholar)
+        }
+      })
     })
   },
 
