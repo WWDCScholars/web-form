@@ -63,17 +63,16 @@ export default {
           fieldValue: {value: emailValue}
         }]
       }, {
-        desiredKeys: ['recordName'],
+        desiredKeys: ['recordName', 'recordChangeTag'],
         resultsLimit: 1
       })
       // database.fetchRecords(emailValue)
         .then(function (response) {
-          if (response.hasErrors) {
-            if (response.errors[0].ckErrorCode === 'NOT_FOUND') {
-              self.errorComment = 'Your email address could not be found. Are you sure it is the one you used in the past?'
-            }
+          if (response.hasErrors || response.records.length != 1) {
+            self.errorComment = 'Your email address could not be found. Are you sure it is the one you used in the past?'
           } else {
             let scholar = response.records[0];
+            self.auth.scholar = scholar
             let userIdentity = self.auth.user
 
             database.fetchRecords(userIdentity.userRecordName)
@@ -146,6 +145,7 @@ export default {
                             }
 
                             self.$router.push({ name: 'welcome' })
+                            // self.$router.push({ name: 'step', params: { step: '2-application' } })
                             // self.auth.router.replace({ name: 'welcome' });
                           }
                         });
