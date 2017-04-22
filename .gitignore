@@ -71,11 +71,11 @@ typings/
 ### Vue App ###
 
 # Compiled Resources
-Public/*.js*
-Public/*.json
-Public/*.woff*
-Public/*.eot
-Public/*.svg
-Public/*.ttf
-Public/css
-Public/js
+#Public/*.js*
+#Public/*.json
+#Public/*.woff*
+#Public/*.eot
+#Public/*.svg
+#Public/*.ttf
+#Public/css
+#Public/js
