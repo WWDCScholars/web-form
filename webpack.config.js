@@ -74,7 +74,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin(['Public/*.js', 'Public/*.json', 'Public/js', 'Public/css'], {
+    new CleanWebpackPlugin(['Public/*.js*', 'Public/*.json', 'Public/js', 'Public/css'], {
       root: __dirname,
       verbose: true
     }),
