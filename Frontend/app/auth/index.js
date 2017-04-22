@@ -1,5 +1,5 @@
 import { serializeSteps } from './stephandling'
-import config from '../config'
+import config from 'config'
 
 const auth = {
   router: {},

@@ -70,6 +70,9 @@ typings/
 
 ### Vue App ###
 
+# Config
+Frontend/app/config/development.js
+
 # Compiled Resources
 Public/*hot-update*
 #Public/*.js*

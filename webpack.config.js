@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const webpack = require('webpack')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -50,8 +51,7 @@ module.exports = {
       {
         test: /\.(woff|woff2)$/,
         loader: "url-loader?limit=10000&minetype=application/font-woff"
-      },
-    // {test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
+      }
 
     ]
   },
@@ -87,7 +87,8 @@ module.exports = {
 
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.common.js'
+      vue: 'vue/dist/vue.common.js',
+      config: (fs.statSync(configPath()) ? configPath() : configPath('production'))
     }
   },
 
@@ -103,4 +104,9 @@ if (process.env.NODE_ENV === 'production') {
     new BabiliPlugin()
     // new webpack.loaderOptionsPlugin({ minimize: true })
   ])
+}
+
+function configPath(environment) {
+  let env = environment || process.env.NODE_ENV
+  return path.join(__dirname, 'Frontend', 'app', 'config', env) + '.js'
 }
