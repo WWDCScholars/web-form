@@ -165,9 +165,6 @@ const auth = {
   async ckSubmitModel (model) {
     const fields = serializeSteps(model)
 
-    // Add current WWDCYear
-    fields.scholar.wwdcYears = [{ recordName: 'WWDC 2017', action: 'NONE' }]
-
     var wwdcYearInfoRecord = null,
     socialMediaRecord = null
 
@@ -178,7 +175,6 @@ const auth = {
         this._ckSave('ScholarSocialMedia', fields.socialMedia, this.scholarSocialMedia.recordName, this.scholarSocialMedia.recordChangeTag)
       ])
 
-      fields.scholar.wwdcYearInfos = [{ recordName: wwdcYearInfoRecord.recordName, action: 'DELETE_SELF' }]
       fields.scholar.socialMedia = { recordName: socialMediaRecord.recordName, action: 'DELETE_SELF' }
 
       // Find old scholar silently instead of creating a new one with user provided email address
@@ -187,8 +183,30 @@ const auth = {
         if (oldScholar) {
           this.scholar.recordName = oldScholar.recordName
           this.scholar.recordChangeTag = oldScholar.recordChangeTag
+          console.log(oldScholar);
+          this.scholar.wwdcYearInfos = oldScholar.fields.wwdcYearInfos.value
+          console.log(oldScholar.fields.wwdcYearInfos);
+          this.scholar.wwdcYears = oldScholar.fields.wwdcYears.value
+          console.log(oldScholar.fields.wwdcYears);
         }
       }
+
+console.log(this.scholar.wwdcYearInfos);
+console.log(this.scholar.wwdcYears);
+      if (this.scholar.wwdcYearInfos !== undefined) {
+        fields.scholar.wwdcYearInfos = this.scholar.wwdcYearInfos
+      }else {
+        fields.scholar.wwdcYearInfos = []
+      }
+      fields.scholar.wwdcYearInfos.push({ recordName: wwdcYearInfoRecord.recordName, action: 'DELETE_SELF' })
+
+      if (this.scholar.wwdcYears !== undefined) {
+        fields.scholar.wwdcYears = this.scholar.wwdcYears
+      }else {
+        fields.scholar.wwdcYears = []
+      }
+      // Add current WWDCYear
+      fields.scholar.wwdcYears.push({ recordName: 'WWDC 2017', action: 'NONE' })
 
       // Save scholar
       let scholar = await this._ckSave('Scholar', fields.scholar, this.scholar.recordName, this.scholar.recordChangeTag)
@@ -229,7 +247,7 @@ const auth = {
           fieldValue: {value: email}
         }]
       }, {
-        desiredKeys: ['recordName', 'recordChangeTag'],
+        desiredKeys: ['recordName', 'recordChangeTag', 'wwdcYears', 'wwdcYearInfos'],
         resultsLimit: 1
       })
       .then(function (response) {
