@@ -71,7 +71,7 @@ typings/
 ### Vue App ###
 
 # Compiled Resources
-Public/*.js
+Public/*.js*
 Public/*.json
 Public/*.woff*
 Public/*.eot
