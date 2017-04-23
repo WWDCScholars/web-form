@@ -107,6 +107,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 function configPath(environment) {
-  let env = environment || process.env.NODE_ENV
+  var env = environment || process.env.NODE_ENV
   return path.join(__dirname, 'Frontend', 'app', 'config', env) + '.js'
 }
