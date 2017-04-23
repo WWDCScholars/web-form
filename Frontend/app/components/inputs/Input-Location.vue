@@ -1,7 +1,7 @@
 <template lang="pug">
 .form-location
   .form-input
-    gmap-autocomplete(@place_changed="setPlace", :id="field.name", placeholder="", @focusout.native="onFocusOut", ref="input", :value="inputValue")
+    gmap-autocomplete(@place_changed="setPlace", :id="field.name", placeholder="", @focusout.native="onFocusOut", ref="input", :value="inputValue", :class="{ 'input-has-value': (inputValue.length > 0) }")
     label(:for="field.name", ref="label").form-title {{ field.placeholder }}
 
   gmap-map(:center="center", :zoom="zoom").form-input-map
@@ -37,8 +37,8 @@ export default {
       return !isNaN(string) ? parseFloat(string) : 0
     })
     this.center = { lat: latLong[0], lng: latLong[1] }
+    this.setCityFromCoordinates(this.center)
     this.zoom = 7
-    this.inputValue = this.model
     this.$emit('input', this.model)
   },
   methods: {
@@ -50,6 +50,36 @@ export default {
       this.model = this.center.lat + ',' + this.center.lng
       this.zoom = 7
       this.$emit('input', this.model)
+    },
+    setCityFromCoordinates(location) {
+      let geocoder = new google.maps.Geocoder
+      geocoder.geocode({ location }, (results, status) => {
+        if (status !== 'OK' || !results[0]) {
+          this.inputValue = this.model
+          return
+        }
+
+        let result = results[0]
+        var readableResult = []
+        for (var i = 0; i < result.address_components.length; i++) {
+          let component = result.address_components[i]
+          switch (component.types[0]) {
+            case 'locality':
+              readableResult.push(component.long_name)
+              break;
+            case 'administrative_area_level_1':
+              readableResult.push(component.short_name)
+              break
+            case 'country':
+              readableResult.push(component.long_name)
+              break
+
+            default:
+              break
+          }
+        }
+        this.inputValue = readableResult.join(', ')
+      })
     },
     onFocusOut (event) {
       const src = event.srcElement
