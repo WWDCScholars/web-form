@@ -34,7 +34,7 @@ class CloudKit {
   }
 
   async _setupAuth() {
-    console.log('setupAuth')
+    // console.log('setupAuth')
     this.defaultContainer.setUpAuth()
       .then((userIdentity) => {
         if (userIdentity) {
@@ -47,7 +47,7 @@ class CloudKit {
   }
 
   async _gotoAuthenticatedState(userIdentity) {
-    console.log('gotoAuthenticatedState')
+    // console.log('gotoAuthenticatedState')
     this.user.isAuthenticated = true
 
     this.defaultContainer
@@ -75,7 +75,7 @@ class CloudKit {
   }
 
   async _gotoUnauthenticatedState(error) {
-    console.log('gotoUnauthenticatedState')
+    // console.log('gotoUnauthenticatedState')
     if (error/* && error.ckErrorCode === 'AUTH_PERSIST_ERROR'*/) {
       throw error
       return
