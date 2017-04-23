@@ -75,6 +75,7 @@ Frontend/app/config/development.js
 
 # Compiled Resources
 Public/*hot-update*
+Public/**/*.map
 #Public/*.js*
 #Public/*.json
 #Public/*.woff*
