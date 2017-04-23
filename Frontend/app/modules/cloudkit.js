@@ -112,20 +112,20 @@ class CloudKit {
     }
 
     // Find old scholar silently with the user provided email address and link it, instead of creating a new one.
-    if (this.user.email) {
-      var oldScholar
-      try {
-        oldScholar = await this.findScholarByEmail(this.user.email)
-      } catch (error) {
-        // Discard error (no problem if we couldn't find the email address)
-      }
-      if (oldScholar) {
-        this.scholar.recordName = oldScholar.recordName
-        this.scholar.recordChangeTag = oldScholar.recordChangeTag
-        this.scholar.wwdcYearInfos = oldScholar.fields.wwdcYearInfos.value
-        this.scholar.wwdcYears = oldScholar.fields.wwdcYears.value
-      }
-    }
+    // if (this.user.email) {
+    //   var oldScholar
+    //   try {
+    //     oldScholar = await this.findScholarByEmail(this.user.email)
+    //   } catch (error) {
+    //     // Discard error (no problem if we couldn't find the email address)
+    //   }
+    //   if (oldScholar) {
+    //     this.scholar.recordName = oldScholar.recordName
+    //     this.scholar.recordChangeTag = oldScholar.recordChangeTag
+    //     this.scholar.wwdcYearInfos = oldScholar.fields.wwdcYearInfos.value
+    //     this.scholar.wwdcYears = oldScholar.fields.wwdcYears.value
+    //   }
+    // }
 
     if (this.scholar.wwdcYearInfos) {
       fields.scholar.wwdcYearInfos = this.scholar.wwdcYearInfos
