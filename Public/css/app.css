@@ -905,8 +905,8 @@ footer {
   width: 11em;
   height: 11em;
   border-radius: 50%;
-  background: #51aa96;
-  background: linear-gradient(to right, #51aa96 10%, rgba(81, 170, 150, 0) 42%);
+  background: #6c6c6c;
+  background: linear-gradient(to right, #6c6c6c 10%, rgba(108, 108, 108, 0) 42%);
   position: relative;
   -webkit-animation: load3 1.4s infinite linear;
           animation: load3 1.4s infinite linear;
@@ -915,7 +915,7 @@ footer {
   .spinner:before {
     width: 50%;
     height: 50%;
-    background: #ffffff;
+    background: white;
     border-radius: 100% 0 0 0;
     position: absolute;
     top: 0;
@@ -933,6 +933,14 @@ footer {
     left: 0;
     bottom: 0;
     right: 0; }
+
+.spinner.spinner-green {
+  background: #51aa96;
+  background: linear-gradient(to right, #51aa96 10%, rgba(81, 170, 150, 0) 42%); }
+
+.spinner.spinner-blue {
+  background: #4db0ce;
+  background: linear-gradient(to right, #4db0ce 10%, rgba(77, 176, 206, 0) 42%); }
 
 @-webkit-keyframes load3 {
   0% {
@@ -1003,7 +1011,8 @@ footer {
   text-align: center;
   height: calc(100% - 60px); }
   .page-thankyou .social-links {
-    margin: 60px 0 35px;
+    margin: 60px 0 35px; }
+  .page-thankyou h2, .page-thankyou h3, .page-thankyou p, .page-thankyou .social-links {
     z-index: 100;
     position: relative; }
   .page-thankyou .scholars-hero {
@@ -1032,3 +1041,5 @@ footer {
       @media (max-width: 650px) {
         .page-thankyou .scholars-hero:before {
           height: 60%; } }
+
+/*# sourceMappingURL=app.css.map*/
