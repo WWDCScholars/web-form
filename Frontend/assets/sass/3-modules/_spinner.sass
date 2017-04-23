@@ -5,8 +5,8 @@
   width: 11em
   height: 11em
   border-radius: 50%
-  background: $sch-green
-  background: linear-gradient(to right, $sch-green 10%, transparentize($sch-green, 1.0) 42%)
+  background: $sch-gray
+  background: linear-gradient(to right, $sch-gray 10%, transparentize($sch-gray, 1.0) 42%)
   position: relative
   animation: load3 1.4s infinite linear
   transform: translateZ(0)
@@ -14,7 +14,7 @@
   &:before
     width: 50%
     height: 50%
-    background: #ffffff
+    background: $white
     border-radius: 100% 0 0 0
     position: absolute
     top: 0
@@ -33,6 +33,15 @@
     left: 0
     bottom: 0
     right: 0
+
+.spinner
+  &.spinner-green
+    background: $sch-green
+    background: linear-gradient(to right, $sch-green 10%, transparentize($sch-green, 1.0) 42%)
+
+  &.spinner-blue
+    background: $sch-blue
+    background: linear-gradient(to right, $sch-blue 10%, transparentize($sch-blue, 1.0) 42%)
 
 @keyframes load3
   0%
