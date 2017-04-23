@@ -483,7 +483,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
       border-radius: 6px;
       cursor: pointer;
       color: #6c6c6c;
-      background-color: whitesmoke;
+      background-color: white;
       text-align: center;
       transition: background-color 100ms linear, border-color 100ms linear, color 100ms linear; }
       .form-select .form-option label:hover {
@@ -1041,5 +1041,3 @@ footer {
       @media (max-width: 650px) {
         .page-thankyou .scholars-hero:before {
           height: 60%; } }
-
-/*# sourceMappingURL=app.css.map*/
