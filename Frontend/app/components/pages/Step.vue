@@ -27,7 +27,7 @@ export default {
     }
   },
   components: {
-    'step-form': require('./steps/Step-Form.vue')
+    'step-form': require('../Step-Form.vue')
   }
 }
 </script>

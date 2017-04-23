@@ -168,10 +168,10 @@ export default {
     }
   },
   components: {
-    'modal': require('../Modal.vue'),
-    'input-file': require('../inputs/Input-File.vue'),
-    'input-date': require('../inputs/Input-Date.vue'),
-    'input-location': require('../inputs/Input-Location.vue')
+    'modal': require('./Modal.vue'),
+    'input-file': require('./inputs/Input-File.vue'),
+    'input-date': require('./inputs/Input-Date.vue'),
+    'input-location': require('./inputs/Input-Location.vue')
   }
 }
 </script>

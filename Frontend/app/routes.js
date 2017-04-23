@@ -5,13 +5,13 @@ export default [
   {
     path: '/error',
     name: 'error',
-    component: require('./components/Error.vue')
+    component: require('./components/pages/Error.vue')
   },
 
   {
     path: '/',
     name: 'welcome',
-    component: require('./components/Welcome.vue'),
+    component: require('./components/pages/Welcome.vue'),
     meta: { requiresAuth: true }
   },
   {
@@ -22,26 +22,26 @@ export default [
   {
     path: '/step/:step',
     name: 'step',
-    component: require('./components/Step.vue'),
+    component: require('./components/pages/Step.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/thankyou',
     name: 'thankyou',
-    component: require('./components/ThankYou.vue'),
+    component: require('./components/pages/ThankYou.vue'),
     meta: { requiresAuth: true }
   },
 
   {
     path: '/signin',
     name: 'signin',
-    component: require('./components/Signin.vue'),
+    component: require('./components/pages/Signin.vue'),
     meta: { requiresAnonymous: true }
   },
   {
     path: '/link',
     name: 'link',
-    component: require('./components/Link.vue'),
+    component: require('./components/pages/Link.vue'),
     meta: { requiresAuth: true }
   }
 

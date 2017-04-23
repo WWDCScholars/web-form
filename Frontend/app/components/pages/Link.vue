@@ -72,7 +72,7 @@ export default {
     }
   },
   components: {
-    'modal': require('./Modal.vue')
+    'modal': require('../Modal.vue')
   }
 }
 </script>
