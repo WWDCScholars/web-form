@@ -51,6 +51,37 @@ const stephandling = {
     }
 
     return ret
+  },
+
+  deserializeSteps (steps, scholarFields, socialMediaFields) {
+    for (var s = 0; s < steps.length; s++) {
+      let step = steps[s]
+
+      for (var g = 0; g < step.groups.length; g++) {
+        let group = step.groups[g]
+
+        for (var f = 0; f < group.fields.length; f++) {
+          const field = groups.fields[f]
+
+          // Find field in scholar default fields
+          if (scholarFields[field.name]) {
+            switch (field.type) {
+              case 'location':
+                let lf = scholarFields[field.name].value
+                field.model = lf.latitude + ',' + lf.longitude
+                break;
+              default:
+                field.model = scholarFields[field.name].value
+            }
+          }
+
+          // Find field in scholar social media fields
+          else if (socialMediaFields[field.name]){
+            field.model = socialMediaFields[field.name].value
+          }
+        }
+      }
+    }
   }
 }
 

@@ -7,12 +7,12 @@ new Vue({
   render: h => h(App),
   data: { store },
   mounted () {
-    store.auth.setVm(this)
+    store.auth.vm = this
   }
 })
 
 window.addEventListener('cloudkitloaded', () => {
-  store.auth._ckConfigureCloudKit()
+  store.auth.init()
 })
 
 export { router }

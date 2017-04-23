@@ -1,8 +1,9 @@
 import steps from './_steps'
+import CloudKit from './modules/cloudkit'
 
 export default {
 
-  auth: require('./auth').default,
+  auth: new CloudKit(),
 
   steps
 
