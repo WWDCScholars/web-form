@@ -6,5 +6,7 @@ export default {
   },
   googleMaps: {
     apiKey: 'AIzaSyCkl5vVa7FTE4yuB0la0gF9dxdlRj7ps3A'
-  }
+  },
+
+  wwdcYear: 'WWDC 2017'
 }
