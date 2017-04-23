@@ -8,5 +8,9 @@ export default {
     apiKey: 'AIzaSyCkl5vVa7FTE4yuB0la0gF9dxdlRj7ps3A'
   },
 
+  sentry: {
+    clientKey: 'https://6b73c6d82c5440d7b025e639c302bb6f@sentry.io/160953'
+  },
+
   wwdcYear: 'WWDC 2017'
 }

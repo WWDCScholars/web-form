@@ -25,6 +25,7 @@
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
     "pug": "^2.0.0-beta11",
+    "raven-js": "^3.14.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",

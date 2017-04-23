@@ -5,6 +5,8 @@ import config from 'config'
 import Router from 'vue-router'
 import Store from 'vue-stash'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
 
 [Router, Store].forEach(Plugin => Vue.use(Plugin))
 
@@ -14,5 +16,10 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places' // If place input is needed
   }
 })
+
+Raven
+  .config(config.sentry.clientKey)
+  .addPlugin(RavenVue, Vue)
+  .install()
 
 export { Vue, Router }
