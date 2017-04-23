@@ -158,6 +158,24 @@ class CloudKit {
       return
     }
 
+    // Cross reference for WWDCYearInfo
+    this._save(
+      'WWDCYearInfo', {
+        scholar: { recordName: scholar.recordName, action: 'DELETE_SELF' },
+        year: { recordName: config.wwdcYear, action: 'NONE' }
+      },
+      wwdcYearInfoRecord.recordName,
+      wwdcYearInfoRecord.recordChangeTag
+    )
+    // Cross reference for ScholarSocialMedia
+    this._save(
+      'ScholarSocialMedia', {
+        scholar: { recordName: scholar.recordName, action: 'DELETE_SELF' }
+      },
+      socialMediaRecord.recordName,
+      socialMediaRecord.recordChangeTag
+    )
+
     let userRecord = await this.fetchFirstRecord(this.user.userRecordName)
     if (!userRecord) {
       return
