@@ -15,7 +15,7 @@ export default {
   computed: {},
   mounted () {},
   created () {
-    this.changeStep()
+    this.onRouteChanged()
   },
   watch: {
     '$route': 'onRouteChanged'
