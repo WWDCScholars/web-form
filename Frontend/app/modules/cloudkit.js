@@ -71,31 +71,7 @@ class CloudKit {
 
     this.scholar = scholarRecord
 
-    let wwdcYears = scholarRecord.fields.wwdcYears.value
-
-    // Check if the user already submitted the current batch
-    for (var i = 0; i < wwdcYears.length; i++) {
-      let obj = wwdcYears[i]
-      if (obj.recordName === config.wwdcYear) {
-        console.log('Contains ' + config.wwdcYear + ', going to thankyou')
-        this.router.push({ name: 'thankyou' })
-        return
-      }
-    }
-
-    // Scholar exists but hasn't filled this years form
-    // Fetch social media
-    let socialMediaReference = scholar.fields.socialMedia
-    let socialMediaRecord = await this.fetchFirstRecord(socialMediaReference.value.recordName)
-    if (!socialMediaRecord) {
-      return
-    }
-
-    this.scholarSocialMedia = socialMediaRecord
-
-    deserializeSteps(this.vm.$store.steps, scholarRecord.fields, socialMediaRecord.fields)
-
-    this.router.replace({ name: 'welcome' })
+    await this.evaluateCompletionStatus(scholarRecord)
   }
 
   async _gotoUnauthenticatedState(error) {
@@ -137,7 +113,12 @@ class CloudKit {
 
     // Find old scholar silently with the user provided email address and link it, instead of creating a new one.
     if (this.user.email) {
-      let oldScholar = await this._getScholarByEmail(this.user.email)
+      var oldScholar
+      try {
+        oldScholar = await this.findScholarByEmail(this.user.email)
+      } catch (error) {
+        // Discard error (no problem if we couldn't find the email address)
+      }
       if (oldScholar) {
         this.scholar.recordName = oldScholar.recordName
         this.scholar.recordChangeTag = oldScholar.recordChangeTag
@@ -196,6 +177,51 @@ class CloudKit {
     return response.records[0]
   }
 
+  async evaluateCompletionStatus(scholarRecord) {
+    let wwdcYears = scholarRecord.fields.wwdcYears.value
+
+    // Check if the user already submitted the current batch
+    for (var i = 0; i < wwdcYears.length; i++) {
+      if (wwdcYears[i].recordName == config.wwdcYear) {
+        console.log('Contains ' + config.wwdcYear + ', going to ThankYou')
+        this.router.push({ name: 'thankyou' })
+        return
+      }
+    }
+
+    // Scholar exists but hasn't filled this years form
+    // Fetch social media
+    let socialMediaReference = scholarRecord.fields.socialMedia
+    let socialMediaRecord = await this.fetchFirstRecord(socialMediaReference.value.recordName)
+    if (!socialMediaRecord) {
+      return
+    }
+
+    this.scholarSocialMedia = socialMediaRecord
+
+    deserializeSteps(this.vm.$store.steps, scholarRecord.fields, socialMediaRecord.fields)
+
+    this.router.replace({ name: 'welcome' })
+  }
+
+  async linkScholarByEmail(email) {
+    let scholarRecord = await this.findScholarByEmail(email)
+    if (!scholarRecord) {
+      return
+    }
+
+    this.scholar = scholarRecord
+
+    let userRecord = await this.fetchFirstRecord(this.user.userRecordName)
+    if (!userRecord) {
+      return
+    }
+
+    let linkedUserRecord = await this._linkScholar(userRecord, scholarRecord)
+
+    await this.evaluateCompletionStatus(scholarRecord)
+  }
+
   async _linkScholar(userRecord, scholar) {
     let fields = {
       scholar: {
@@ -220,6 +246,33 @@ class CloudKit {
   _fetchRecord(recordName) {
     return this._promisify(
       this.publicDatabase.fetchRecords(recordName)
+    )
+  }
+
+  async findScholarByEmail(email) {
+    let response = await this._performQuery({
+      recordType: 'Scholar',
+      filterBy: [{
+        comparator: 'EQUALS',
+        fieldName: 'email',
+        fieldValue: { value: email }
+      }]
+    }, {
+      // desiredKeys: ['recordName', 'recordChangeTag'],
+      resultsLimit: 1
+    })
+
+    if (!response.records[0]) {
+      throw new Error('Could not find scholar with email: ' + email)
+      return
+    }
+
+    return response.records[0]
+  }
+
+  _performQuery(query, options) {
+    return this._promisify(
+      this.publicDatabase.performQuery(query, options)
     )
   }
 
