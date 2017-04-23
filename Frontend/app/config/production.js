@@ -9,7 +9,8 @@ export default {
   },
 
   sentry: {
-    clientKey: 'https://6b73c6d82c5440d7b025e639c302bb6f@sentry.io/160953'
+    clientKey: 'https://6b73c6d82c5440d7b025e639c302bb6f@sentry.io/160953',
+    environment: 'production'
   },
 
   wwdcYear: 'WWDC 2017'

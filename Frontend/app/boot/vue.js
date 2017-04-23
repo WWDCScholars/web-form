@@ -18,7 +18,7 @@ Vue.use(VueGoogleMaps, {
 })
 
 Raven
-  .config(config.sentry.clientKey)
+  .config(config.sentry.clientKey, {environment: config.sentry.environment})
   .addPlugin(RavenVue, Vue)
   .install()
 
