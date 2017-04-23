@@ -1,8 +1,8 @@
 <template lang="pug">
 .step-form.form(:class="colorClass")
-  modal(v-if="showModal")
+  modal(v-if="submitInProgress")
     h3(slot="header").color-green Beaming your profile to space...
-    div(slot="body").spinner.modal-spinner
+    div(slot="body").spinner.spinner-green.modal-spinner
   h3 {{ step.title }}
   .form-group(v-for="group in step.groups")
     h4 {{ group.title }}
@@ -49,7 +49,7 @@
   .form-cta-group
     button(v-if="currentStepNumber != 0", v-on:click="previousStep").form-cta.form-cta-secondary.form-cta-left Previous
     button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep", :disabled="!step.finished").form-cta.form-cta-primary.form-cta-right Continue
-    button(v-if="currentStepNumber === stepCount - 1", v-on:click="submit", :disabled="!submittable").form-cta.form-cta-primary.form-cta-right Submit
+    button(v-if="currentStepNumber === stepCount - 1", v-on:click="submit", :disabled="!submittable || submitInProgress").form-cta.form-cta-primary.form-cta-right Submit
 </template>
 
 <script>
@@ -59,8 +59,9 @@ export default {
   props: ['step'],
   data () {
     return {
-      showModal: false,
-      submittable: false
+      submittable: false,
+
+      submitInProgress: false
     }
   },
   computed: {
@@ -131,10 +132,10 @@ export default {
     },
     onFocusOut (event) {
       const src = event.srcElement
-      if (src.value != '') {
-        src.nextSibling.classList.add('input-has-value')
-      } else {
+      if (src.value == '') {
         src.nextSibling.classList.remove('input-has-value')
+      } else {
+        src.nextSibling.classList.add('input-has-value')
       }
     },
 
@@ -149,14 +150,15 @@ export default {
       this.$router.go(-1)
     },
     async submit () {
-      if (!this.submittable) {
+      if (!this.submittable || this.submitInProgress) {
         return
       }
+      this.submitInProgress = true
 
       try {
-        this.showModal = true
-        let scholar = await this.$store.auth.ckSubmitModel(this.$store.steps)
-        this.showModal = false
+        this.submitInProgress = true
+        await this.auth.submitModel(this.$store.steps)
+        this.submitInProgress = false
 
         this.$router.push({ name: 'thankyou' })
       } catch (errors) {
