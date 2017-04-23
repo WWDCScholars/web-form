@@ -18,11 +18,12 @@ export default {
     this.changeStep()
   },
   watch: {
-    '$route': 'changeStep'
+    '$route': 'onRouteChanged'
   },
   methods: {
-    changeStep () {
-      this.step = this.$store.steps[this.$route.params.step.split('-')[0]]
+    onRouteChanged(to, from) {
+      let stepIndex = parseInt(this.$route.params.step.split('-')[0])
+      this.step = this.$store.steps[stepIndex]
       window.scrollTo(0, 0)
     }
   },
