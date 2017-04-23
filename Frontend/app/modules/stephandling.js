@@ -61,7 +61,7 @@ const stephandling = {
         let group = step.groups[g]
 
         for (var f = 0; f < group.fields.length; f++) {
-          const field = groups.fields[f]
+          const field = group.fields[f]
 
           // Find field in scholar default fields
           if (scholarFields[field.name]) {
