@@ -61,7 +61,9 @@ export default {
     return {
       submittable: false,
 
-      submitInProgress: false
+      submitInProgress: false,
+
+      _stepChanged: false
     }
   },
   computed: {
@@ -77,21 +79,19 @@ export default {
   },
   mounted () {
     // Set input classes
-    for (var g = 0; g < this.step.groups.length; g++) {
-      const group = this.step.groups[g]
-      for (var f = 0; f < group.fields.length; f++) {
-        const field = group.fields[f]
-        if (field.placeholder && field.model.length > 0) {
-          const el = document.getElementById(field.name).nextSibling
-          el.classList.add('no-transition')
-          el.classList.add('input-has-value')
-          setTimeout(() => {
-            el.classList.remove('no-transition')
-          }, 200)
-        }
-      }
-    }
+    this.setupLabels()
     this.evaluateCompletion()
+  },
+  updated() {
+    if (this._stepChanged) {
+      this.setupLabels()
+      this._stepChanged = false
+    }
+  },
+  watch: {
+    step() {
+      this._stepChanged = true
+    }
   },
   methods: {
     evaluateCompletion () {
@@ -136,6 +136,24 @@ export default {
         src.nextSibling.classList.remove('input-has-value')
       } else {
         src.nextSibling.classList.add('input-has-value')
+      }
+    },
+
+    setupLabels() {
+      for (var g = 0; g < this.step.groups.length; g++) {
+        const group = this.step.groups[g]
+        for (var f = 0; f < group.fields.length; f++) {
+          const field = group.fields[f]
+
+          if (field.placeholder != undefined && field.model.length > 0) {
+            const el = document.getElementById(field.name).nextSibling
+            el.classList.add('no-transition')
+            el.classList.add('input-has-value')
+            setTimeout(() => {
+              el.classList.remove('no-transition')
+            }, 200)
+          }
+        }
       }
     },
 
