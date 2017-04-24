@@ -52,7 +52,7 @@ class CloudKit {
 
     this.defaultContainer
       .whenUserSignsOut()
-      .then(this._gotoUnauthenticatedState)
+      .then(this._gotoUnauthenticatedState.bind(this))
 
     let userRecord = await this.fetchFirstRecord(userIdentity.userRecordName)
     if (!userRecord) {
@@ -83,8 +83,8 @@ class CloudKit {
 
     this.defaultContainer
       .whenUserSignsIn()
-      .then(this._gotoAuthenticatedState)
-      .catch(this._gotoUnauthenticatedState)
+      .then(this._gotoAuthenticatedState.bind(this))
+      .catch(this._gotoUnauthenticatedState.bind(this))
 
     this.router.replace({ name: 'signin' })
   }
