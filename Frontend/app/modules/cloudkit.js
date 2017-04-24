@@ -127,8 +127,8 @@ class CloudKit {
     //   }
     // }
 
-    if (this.scholar.wwdcYearInfos) {
-      fields.scholar.wwdcYearInfos = this.scholar.wwdcYearInfos
+    if (this.scholar.fields.wwdcYearInfos) {
+      fields.scholar.wwdcYearInfos = this.scholar.fields.wwdcYearInfos.value
     } else {
       fields.scholar.wwdcYearInfos = []
     }
@@ -137,8 +137,8 @@ class CloudKit {
       action: 'DELETE_SELF'
     })
 
-    if (this.scholar.wwdcYears) {
-      fields.scholar.wwdcYears = this.scholar.wwdcYears
+    if (this.scholar.fields.wwdcYears) {
+      fields.scholar.wwdcYears = this.scholar.fields.wwdcYears.value
     } else {
       fields.scholar.wwdcYears = []
     }
