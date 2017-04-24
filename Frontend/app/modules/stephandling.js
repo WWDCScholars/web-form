@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const stephandling = {
   serializeSteps (steps) {
     var ret = {
@@ -41,6 +43,8 @@ const stephandling = {
               if (!(field.model[0] instanceof File)) { continue }
               ret[currentParameterName][field.name] = field.model[0]
             }
+          } else if (field.type === 'date') {
+            ret[currentParameterName][field.name] = moment(field.model, field.date_format).valueOf()
           } else {
             ret[currentParameterName][field.name] = field.model
           }
@@ -70,6 +74,9 @@ const stephandling = {
                 let lf = scholarFields[field.name].value
                 field.model = lf.latitude + ',' + lf.longitude
                 break;
+              case 'date':
+                field.model = moment(scholarFields[field.name].value).format(field.date_format)
+                break
               default:
                 field.model = scholarFields[field.name].value
             }

@@ -14,15 +14,18 @@
           label(v-bind:for="option") {{ option }}
 
       // *TYPE file
-      input-file(v-else-if="field.type === 'file'", :field="field", v-model="field.model", @input="evaluateCompletion")
+      input-file(v-else-if="field.type === 'file'", :field="field", v-model="field.model", @input="evaluateCompletion", v-validate.reject="validationOptions(field)", :data-vv-name="field.name", data-vv-value-path="", :data-vv-as="field.readableName || field.placeholder")
 
       // *TYPE email
       .form-input(v-else-if="field.type === 'email'")
-        input(type="email", :name="field.name", :id="field.name", :required="field.required" @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
+        input(type="email", :name="field.name", :id="field.name", :required="field.required" @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion", v-validate="validationOptions(field)", :data-vv-as="field.readableName || field.placeholder")
         label(:for="field.name").form-title {{ field.placeholder }}
 
       // *TYPE date
-      input-date(v-else-if="field.type === 'date'", :field="field", v-model="field.model", @input="evaluateCompletion")
+      .form-input(v-else-if="field.type === 'date'")
+        input(type="text", :name="field.name", :id="field.name", :required="field.require", @focusout="onFocusOut", v-model="field.model", @change="evaluateCompletion", v-validate="validationOptions(field)", :data-vv-as="field.readableName || field.placeholder")
+        label(:for="field.name").form-title {{ field.placeholder }}
+      //- input-date(v-else-if="field.type === 'date'", :field="field", v-model="field.model", @input="evaluateCompletion")
 
       //*TYPE textarea
       .form-input(v-else-if="field.type === 'textarea'")
@@ -34,7 +37,7 @@
 
       // *TYPE url
       .form-input(v-else-if="field.type === 'url'")
-        input(type="url", :name="field.name", :id="field.name", :required="field.required", @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
+        input(type="url", :name="field.name", :id="field.name", :required="field.required", @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion", v-validate="validationOptions(field)", :data-vv-as="field.readableName || field.placeholder")
         label(:for="field.name").form-title {{ field.placeholder }}
         .form-optional-mark(v-if="!field.required") Optional
 
@@ -44,6 +47,7 @@
         label(:for="field.name").form-title {{ field.placeholder }}
         .form-optional-mark(v-if="!field.required") Optional
 
+      .form-input-error(v-show="errors.has(field.name)") {{ errors.first(field.name) }}
       .form-comment(v-if="field.comment") {{ field.comment }}
 
   .form-cta-group
@@ -53,6 +57,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'step-form',
   store: ['auth', 'steps'],
@@ -91,9 +96,20 @@ export default {
   watch: {
     step() {
       this._stepChanged = true
+      this.$validator.validateAll()
     }
   },
   methods: {
+    validationOptions(field) {
+      const ret = {}
+      if (field.required) { ret.required = true }
+      if (field.type === 'url') { ret.url = true }
+      if (field.type === 'email') { ret.email = true }
+      if (field.dimensions_min) { ret.dimensions_min = [field.dimensions_min,field.dimensions_min] }
+      // if (field.past) { ret.before = field.name+'_limit' }
+      if (field.date_format) { ret.date_format = field.date_format }
+      return { rules: ret }
+    },
     evaluateCompletion () {
       var completed = true
       for (var g = 0; g < this.step.groups.length; g++) {
@@ -108,13 +124,14 @@ export default {
                   completed = false
                 }
               }
-            } else if (field.name === 'email') {
-              this.$store.auth.user.email = field.model
             } else if (!field.model) {
               completed = false
             }
           }
         }
+      }
+      if (this.errors.any()) {
+        completed = false
       }
       this.step.finished = completed
 
@@ -188,7 +205,7 @@ export default {
   components: {
     'modal': require('./Modal.vue'),
     'input-file': require('./inputs/Input-File.vue'),
-    'input-date': require('./inputs/Input-Date.vue'),
+    // 'input-date': require('./inputs/Input-Date.vue'),
     'input-location': require('./inputs/Input-Location.vue')
   }
 }

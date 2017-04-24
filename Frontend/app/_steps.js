@@ -3,13 +3,13 @@ var steps = [
   {
     slug: '0-basic',
     title: 'Let\'s get you signed up...',
-    color: 'red',
+    color: 'orange',
     ckParameterName: 'scholar',
     groups: [{
         title: 'Please upload a profile image',
         ckParameterName: 'wwdcYearInfo',
         fields: [
-          { name: 'profilePicture', type: 'file', accept: 'image/*', comment: 'This needs to be an image of you with a resolution of at least 250x250' }
+          { name: 'profilePicture', readableName: 'profile picture', type: 'file', accept: 'image/*', dimensions_min: 250, comment: 'This needs to be an image of you with a resolution of at least 250x250' }
         ]
       }, {
         title: 'Enter some basic details about yourself',
@@ -17,7 +17,7 @@ var steps = [
           { name: 'firstName', type: 'text', placeholder: 'First Name', class: 'form-width-50' },
           { name: 'lastName', type: 'text', placeholder: 'Last Name', class: 'form-width-50' },
           { name: 'email', type: 'email', placeholder: 'Email' },
-          { name: 'birthday', type: 'date', placeholder: 'Date of Birth (dd/mm/yyyy)' }
+          { name: 'birthday', readableName: 'Date of Birth', type: 'date', placeholder: 'Date of Birth (DD/MM/YYYY)', past: true, date_format: 'DD/MM/YYYY' }
         ]
       }, {
         title: 'Gender',
@@ -30,7 +30,7 @@ var steps = [
   {
     slug: '1-about',
     title: 'A little more information to help you connect...',
-    color: 'red2',
+    color: 'red',
     ckParameterName: 'scholar',
     groups: [{
       title: 'Describe yourself in less than 300 characters',
@@ -69,18 +69,18 @@ var steps = [
     }, {
       title: 'Please provide a screenshot of your acceptance email for this year to validate your profile',
       fields: [
-        { name: 'acceptanceEmail', type: 'file', accept: 'image/*', class: 'form-file-wide' }
+        { name: 'acceptanceEmail', readableName: 'acceptance email', type: 'file', accept: 'image/*', class: 'form-file-wide' }
       ]
     }, {
       title: 'Upload some screenshots that showcase your playground submission',
       fields: [
-        { name: 'screenshots', type: 'file', accept: 'image/*', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
+        { name: 'screenshots', readableName: 'screenshots', type: 'file', accept: 'image/*', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
       ]
     }, {
       title: 'Is your submission available to view anywhere else? Let us know!',
       fields: [
-        { name: 'videoLink', type: 'url', placeholder: 'YouTube URL', required: false },
-        { name: 'githubAppLink', type: 'url', placeholder: 'GitHub URL', required: false }
+        { name: 'videoLink', readableName: 'YouTube link', type: 'url', placeholder: 'YouTube URL', required: false },
+        { name: 'githubAppLink', readableName: 'GitHub link', type: 'url', placeholder: 'GitHub URL', required: false }
       ]
     }, {
       title: 'You\'re good to go! Hit submit and we will review your profile as soon as possible!',
