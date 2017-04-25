@@ -26,4 +26,4 @@ Raven
   .addPlugin(RavenVue, Vue)
   .install()
 
-export { Vue, Router }
+export { Vue, Router, Raven }

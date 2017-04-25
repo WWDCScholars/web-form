@@ -58,6 +58,7 @@
 
 <script>
 import moment from 'moment'
+import Raven from 'raven-js'
 export default {
   name: 'step-form',
   store: ['auth', 'steps'],
@@ -196,10 +197,23 @@ export default {
         this.submitInProgress = false
 
         this.$router.push({ name: 'thankyou' })
-      } catch (errors) {
-        console.error(errors)
-        this.$router.push({ name: 'error' })
+      } catch (error) {
+        console.error(error)
+        this.handleError(error)
       }
+    },
+
+    handleError(error) {
+      const sentryEvents = []
+      if (error.length) {
+        for (var i = 0; i < error.length; i++) {
+          Raven.captureException(error[i])
+        }
+      } else {
+        Raven.captureException(error)
+      }
+
+      this.$router.replace({ name: 'error' })
     }
   },
   components: {

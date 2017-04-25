@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import Raven from 'raven-js'
 export default {
   name: 'error',
   store: [],
@@ -13,7 +14,9 @@ export default {
     return {}
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    Raven.showReportDialog()
+  },
   methods: {},
   components: {}
 }

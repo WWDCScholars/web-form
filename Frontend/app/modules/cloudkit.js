@@ -12,7 +12,7 @@ class CloudKit {
     this.scholarSocialMedia = {}
   }
 
-  init() {
+  async init() {
     this.ck = window.CloudKit
 
     this.ck.configure({
@@ -33,15 +33,23 @@ class CloudKit {
     this._setupAuth()
   }
 
+  _handleError(error) {
+    this.Raven.captureException(error)
+    this.router.replace({ name: 'error' })
+  }
+
   async _setupAuth() {
-    // console.log('setupAuth')
     this.defaultContainer.setUpAuth()
-      .then((userIdentity) => {
-        if (userIdentity) {
-          this.user = userIdentity
-          this._gotoAuthenticatedState(userIdentity)
-        } else {
-          this._gotoUnauthenticatedState()
+      .then(async userIdentity => {
+        try {
+          if (userIdentity) {
+            this.user = userIdentity
+            await this._gotoAuthenticatedState(userIdentity)
+          } else {
+            await this._gotoUnauthenticatedState()
+          }
+        } catch (error) {
+          this._handleError(error)
         }
       })
   }
@@ -49,6 +57,9 @@ class CloudKit {
   async _gotoAuthenticatedState(userIdentity) {
     // console.log('gotoAuthenticatedState')
     this.user.isAuthenticated = true
+    this.Raven.setUserContext({
+      id: userIdentity.userRecordName
+    })
 
     this.defaultContainer
       .whenUserSignsOut()
@@ -70,6 +81,10 @@ class CloudKit {
     let scholarRecord = await this.fetchFirstRecord(scholarReference.value.recordName)
 
     this.scholar = scholarRecord
+    this.Raven.setUserContext({
+      id: userIdentity.userRecordName,
+      email: scholarRecord.fields.email.value
+    })
 
     await this.evaluateCompletionStatus(scholarRecord)
   }
@@ -86,6 +101,7 @@ class CloudKit {
       .then(this._gotoAuthenticatedState.bind(this))
       .catch(this._gotoUnauthenticatedState.bind(this))
 
+    this.Raven.setUserContext()
     this.router.replace({ name: 'signin' })
   }
 
@@ -110,22 +126,6 @@ class CloudKit {
       recordName: socialMediaRecord.recordName,
       action: 'DELETE_SELF'
     }
-
-    // Find old scholar silently with the user provided email address and link it, instead of creating a new one.
-    // if (this.user.email) {
-    //   var oldScholar
-    //   try {
-    //     oldScholar = await this.findScholarByEmail(this.user.email)
-    //   } catch (error) {
-    //     // Discard error (no problem if we couldn't find the email address)
-    //   }
-    //   if (oldScholar) {
-    //     this.scholar.recordName = oldScholar.recordName
-    //     this.scholar.recordChangeTag = oldScholar.recordChangeTag
-    //     this.scholar.wwdcYearInfos = oldScholar.fields.wwdcYearInfos.value
-    //     this.scholar.wwdcYears = oldScholar.fields.wwdcYears.value
-    //   }
-    // }
 
     if (this.scholar.fields) {
       fields.scholar.wwdcYearInfos = this.scholar.fields.wwdcYearInfos.value
@@ -232,6 +232,10 @@ class CloudKit {
     }
 
     let linkedUserRecord = await this._linkScholar(userRecord, scholarRecord)
+    this.Raven.setUserContext({
+      id: userRecord.userRecordName,
+      email
+    })
 
     await this.evaluateCompletionStatus(scholarRecord)
   }
@@ -366,7 +370,7 @@ class CloudKit {
     return new Promise((resolve, reject) => {
       ckPromise.then((response) => {
         if (response.hasErrors) {
-          return resolve(response.errors)
+          return reject(response.errors)
         }
 
         resolve(response)
