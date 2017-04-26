@@ -361,6 +361,12 @@ class CloudKit {
       })
     }
 
+    this.Raven.captureBreadcrumb({
+      message: 'saveRecord',
+      category: 'CloudKit',
+      data: record
+    })
+
     return this._promisify(
       this.publicDatabase.saveRecords(record, options)
     )
