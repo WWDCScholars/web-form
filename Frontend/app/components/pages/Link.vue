@@ -5,7 +5,9 @@
     div(slot="body").spinner.spinner-blue.modal-spinner
 
   h2.color-blue Welcome to WWDCScholars!
-  h3.color-blue.link-header Have you signed up for an account before?
+  h4.color-blue Have you signed up for an account at WWDCScholars before?
+  p If you did, please provide the email address you used for your old account, so we can link it with your new one and show past WWDC attendences on your profile.
+  p If you never had a WWDCScholars account before, select #[i New Scholar].
 
 
   .form.form-color-blue.link-button-group
