@@ -15,8 +15,9 @@
   .form.form-color-blue.link-form(v-if="hasSignedUpBefore")
     .form-field
       .form-input
-        input(type="email", ref="signedUpBefore_email", id="email", @focusout="onFocusOut")
-        label(for="email").form-title Email
+        input(type="email", ref="signedUpBefore_email", name="signedUpBefore_email", id="signedUpBefore_email", @focusout="onFocusOut", v-validate="'required|email'", data-vv-as="Email")
+        label(for="signedUpBefore_email").form-title Email
+      .form-input-error(v-show="errors.has('signedUpBefore_email')") {{ errors.first('signedUpBefore_email') }}
       .form-comment {{ errorComment }}
 
     button(@click="link", :disabled="linkInProgress").form-cta.form-cta-primary.form-cta-right Link
