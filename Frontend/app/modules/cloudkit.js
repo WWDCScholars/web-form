@@ -56,6 +56,10 @@ class CloudKit {
 
   async _gotoAuthenticatedState(userIdentity) {
     // console.log('gotoAuthenticatedState')
+    this.Raven.captureBreadcrumb({
+      message: 'gotoAuthenticatedState',
+      category: 'CloudKit'
+    })
     this.user.isAuthenticated = true
     this.Raven.setUserContext({
       id: userIdentity.userRecordName
@@ -91,6 +95,10 @@ class CloudKit {
 
   async _gotoUnauthenticatedState(error) {
     // console.log('gotoUnauthenticatedState')
+    this.Raven.captureBreadcrumb({
+      message: 'gotoAuthenticatedState',
+      category: 'CloudKit'
+    })
     if (error/* && error.ckErrorCode === 'AUTH_PERSIST_ERROR'*/) {
       throw error
       return
@@ -376,6 +384,11 @@ class CloudKit {
     return new Promise((resolve, reject) => {
       ckPromise.then((response) => {
         if (response.hasErrors) {
+          this.Raven.captureBreadcrumb({
+            message: 'Error',
+            category: 'CloudKit',
+            data: response
+          })
           return reject(response.errors)
         }
 
