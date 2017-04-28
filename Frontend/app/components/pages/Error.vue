@@ -15,6 +15,7 @@ export default {
   },
   computed: {},
   mounted() {
+    if (!Raven.lastEventId()) { return }
     Raven.showReportDialog()
   },
   methods: {},
