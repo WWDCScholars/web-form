@@ -192,7 +192,7 @@ class CloudKit {
   async _save(recordType, fields, recordName, recordChangeTag) {
     let response = await this._saveRecord('PUBLIC', recordName, recordChangeTag, recordType, null, null, null, null, null, null, null, fields, null)
     if (!response.records[0]) {
-      throw new Error('Emptry response when saving record: ' + recordName)
+      throw new Error('Empty response when saving record: ' + recordName)
       return
     }
 
