@@ -163,7 +163,7 @@ class CloudKit {
     }
 
     // Cross reference for WWDCYearInfo
-    this._save(
+    await this._save(
       'WWDCYearInfo', {
         scholar: { recordName: scholar.recordName, action: 'DELETE_SELF' },
         year: { recordName: config.wwdcYear, action: 'NONE' }
@@ -172,7 +172,7 @@ class CloudKit {
       wwdcYearInfoRecord.recordChangeTag
     )
     // Cross reference for ScholarSocialMedia
-    this._save(
+    await this._save(
       'ScholarSocialMedia', {
         scholar: { recordName: scholar.recordName, action: 'DELETE_SELF' }
       },
@@ -190,6 +190,10 @@ class CloudKit {
   }
 
   async _save(recordType, fields, recordName, recordChangeTag) {
+    this.Raven.captureBreadcrumb({
+      message: 'save',
+      category: 'CloudKit'
+    })
     let response = await this._saveRecord('PUBLIC', recordName, recordChangeTag, recordType, null, null, null, null, null, null, null, fields, null)
     if (!response.records[0]) {
       throw new Error('Empty response when saving record: ' + recordName)
@@ -254,6 +258,11 @@ class CloudKit {
   }
 
   async _linkScholar(userRecord, scholar) {
+    this.Raven.captureBreadcrumb({
+      message: '_linkScholar',
+      category: 'CloudKit',
+      data: { userRecord, scholarRecord: scholar }
+    })
     let fields = {
       scholar: {
         recordName: scholar.recordName,
@@ -265,6 +274,11 @@ class CloudKit {
   }
 
   async fetchFirstRecord(recordName) {
+    this.Raven.captureBreadcrumb({
+      message: 'fetchFirstRecord',
+      category: 'CloudKit',
+      data: { recordName }
+    })
     let response = await this._fetchRecord(recordName)
     if (!response.records[0]) {
       throw new Error('Empty response when fetching record: ' + recordName)
