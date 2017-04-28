@@ -231,6 +231,11 @@ class CloudKit {
     if (!scholarRecord) {
       return
     }
+    await this.linkScholar(scholarRecord)
+  }
+
+  async linkScholar(scholarRecord) {
+    if (!scholarRecord) { return }
 
     this.scholar = scholarRecord
 
@@ -242,7 +247,7 @@ class CloudKit {
     let linkedUserRecord = await this._linkScholar(userRecord, scholarRecord)
     this.Raven.setUserContext({
       id: userRecord.userRecordName,
-      email
+      email: scholarRecord.fields.email.value
     })
 
     await this.evaluateCompletionStatus(scholarRecord)
