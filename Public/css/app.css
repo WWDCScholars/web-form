@@ -1009,8 +1009,49 @@ footer {
 
 .link-form {
   margin-top: 30px; }
+  .link-form .form-back {
+    background: 0;
+    border: 0;
+    margin-bottom: 15px;
+    position: relative;
+    padding: 15px;
+    margin-left: -15px; }
+    .link-form .form-back:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 7px solid #3EB5D9;
+      top: 19px;
+      left: 2px; }
+    .link-form .form-back:hover {
+      color: #69c5e1; }
   .link-form .form-cta {
     margin-top: 15px; }
+  .link-form .found-scholar {
+    color: #6c6c6c; }
+  .link-form .found-scholar-info {
+    text-align: center; }
+    .link-form .found-scholar-info .found-scholar-name {
+      display: inline;
+      font-weight: 600; }
+  .link-form .found-scholar-buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .link-form .found-scholar-buttons button {
+      margin-left: 15px; }
+      .link-form .found-scholar-buttons button:first-of-type {
+        width: 100px; }
 
 .page-thankyou {
   position: relative;
