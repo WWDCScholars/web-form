@@ -499,7 +499,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="fil
          -moz-appearance: none;
               appearance: none;
       outline: none;
-      position: absolute; }
+      position: absolute;
+      opacity: 0; }
 
 .form-file {
   position: relative;
