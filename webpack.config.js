@@ -5,8 +5,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BabiliPlugin = require('babili-webpack-plugin')
-const GitRevisionPlugin = require('git-revision-webpack-plugin')
-const gitRevisionPlugin = new GitRevisionPlugin()
+const buildDate = new Date().toISOString()
 
 module.exports = {
   // main entry of the app
@@ -77,7 +76,7 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      RELEASE: JSON.stringify(gitRevisionPlugin.version())
+      RELEASE: JSON.stringify(buildDate)
     }),
     new CleanWebpackPlugin(['Public/*.js*', 'Public/*.json', 'Public/js', 'Public/css'], {
       root: __dirname,
