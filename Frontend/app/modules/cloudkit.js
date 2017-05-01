@@ -55,10 +55,10 @@ class CloudKit {
   }
 
   async _gotoAuthenticatedState(userIdentity) {
-    // console.log('gotoAuthenticatedState')
     this.Raven.captureBreadcrumb({
       message: 'gotoAuthenticatedState',
-      category: 'CloudKit'
+      category: 'CloudKit',
+      data: { userIdentity }
     })
     this.user.isAuthenticated = true
     this.Raven.setUserContext({
@@ -104,6 +104,8 @@ class CloudKit {
       return
     }
 
+    this.user = {}
+
     this.defaultContainer
       .whenUserSignsIn()
       .then(this._gotoAuthenticatedState.bind(this))
@@ -115,6 +117,11 @@ class CloudKit {
 
   async submitModel(model) {
     let fields = serializeSteps(model)
+
+    this.Raven.setUserContext({
+      id: this.user.userRecordName,
+      email: fields.scholar.email
+    })
 
     let [wwdcYearInfoRecord, socialMediaRecord] = await Promise.all([
       this._save('WWDCYearInfo', fields.wwdcYearInfo),
@@ -180,6 +187,11 @@ class CloudKit {
       socialMediaRecord.recordChangeTag
     )
 
+    if (!this.user.userRecordName) {
+      let userIdentity = await this.fetchCurrentUserIdentity()
+      this.user = userIdentity
+      this.user.isAuthenticated = true
+    }
     let userRecord = await this.fetchFirstRecord(this.user.userRecordName)
     if (!userRecord) {
       return
@@ -190,10 +202,6 @@ class CloudKit {
   }
 
   async _save(recordType, fields, recordName, recordChangeTag) {
-    this.Raven.captureBreadcrumb({
-      message: 'save',
-      category: 'CloudKit'
-    })
     let response = await this._saveRecord('PUBLIC', recordName, recordChangeTag, recordType, null, null, null, null, null, null, null, fields, null)
     if (!response.records[0]) {
       throw new Error('Empty response when saving record: ' + recordName)
@@ -201,6 +209,10 @@ class CloudKit {
     }
 
     return response.records[0]
+  }
+
+  async fetchCurrentUserIdentity() {
+    return this.defaultContainer.fetchCurrentUserIdentity()
   }
 
   async evaluateCompletionStatus(scholarRecord) {
