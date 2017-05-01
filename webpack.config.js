@@ -77,7 +77,7 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      RELEASE: JSON.stringify(gitRevisionPlugin.commithash())
+      RELEASE: JSON.stringify(gitRevisionPlugin.version())
     }),
     new CleanWebpackPlugin(['Public/*.js*', 'Public/*.json', 'Public/js', 'Public/css'], {
       root: __dirname,
