@@ -255,6 +255,12 @@ class CloudKit {
 
     this.scholar = scholarRecord
 
+    if (!this.user.userRecordName) {
+      let userIdentity = await this.fetchCurrentUserIdentity()
+      if (!userIdentity) { return }
+      this.user = userIdentity
+      this.user.isAuthenticated = true
+    }
     let userRecord = await this.fetchFirstRecord(this.user.userRecordName)
     if (!userRecord) {
       return
