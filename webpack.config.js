@@ -47,10 +47,11 @@ module.exports = {
       },
 
       {
-        test: /\.(png|jpg|gif|svg|ttf|eot)$/,
-        loader: 'file-loader',
+        test: /\.(jpe?g|png|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          limit: 10000,
+          name: 'images/[name].[hash:7].[ext]'
         }
       },
 
@@ -95,9 +96,12 @@ module.exports = {
   ],
 
   resolve: {
+    extensions: ['.js', '.vue', '.json'],
     alias: {
       vue: 'vue/dist/vue.common.js',
-      config: (fs.statSync(configPath()) ? configPath() : configPath('production'))
+      config: (fs.statSync(configPath()) ? configPath() : configPath('production')),
+      'assets': path.join(__dirname, 'Frontend', 'assets'),
+      'images': path.join(__dirname, 'Frontend', 'assets', 'images')
     }
   },
 

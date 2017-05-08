@@ -8,12 +8,10 @@
         In the meantime, you should check out the other great ways to connect with fellow Scholarship winners. We have listed some of them below.
 
     .social-links
-      a(href="https://www.facebook.com/groups/1854279174824050"): img(src="/images/icon-facebook.png")
-      a(href="https://twitter.com/WWDCScholars"): img(src="/images/icon-twitter.png")
-      a(href="https://wwdc.slack.com"): img(src="/images/icon-slack.png")
-      a(href="https://t.me/joinchat/AAAAAEDVzkDde1wIPg7qjA"): img(src="/images/icon-telegram.png")
-
-  //- .scholars-hero
+      a(href="https://www.facebook.com/groups/1854279174824050"): img(src="~images/icon-facebook.png")
+      a(href="https://twitter.com/WWDCScholars"): img(src="~images/icon-twitter.png")
+      a(href="https://wwdc.slack.com"): img(src="~images/icon-slack.png")
+      a(href="https://t.me/joinchat/AAAAAEDVzkDde1wIPg7qjA"): img(src="~images/icon-telegram.png")
 </template>
 
 <script>
