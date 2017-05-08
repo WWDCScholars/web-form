@@ -14,7 +14,8 @@ module.exports = {
   // output configuration
   output: {
     path: path.resolve(__dirname, './Public/'),
-    filename: 'js/app.js'
+    filename: 'js/app.js',
+    publicPath: '/'
   },
 
   module: {
@@ -36,7 +37,11 @@ module.exports = {
         test: /\.sass$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader!autoprefixer-loader!sass-loader?indentedSytax'
+          use: [
+            { loader: 'css-loader' },
+            { loader: 'autoprefixer-loader' },
+            { loader: 'sass-loader?indentedSytax' },
+          ]
         }),
         exclude: /node_modules/
       },
@@ -51,7 +56,7 @@ module.exports = {
 
       {
         test: /\.(woff|woff2)$/,
-        loader: "url-loader?limit=10000&minetype=application/font-woff"
+        loader: "url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]"
       }
 
     ]
