@@ -5,8 +5,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const BabiliPlugin = require('babili-webpack-plugin')
-const GitRevisionPlugin = require('git-revision-webpack-plugin')
-const gitRevisionPlugin = new GitRevisionPlugin()
+const buildDate = new Date().toISOString()
 
 module.exports = {
   // main entry of the app
@@ -15,7 +14,8 @@ module.exports = {
   // output configuration
   output: {
     path: path.resolve(__dirname, './Public/'),
-    filename: 'js/app.js'
+    filename: 'js/app.js',
+    publicPath: '/'
   },
 
   module: {
@@ -37,22 +37,27 @@ module.exports = {
         test: /\.sass$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader!autoprefixer-loader!sass-loader?indentedSytax'
+          use: [
+            { loader: 'css-loader' },
+            { loader: 'autoprefixer-loader' },
+            { loader: 'sass-loader?indentedSytax' },
+          ]
         }),
         exclude: /node_modules/
       },
 
       {
-        test: /\.(png|jpg|gif|svg|ttf|eot)$/,
-        loader: 'file-loader',
+        test: /\.(jpe?g|png|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          limit: 10000,
+          name: 'images/[name].[hash:7].[ext]'
         }
       },
 
       {
         test: /\.(woff|woff2)$/,
-        loader: "url-loader?limit=10000&minetype=application/font-woff"
+        loader: "url-loader?limit=10000&mimetype=application/font-woff&name=fonts/[name].[ext]"
       }
 
     ]
@@ -77,7 +82,7 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      RELEASE: JSON.stringify(gitRevisionPlugin.commithash())
+      RELEASE: JSON.stringify(buildDate)
     }),
     new CleanWebpackPlugin(['Public/*.js*', 'Public/*.json', 'Public/js', 'Public/css'], {
       root: __dirname,
@@ -91,9 +96,12 @@ module.exports = {
   ],
 
   resolve: {
+    extensions: ['.js', '.vue', '.json'],
     alias: {
       vue: 'vue/dist/vue.common.js',
-      config: (fs.statSync(configPath()) ? configPath() : configPath('production'))
+      config: (fs.statSync(configPath()) ? configPath() : configPath('production')),
+      'assets': path.join(__dirname, 'Frontend', 'assets'),
+      'images': path.join(__dirname, 'Frontend', 'assets', 'images')
     }
   },
 

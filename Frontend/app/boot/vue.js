@@ -22,7 +22,7 @@ Vue.use(VueGoogleMaps, {
 })
 
 Raven
-  .config(config.sentry.clientKey, {environment: config.sentry.environment, release: RELEASE, autoBreadcrumbs: {'ui.input': false} })
+  .config(config.sentry.clientKey, {environment: config.sentry.environment, release: RELEASE, autoBreadcrumbs: {'ui': false} })
   .addPlugin(RavenVue, Vue)
   .install()
 

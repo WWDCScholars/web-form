@@ -21,7 +21,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "flatpickr": "^2.5.7",
-    "git-revision-webpack-plugin": "^2.4.1",
+    "js-cloudkit": "git+https://github.com/moritzsternemann/js-cloudkit#master",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
@@ -37,6 +37,7 @@
     "vue-stash": "^2.0.1-beta",
     "vue-template-compiler": "^2.2.6",
     "vue2-google-maps": "^0.7.5",
+    "web-assets": "git+https://github.com/WWDCScholars/web-assets#master",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.2",
     "write-file-webpack-plugin": "^4.0.2"

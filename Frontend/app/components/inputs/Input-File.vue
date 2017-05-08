@@ -60,7 +60,7 @@ export default {
       reader.readAsDataURL(file)
     },
     onFileInputChange (event) {
-      const input = event.srcElement
+      const input = event.srcElement || event.target
       if (input.files && input.files[0]) {
         const file = input.files[0]
         const preview = input.nextSibling.nextSibling
