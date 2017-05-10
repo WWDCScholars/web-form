@@ -1,0 +1,106 @@
+.form-file
+  position: relative
+  width: 125px
+  height: 125px
+  background-color: $white
+  border: 1px solid $form-border-color
+  border-radius: 6px
+  cursor: pointer
+  margin-right: 15px
+  margin-bottom: 15px
+  transition: border-color 100ms linear, box-shadow 100ms linear
+
+  input
+    width: 100%
+    height: 100%
+    opacity: 0
+    cursor: pointer
+
+  .form-file-icon
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-image: url("~images/upload-icon.png")
+    background-repeat: no-repeat
+    background-size: 40px 40px
+    background-position: center
+    pointer-events: none
+
+  .form-file-preview
+    display: none
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 95px
+    height: 95px
+    transform: translate(-50%, -50%)
+    overflow: hidden
+    pointer-events: none
+    border: 0
+    object-fit: cover
+    overflow: hidden
+
+    &.show
+      display: block
+
+  .form-file-remove
+    display: none
+    position: absolute
+    background-color: $sch-red
+    width: 20px
+    height: 20px
+    border-radius: 10px
+    border: 0
+    top: 5px
+    right: 5px
+
+    &:after
+      content: ' '
+      position: absolute
+      top: 8px
+      left: 4px
+      width: 12px
+      height: 3px
+      border-radius: 1.5px
+      background-color: $white
+
+.form-file-preview.show + .form-file-remove
+  display: block
+
+.form-file-wrapper
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+  margin-bottom: -15px
+
+  .form-file-add
+    width: 125px
+    height: 125px
+    background-color: $white
+    border: 1px solid $form-border-color
+    border-radius: 6px
+    background-image: url("~images/add-icon.png")
+    background-repeat: no-repeat
+    background-size: 40px 40px
+    background-position: center
+    margin-right: 15px
+    margin-bottom: 15px
+
+.form-file-wide
+  .form-file
+    width: 150px
+    height: 100px
+
+    .form-file-preview
+      width: 88px
+      height: 70px
+
+    .form-file-remove
+      right: 20px
+
+  .form-file-wrapper
+    .form-file-add
+      width: 150px
+      height: 100px
