@@ -15,10 +15,23 @@ const env = config.build.env
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        use: {
+          loader: 'image-webpack-loader',
+          options: {
+            gifsicle: { interlaced: false },
+            optipng: { optimizationLevel: 7 },
+            pngquant: { quality: '65-90', speed: 4 },
+            mozjpeg: { progressive: true, quality: 80 }
+          }
+        }
+      }
+    ].concat(utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true
-    })
+    }))
   },
   resolve: {
     alias: {

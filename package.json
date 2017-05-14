@@ -41,6 +41,7 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.28.0",
     "http-proxy-middleware": "^0.17.4",
+    "image-webpack-loader": "^3.3.1",
     "js-cloudkit": "moritzsternemann/js-cloudkit",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
