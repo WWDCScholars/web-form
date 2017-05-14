@@ -2,61 +2,21 @@
 .step-form.form(:class="colorClass")
   modal(v-if="submitInProgress")
     h3(slot="header").color-green Beaming your profile to space...
+    spinner(slot="body", type="circle", color="green")
     div(slot="body").spinner.spinner-green.modal-spinner
   h3 {{ step.title }}
   .form-group(v-for="group in step.groups")
     h4 {{ group.title }}
-    .form-field(v-for="field in group.fields", :class="field.class")
-      // *TYPE radio
-      .form-select(v-if="field.type === 'radio'")
-        .form-option(v-for="option in field.options")
-          input(type="radio", :name="field.name", :value="option", :id="option", :required="field.required", v-model="field.model", @click="evaluateCompletion")
-          label(v-bind:for="option") {{ option }}
-
-      // *TYPE file
-      input-file(v-else-if="field.type === 'file'", :field="field", v-model="field.model", @input="evaluateCompletion", v-validate.reject="validationOptions(field)", :data-vv-name="field.name", data-vv-value-path="", :data-vv-as="field.readableName || field.placeholder")
-
-      // *TYPE email
-      .form-input(v-else-if="field.type === 'email'")
-        input(type="email", :name="field.name", :id="field.name", :required="field.required" @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion", v-validate="validationOptions(field)", :data-vv-as="field.readableName || field.placeholder")
-        label(:for="field.name").form-title {{ field.placeholder }}
-
-      // *TYPE date
-      .form-input(v-else-if="field.type === 'date'")
-        input(type="text", :name="field.name", :id="field.name", :required="field.require", @focusout="onFocusOut", v-model="field.model", @change="evaluateCompletion", v-validate="validationOptions(field)", :data-vv-as="field.readableName || field.placeholder")
-        label(:for="field.name").form-title {{ field.placeholder }}
-      //- input-date(v-else-if="field.type === 'date'", :field="field", v-model="field.model", @input="evaluateCompletion")
-
-      //*TYPE textarea
-      .form-input(v-else-if="field.type === 'textarea'")
-        textarea(rows="5", :maxlength="field.maxCharacters", :name="field.name", :id="field.name", :required="field.required", v-model="field.model", @keyup="evaluateCompletion")
-        .form-comment {{ field.maxCharacters - field.model.length }} / {{ field.maxCharacters }} characters remaining
-
-      // *TYPE location
-      input-location(v-else-if="field.type === 'location'", :field="field", v-model="field.model", @input="evaluateCompletion")
-
-      // *TYPE url
-      .form-input(v-else-if="field.type === 'url'")
-        input(type="url", :name="field.name", :id="field.name", :required="field.required", @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion", v-validate="validationOptions(field)", :data-vv-as="field.readableName || field.placeholder")
-        label(:for="field.name").form-title {{ field.placeholder }}
-        .form-optional-mark(v-if="!field.required") Optional
-
-      // *TYPE text
-      .form-input(v-else-if="field.type === 'text'")
-        input(type="text", :name="field.name", :id="field.name", :required="field.required", @focusout="onFocusOut", v-model="field.model", @keyup="evaluateCompletion")
-        label(:for="field.name").form-title {{ field.placeholder }}
-        .form-optional-mark(v-if="!field.required") Optional
-
-      .form-input-error(v-show="errors.has(field.name)") {{ errors.first(field.name) }}
-      .form-comment(v-if="field.comment") {{ field.comment }}
+    form-field(v-for="field in group.fields", :model="field", :key="field.name", @change="onFieldChange", ref="fields")
 
   .form-cta-group
-    button(v-if="currentStepNumber != 0", v-on:click="previousStep").form-cta.form-cta-secondary.form-cta-left Previous
-    button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep", :disabled="!step.finished").form-cta.form-cta-primary.form-cta-right Continue
-    button(v-if="currentStepNumber === stepCount - 1", v-on:click="submit", :disabled="!submittable || submitInProgress").form-cta.form-cta-primary.form-cta-right Submit
+    button(v-if="currentStepNumber != 0", v-on:click="previousStep").button.button-secondary.u-left Previous
+    button(v-if="currentStepNumber != stepCount - 1", v-on:click="nextStep", :disabled="!step.finished").button.button-primary.u-right Continue
+    button(v-if="currentStepNumber === stepCount - 1", v-on:click="submit", :disabled="!submittable || submitInProgress").button.button-primary.u-right Submit
 </template>
 
 <script>
+import { FormField, Modal, Spinner } from 'components'
 import Raven from 'raven-js'
 export default {
   name: 'step-form',
@@ -73,7 +33,7 @@ export default {
   },
   computed: {
     colorClass () {
-      return 'form-color-' + this.step.color
+      return 'section-accent-color-' + this.step.color
     },
     currentStepNumber () {
       return parseInt(this.step.slug.split('-')[0])
@@ -83,20 +43,17 @@ export default {
     }
   },
   mounted () {
-    // Set input classes
-    this.setupLabels()
     this.evaluateCompletion()
   },
   updated () {
     if (this._stepChanged) {
-      this.setupLabels()
+      this.evaluateCompletion()
       this._stepChanged = false
     }
   },
   watch: {
     step () {
       this._stepChanged = true
-      this.$validator.validateAll()
     }
   },
   methods: {
@@ -109,27 +66,29 @@ export default {
       if (field.date_format) { ret.date_format = field.date_format }
       return { rules: ret }
     },
+    onFieldChange () {
+      this.evaluateCompletion()
+    },
     evaluateCompletion () {
       var completed = true
-      for (var g = 0; g < this.step.groups.length; g++) {
-        const group = this.step.groups[g]
-        for (var f = 0; f < group.fields.length; f++) {
-          const field = group.fields[f]
-          if (field.required !== false) {
-            if (field.type === 'file') {
-              for (var fn = 0; fn < (field.min ? field.min : 1); fn++) {
-                if (!field.model[fn]) {
-                  completed = false
-                }
+      const fields = this.$refs.fields
+      for (var f = 0; f < fields.length; f++) {
+        const field = fields[f]
+        const model = field.model
+        if (model.required) {
+          if (model.type === 'file') {
+            for (var fn = 0; fn < (model.min ? model.min : 1); fn++) {
+              if (!model.model[fn]) {
+                completed = false
               }
-            } else if (!field.model) {
-              completed = false
             }
+          } else if (!model.model) {
+            completed = false
           }
         }
-      }
-      if (this.errors.any()) {
-        completed = false
+        if (field.errors.any() === true) {
+          completed = false
+        }
       }
       this.step.finished = completed
 
@@ -153,25 +112,6 @@ export default {
         src.nextSibling.classList.add('input-has-value')
       }
     },
-
-    setupLabels () {
-      for (var g = 0; g < this.step.groups.length; g++) {
-        const group = this.step.groups[g]
-        for (var f = 0; f < group.fields.length; f++) {
-          const field = group.fields[f]
-
-          if (field.placeholder !== undefined && field.model.length > 0) {
-            const el = document.getElementById(field.name).nextSibling
-            el.classList.add('no-transition')
-            el.classList.add('input-has-value')
-            setTimeout(() => {
-              el.classList.remove('no-transition')
-            }, 200)
-          }
-        }
-      }
-    },
-
     nextStep () {
       if (!this.step.finished) {
         return
@@ -213,10 +153,9 @@ export default {
     }
   },
   components: {
-    'modal': require('./Modal.vue'),
-    'input-file': require('./inputs/Input-File.vue'),
-    // 'input-date': require('./inputs/Input-Date.vue'),
-    'input-location': require('./inputs/Input-Location.vue')
+    FormField,
+    Modal,
+    Spinner
   }
 }
 </script>

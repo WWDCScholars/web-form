@@ -51,7 +51,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // generate favicons
     new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, '..', '..', 'node_modules', 'web-assets', 'assets', 'images', 'favicon.png'),
+      logo: path.resolve(__dirname, '..', '..', 'node_modules', 'wwdcscholars-web-assets', 'assets', 'images', 'favicon.png'),
       // logo: '~web-assets/assets/images/favicon.png',
       prefix: 'icons/',
       emitStats: false,

@@ -5927,11 +5927,11 @@ write@^0.2.1:
 
 wwdcscholars-web-assets@WWDCScholars/web-assets:
   version "1.0.0"
-  resolved "https://codeload.github.com/WWDCScholars/web-assets/tar.gz/dc5ae38bc291ced740b0b5a711e41b5db6ce54ac"
+  resolved "https://codeload.github.com/WWDCScholars/web-assets/tar.gz/9e6d6fd05a48eebfcffcef3f2bd5f1d94d107463"
 
 wwdcscholars-web-components@WWDCScholars/web-components:
   version "1.0.0"
-  resolved "https://codeload.github.com/WWDCScholars/web-components/tar.gz/16fd6a8a94bc6c3a18326cffa82a79bee596541d"
+  resolved "https://codeload.github.com/WWDCScholars/web-components/tar.gz/79d1ad00645af35d91974b017d6ea93dfb108121"
   dependencies:
     moment "^2.18.1"
     node-sass "^4.5.2"

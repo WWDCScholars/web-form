@@ -1,5 +1,5 @@
 {
-  "name": "WWDCScholars-form",
+  "name": "wwdcscholars-web-form",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:WWDCScholars/WWDCScholars-form.git",
@@ -75,10 +75,5 @@
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
-  },
-  "browserlist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  }
 }

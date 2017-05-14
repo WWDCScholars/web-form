@@ -14,8 +14,8 @@ var steps = [
     }, {
       title: 'Enter some basic details about yourself',
       fields: [
-        { name: 'firstName', type: 'text', placeholder: 'First Name', class: 'form-width-50' },
-        { name: 'lastName', type: 'text', placeholder: 'Last Name', class: 'form-width-50' },
+        { name: 'firstName', type: 'text', placeholder: 'First Name', class: 'field-width-50' },
+        { name: 'lastName', type: 'text', placeholder: 'Last Name', class: 'field-width-50' },
         { name: 'email', type: 'email', placeholder: 'Email' },
         { name: 'birthday', readableName: 'Date of Birth', type: 'date', placeholder: 'Date of Birth (DD/MM/YYYY)', past: true, date_format: 'DD/MM/YYYY' }
       ]
@@ -69,12 +69,12 @@ var steps = [
     }, {
       title: 'Please provide a screenshot of your acceptance email for this year to validate your profile',
       fields: [
-        { name: 'acceptanceEmail', readableName: 'acceptance email', type: 'file', accept: 'image/*', class: 'form-file-wide' }
+        { name: 'acceptanceEmail', readableName: 'acceptance email', type: 'file', accept: 'image/*', class: 'input-file-wide' }
       ]
     }, {
       title: 'Upload some screenshots that showcase your playground submission',
       fields: [
-        { name: 'screenshots', readableName: 'screenshots', type: 'file', accept: 'image/*', class: 'form-file-wide', multiple: true, max: 5, min: 1 }
+        { name: 'screenshots', readableName: 'screenshots', type: 'file', accept: 'image/*', class: 'input-file-wide', multiple: true, max: 5, min: 1 }
       ]
     }, {
       title: 'Is your submission available to view anywhere else? Let us know!',

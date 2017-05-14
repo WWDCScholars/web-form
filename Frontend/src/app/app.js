@@ -1,6 +1,14 @@
 import { Vue, router, store, Raven } from './boot/core'
 import App from './components/App.vue'
 
+window.addEventListener('cloudkitloaded', async () => {
+  try {
+    await store.auth.init()
+  } catch (error) {
+    handleError(error)
+  }
+})
+
 try {
   /* eslint-disable no-new */
   new Vue({
@@ -15,14 +23,6 @@ try {
 } catch (error) {
   handleError(error)
 }
-
-window.addEventListener('cloudkitloaded', async () => {
-  try {
-    await store.auth.init()
-  } catch (error) {
-    handleError(error)
-  }
-})
 
 function handleError (error) {
   if (error.length) {

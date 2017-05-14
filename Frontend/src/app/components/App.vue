@@ -1,10 +1,13 @@
 <template lang="pug">
 #app
   page-header
+    #apple-sign-out-button(slot="right")
+  
   router-view
 </template>
 
 <script>
+import { PageHeader } from 'components'
 export default {
   name: 'App',
   store: [],
@@ -17,7 +20,7 @@ export default {
   mounted () {},
   methods: {},
   components: {
-    'page-header': require('./Header.vue')
+    PageHeader
   }
 }
 </script>

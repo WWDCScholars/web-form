@@ -1,12 +1,12 @@
 <template lang="pug">
-.container.container-outer.color-gray
+.container.container-outer.color-gray.section-accent-color-blue
   modal(v-if="searchInProgress")
     h3(slot="header").color-blue Looking for your account...
-    div(slot="body").spinner.spinner-blue.modal-spinner
+    spinner(slot="body", type="circle", color="blue")
 
   modal(v-if="linkInProgress")
     h3(slot="header").color-blue Linking your account...
-    div(slot="body").spinner.spinner-blue.modal-spinner
+    spinner(slot="body", type="circle", color="blue")
 
   h2.color-blue Welcome to WWDCScholars!
   h4.color-blue Have you signed up for an account at WWDCScholars before?
@@ -16,29 +16,27 @@
 
   .link-form
     button(@click="prevStep", v-if="stepIndex > 0 && stepIndex <= 2").form-back.color-blue Back
+    // Step 0
     .form.form-color-blue.link-button-group(v-if="stepIndex === 0")
-      button(@click="nextStep").form-cta.form-cta-secondary Signed Up Before
-      button(@click="newScholar").form-cta.form-cta-primary New Scholar
+      button(@click="nextStep").button.button-secondary Signed Up Before
+      button(@click="newScholar").button.button-primary New Scholar
 
+    // Step 1
     .form.form-color-blue(v-else-if="stepIndex === 1")
-      .form-field
-        .form-input
-          input(type="email", v-model="email", name="signedUpBefore_email", id="signedUpBefore_email", @focusout="onFocusOut", v-validate="'required|email'", data-vv-as="Email")
-          label(for="signedUpBefore_email", ref="signedUpBefore_email_label").form-title Email
-        .form-input-error(v-show="errors.has('signedUpBefore_email')") {{ errors.first('signedUpBefore_email') }}
-        .form-comment {{ errorComment }}
+      form-field(:model="searchField")
+      button(@click="find", :disabled="searchInProgress || errors.has('signedUpBefore_email')").button.button-primary.u-right Find
 
-      button(@click="find", :disabled="searchInProgress || errors.has('signedUpBefore_email')").form-cta.form-cta-primary.form-cta-right Find
-
+    // Step 2
     .form.form-color-blue(v-else-if="stepIndex === 2")
       .found-scholar
         .found-scholar-info Are you #[.found-scholar-name {{ scholarName }}]?
         .found-scholar-buttons
-          button(@click="wrongUser").form-cta.form-cta-secondary No
-          button(@click="link").form-cta.form-cta-primary Yes
+          button(@click="wrongUser").button.button-secondary No
+          button(@click="link").button.button-primary Yes
 </template>
 
 <script>
+import { FormField, Modal, Spinner } from 'components'
 import Raven from 'raven-js'
 export default {
   name: 'welcome',
@@ -49,7 +47,16 @@ export default {
       errorComment: '',
       searchInProgress: false,
       linkInProgress: false,
-      email: ''
+      email: '',
+
+      searchField: {
+        type: 'email',
+        name: 'signedUpBefore_email',
+        placeholder: 'Email',
+        model: '',
+        validator: 'required|email',
+        required: true
+      }
     }
   },
   computed: {
@@ -94,13 +101,14 @@ export default {
       this.$router.push({ name: 'welcome' })
     },
     async find () {
-      if (this.searchInProgress || this.email.length < 4) {
+      const email = this.searchField.model.trim()
+      if (this.searchInProgress || email.length < 4) {
         return
       }
 
       this.searchInProgress = true
       try {
-        let scholar = await this.auth.findScholarByEmail(this.email)
+        let scholar = await this.auth.findScholarByEmail(email)
         this.scholar = scholar
         this.nextStep()
       } catch (error) {
@@ -130,7 +138,9 @@ export default {
     }
   },
   components: {
-    'modal': require('../Modal.vue')
+    FormField,
+    Modal,
+    Spinner
   }
 }
 </script>

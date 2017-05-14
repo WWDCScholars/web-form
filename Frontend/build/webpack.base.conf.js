@@ -26,9 +26,14 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       vue: 'vue/dist/vue.common.js',
+      '@': resolve('src'),
       assets: resolve('src/assets'),
       images: resolve('src/assets/images'),
-      '@': resolve('src')
+
+      'web-assets': 'wwdcscholars-web-assets',
+      'web-assets.style': 'wwdcscholars-web-assets/styles',
+
+      'components': 'wwdcscholars-web-components'
     }
   },
   module: {
