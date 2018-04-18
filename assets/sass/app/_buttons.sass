@@ -1,0 +1,37 @@
+.btn
+  background-color: $white
+  width: 160px
+  padding: 10px
+  border: 1px solid transparent
+  border-radius: 6px
+  text-transform: uppercase
+  text-align: center
+  text-decoration: none
+  font-size: 1.1em
+  transition: border-color 100ms linear, background-color 100ms linear
+
+  &:disabled
+    color: $sch-gray
+    background-color: $sch-gray3
+    border: 1px solid $sch-gray
+
++form-colors
+  $bg: dyn-temp('bg')
+  $fg: dyn-temp('fg')
+  .btn-primary:not([disabled])
+    color: $fg
+    background-color: $bg
+    border-color: $bg
+
+    &:hover
+      background-color: darken($bg, 8%)
+      border-color: darken($bg, 8%)
+
+  .btn-secondary
+    color: $bg
+    background-color: $fg
+    border-color: $bg
+
+    &:hover
+      background-color: darken($fg, 8%)
+      border-color: darken($bg, 8%)

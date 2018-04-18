@@ -1,0 +1,166 @@
+[
+  {
+    "slug": "0-basic",
+    "title": "Let's get you signed up...",
+    "color": "orange",
+    "ckParameterName": "scholar",
+    "sections": [{
+        "title": "Please upload a profile image",
+        "ckParameterName": "wwdcYearInfo",
+        "fields": [{
+          "name": "profilePicture_small",
+          "readableName": "profile picture",
+          "type": "image",
+          "accept": "image/*",
+          "dimensions_min": 250,
+          "resizeMax": 500,
+          "comment": "This needs to be an image of you with a resolution of at least 250x250"
+        }]
+      }, {
+        "title": "Enter some basic details about yourself",
+        "fields": [{
+          "name": "firstName",
+          "type": "text",
+          "placeholder": "First Name",
+          "styleClass": "field-width-50"
+        }, {
+          "name": "lastName",
+          "type": "text",
+          "placeholder": "Last Name",
+          "styleClass": "field-width-50"
+        }, {
+          "name": "email",
+          "type": "email",
+          "placeholder": "Email"
+        }, {
+          "name": "birthday",
+          "readableName": "Date of Birth",
+          "type": "date",
+          "placeholder": "Date of Birth (YYYY-MM-DD)",
+          "onlyPast": true,
+          "displayFormat": "Y-m-d"
+        }]
+      }, {
+        "title": "Gender",
+        "fields": [{
+          "name": "gender",
+          "type": "radio",
+          "options": ["male", "female", "other"]
+        }]
+      }]
+  },
+
+  {
+    "slug": "1-about",
+    "title": "A little more information to help you connect...",
+    "color": "red",
+    "ckParameterName": "scholar",
+    "sections": [{
+      "title": "Describe yourself in less than 300 characters",
+      "fields": [{
+        "name": "shortBio",
+        "readableName": "Bio",
+        "type": "textarea",
+        "maxLength": 300
+      }]
+    }, {
+      "title": "Tell us where you're from",
+      "fields": [{
+        "name": "location",
+        "type": "location",
+        "placeholder": "Hometown / Nearest City"
+      }]
+    }, {
+      "title": "Where else can people find you?",
+      "ckParameterName": "socialMedia",
+      "fields": [{
+        "name": "website",
+        "type": "url",
+        "placeholder": "Personal Website URL",
+        "required": false
+      }, {
+        "name": "github",
+        "type": "url",
+        "placeholder": "GitHub URL",
+        "required": false
+      }, {
+        "name": "twitter",
+        "type": "url",
+        "placeholder": "Twitter URL",
+        "required": false
+      }, {
+        "name": "facebook",
+        "type": "url",
+        "placeholder": "Facebook URL",
+        "required": false
+      }, {
+        "name": "linkedin",
+        "type": "url",
+        "placeholder": "LinkedIn URL",
+        "required": false
+      }, {
+        "name": "imessage",
+        "type": "text",
+        "placeholder": "iMessage Number or Email",
+        "required": false
+      }]
+    }]
+  },
+
+  {
+    "slug": "2-application",
+    "title": "Now for the fun part. Show us your WWDC 2017 submission!",
+    "color": "green",
+    "ckParameterName": "wwdcYearInfo",
+    "sections": [{
+      "title": "What applicant group(s) do you fall under?",
+      "fields": [{
+        "name": "appliedAs",
+        "type": "radio",
+        "options": ["student", "stem", "both"],
+        "readableName": "applicant group(s)"
+      }]
+    }, {
+      "title": "Please provide a screenshot of your acceptance email for this year to validate your profile",
+      "fields": [{
+        "name": "acceptanceEmail",
+        "readableName": "acceptance email",
+        "type": "image",
+        "accept": "image/*",
+        "styleClass": "field-image-wide",
+        "resizeMax": 500
+      }]
+    }, {
+      "title": "Upload some screenshots that showcase your playground submission",
+      "fields": [{
+        "name": "screenshots",
+        "readableName": "screenshots",
+        "type": "image",
+        "accept": "image/*",
+        "styleClass": "field-image-wide",
+        "multiple": true,
+        "maxCount": 5,
+        "minCount": 1,
+        "resizeMax": 1920
+      }]
+    }, {
+      "title": "Is your submission available to view anywhere else? Let us know!",
+      "fields": [{
+        "name": "videoLink",
+        "readableName": "YouTube link",
+        "type": "url",
+        "placeholder": "YouTube URL",
+        "required": false
+      }, {
+        "name": "githubAppLink",
+        "readableName": "GitHub link",
+        "type": "url",
+        "placeholder": "GitHub URL",
+        "required": false
+      }]
+    }, {
+      "title": "You're good to go! Hit submit and we will review your profile as soon as possible!",
+      "fields": []
+    }]
+  }
+]

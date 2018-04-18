@@ -1,13 +1,3 @@
-### Vapor ###
-Config/secrets
-
-### Vapor Patch ###
-Packages
-.build
-xcuserdata
-*.xcodeproj
-DerivedData/
-
 ### Node ###
 # Logs
 logs
@@ -68,19 +58,6 @@ typings/
 # dotenv environment variables file
 .env
 
-### Vue App ###
-
-# Config
-Frontend/app/config/development.js
-
-# Compiled Resources
-Public/*hot-update*
-#Public/**/*.map
-#Public/*.js*
-#Public/*.json
-#Public/*.woff*
-#Public/*.eot
-#Public/*.svg
-#Public/*.ttf
-#Public/css
-#Public/js
+### Nuxt ###
+# Build output
+.nuxt
