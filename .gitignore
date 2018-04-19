@@ -61,3 +61,4 @@ typings/
 ### Nuxt ###
 # Build output
 .nuxt
+dist
