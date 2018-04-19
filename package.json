@@ -14,9 +14,9 @@
   },
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "build": "cross-env NODE_ENV=production nuxt build",
+    "start": "cross-env NODE_ENV=production nuxt start",
+    "generate": "cross-env NODE_ENV=production nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.1.1",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/node": "^9.4.6",
+    "cross-env": "^5.1.4",
     "eslint": "^4.19.1",
     "eslint-config-typescript": "^1.0.2",
     "eslint-loader": "^2.0.0",

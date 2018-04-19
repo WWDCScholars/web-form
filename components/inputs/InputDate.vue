@@ -23,7 +23,7 @@ import 'flatpickr/dist/flatpickr.css';
   }
 })
 export default class InputDate extends Vue {
-  @Model('input')
+  @Model('input', { default: () => new Date() })
   value: string | Date
 
   @Prop()
@@ -35,7 +35,7 @@ export default class InputDate extends Vue {
   @Prop()
   displayFormat: string
 
-  value_validate: string
+  value_validate: string | Date = this.value || ''
 
   config?: { dateFormat: string; maxDate: (Date | undefined); } = undefined;
 
@@ -50,8 +50,8 @@ export default class InputDate extends Vue {
   }
 
   update(value) {
-    this.$emit('input', value);
     this.value_validate = value;
+    this.$emit('input', value);
   }
 
   get inputHasValue() {
@@ -115,5 +115,16 @@ export default class InputDate extends Vue {
   $bg: dyn-temp('bg')
   .input-date
     .flatpickr-mobile
-      color: $bg
+      width: 100%
+      padding: 15px 15px 5px 15px
+      font-size: 1em
+      height: calc(1em + 25px)
+      border: 1px solid $form-border-color
+      border-radius: $border-radius
+      color: $sch-gray
+      appearance: none
+
+      &:focus
+        color: $bg
+        border: 1px solid $bg
 </style>

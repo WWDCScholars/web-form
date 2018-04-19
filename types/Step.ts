@@ -52,7 +52,6 @@ export default class Step {
   public static async serializeSteps(steps: Step[]) {
     const values = Object.keys(steps).map(key => steps[key]);
     const ret = {};
-    const canvas = document.createElement('canvas');
     for (let step of values) {
       let currentParameterName = step.ckParameterName;
       for (let section of step.sections) {
@@ -79,11 +78,12 @@ export default class Step {
                 return loadImage(file)
                   .then(image => {
                     const [width, height] = getSize(image['width'], image['height'], field['resizeMax']);
+                    const canvas = document.createElement('canvas');
                     canvas.width = width;
                     canvas.height = height;
-                    return image;
+                    return {image, canvas};
                   })
-                  .then(image => pica.resize(image, canvas))
+                  .then(({image, canvas}) => pica.resize(image, canvas))
                   .then(result => pica.toBlob(result, 'image/jpeg', 0.90));
               });
             const images = await Promise.all(results);

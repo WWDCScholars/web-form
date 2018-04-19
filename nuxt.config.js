@@ -50,6 +50,9 @@ module.exports = {
   /*
   ** Build configuration
   */
+  generate: {
+    fallback: '404.html'
+  },
   css: [
     { src: '~/assets/sass/app/_index.sass', lang: 'sass' }
   ],
@@ -91,7 +94,13 @@ module.exports = {
     { src: '~plugins/cloudkit' },
     { src: '~plugins/validation-helper' }
   ],
-  vendor: ['vuex-class', 'nuxt-class-component', 'flatpickr'],
+  vendor: [
+    'vee-validate',
+    'vue2-google-maps',
+    'pica',
+    'moment',
+    'flatpickr'
+  ],
   sentry: {
     dsn: process.env.SENTRY_DSN,
     config: {

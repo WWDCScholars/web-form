@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
+import { Component, Model, Prop, Watch, Vue } from 'nuxt-property-decorator';
 
 @Component
 export default class InputImage extends Vue {
@@ -56,7 +56,7 @@ export default class InputImage extends Vue {
       return;
     }
 
-    this.model.push(undefined);
+    this.$emit('change', [...this.model, undefined]);
   }
 
   clearField(index) {
@@ -79,7 +79,7 @@ export default class InputImage extends Vue {
 
     // add to model
     this.model[index] = file;
-    // this.value_validate = file;
+    this.value_validate = file;
 
     // emit changed model
     this.$emit('change', this.model);
@@ -91,6 +91,11 @@ export default class InputImage extends Vue {
       this.$set(this.previews, index, e.target['result']);
     };
     reader.readAsDataURL(file);
+  }
+
+  @Watch('value')
+  onValueChanged(val: (File | undefined)[]) {
+    this.model = val;
   }
 }
 </script>
@@ -151,6 +156,7 @@ export default class InputImage extends Vue {
       border-radius: 10px
       border: 0
       background-color: $sch-red
+      padding: 0
 
       &:after
         content: ' '

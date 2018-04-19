@@ -1,8 +1,11 @@
 h2
-  margin-top: 80px
+  margin-top: 20px
   font-size: 36px
   text-align: center
   font-weight: 600
+
+  +for-tablet-landscape-up
+    margin-top: 80px
 
 h3
   margin-top: 40px
@@ -22,9 +25,7 @@ p
 hr
   background-color: $sch-gray2
   height: 1.5px
-  margin: 50px -35px
   border: 0
 
-@media (max-width: 650px)
-  h2
-    margin-top: 40px
+  +for-tablet-landscape-up
+    margin: 50px -35px

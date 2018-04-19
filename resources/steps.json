@@ -36,7 +36,7 @@
           "name": "birthday",
           "readableName": "Date of Birth",
           "type": "date",
-          "placeholder": "Date of Birth (YYYY-MM-DD)",
+          "placeholder": "Date of Birth",
           "onlyPast": true,
           "displayFormat": "Y-m-d"
         }]

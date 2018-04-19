@@ -30,6 +30,5 @@ const validateImageMin = {
 Validator.extend('dimensions_min', validateImageMin);
 
 Vue.use(VeeValidate, {
-  inject: true,
-  // delay: 1
+  inject: true
 });

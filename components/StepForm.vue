@@ -40,7 +40,8 @@
         :value="field.model",
         @change="update(s, f, $event)",
         v-validate-field="field",
-        v-validate="validationOptions(field)"
+        v-validate="validationOptions(field)",
+        data-vv-validate-on="change"
       )
 
       input-text(
@@ -49,7 +50,8 @@
         :value="field.model",
         @input="update(s, f, $event)",
         v-validate-field="field",
-        v-validate="validationOptions(field)"
+        v-validate="validationOptions(field)",
+        data-vv-validate-on="input"
       )
 
       .input-error(v-if="errors.has(field.name)") {{ errors.first(field.name) }}
@@ -93,9 +95,11 @@ export default class StepForm extends Vue {
   // on field update
   update(section, field, value) {
     this.updateField({ slug: this.step.slug, section, field, value });
-    this.evaluateStepCompletion({
-      slug: this.step.slug,
-      errors: this.errors.any()
+    Vue.nextTick(() => {
+      this.evaluateStepCompletion({
+        slug: this.step.slug,
+        errors: this.errors.any()
+      });
     });
   }
 
@@ -109,7 +113,7 @@ export default class StepForm extends Vue {
     if (field.type === 'url') { r['url'] = true; }
     if (field.type === 'email') { r['email'] = true; }
     if (field.dimensions_min) { r['dimensions_min'] = [field.dimensions_min, field.dimensions_min]; }
-    if (field.displayFormat) { r['date_format'] = field.displayFormat; }
+    // if (field.displayFormat) { r['date_format'] = field.displayFormat; }
     return { rules: r };
   }
 
@@ -132,8 +136,9 @@ export default class StepForm extends Vue {
       grid-column: span 2
 
     .field
-      &.field-width-50
-        grid-column: span 1
+      +for-tablet-landscape-up
+        &.field-width-50
+          grid-column: span 1
 
       .input-error
         font-size: 0.8em

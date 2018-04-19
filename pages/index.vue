@@ -9,8 +9,9 @@
 
   hr
 
+  //- .signin-wrapper
+  //-   h2.color-blue Let's get started...
   .signin-wrapper
-    h2.color-blue Let's get started...
     #apple-sign-in-button
 </template>
 
@@ -26,17 +27,12 @@ export default class PageIndex extends Vue {
 
 <style lang="sass" scoped>
 .signin-wrapper
-  width: 600px
-  height: 200px
-  margin: 0 auto
-  border: 1px solid $sch-gray0
-  background-color: $white
-  border-radius: $border-radius
   display: flex
   justify-content: center
   align-items: center
   flex-direction: column
+  padding: 15px 0
 
-  h2
-    margin: 0 0 15px
+  +for-tablet-landscape-up
+    padding: 0
 </style>

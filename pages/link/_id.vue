@@ -2,13 +2,14 @@
 .container-fluid.color-gray
   h2.color-blue Welcome to WWDCScholars!
   h3.color-blue Have you signed up for an account at WWDCScholars before?
-  p.
-    If you did, please provide the email address you used for your old account, so we can link it with your new one and display past WWDC scholarships on your profile.
-  p.
-    If you never had WWDCScholars account before, select #[i First-time Scholar].
 
   .link-form.form-color-blue
     .link-step.link-step-0(v-if="stepIndex === 'start'")
+      p.
+        If you did, please provide the email address you used for your old account, so we can link it with your new one and display past WWDC scholarships on your profile.
+      p.
+        If you never had WWDCScholars account before, select #[i First-time Scholar].
+
       .cta-group
         button(@click="nextStep").btn.btn-secondary Signed Up Before
         nuxt-link(:to="firstStepLink").btn.btn-secondary First-time Scholar

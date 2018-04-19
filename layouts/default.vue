@@ -20,5 +20,8 @@ export default class LayoutDefault extends Vue {
 
 <style lang="sass" scoped>
 .page
-  padding-bottom: 80px
+  padding-bottom: 30px
+
+  +for-tablet-landscape-up
+    padding-bottom: 80px
 </style>

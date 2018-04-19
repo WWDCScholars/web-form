@@ -32,12 +32,15 @@ export default class PageHeader extends Vue {
     flex-grow: 1
 
   h1
-    font-size: 1.8em
+    font-size: 1.6em
     margin: 0
     padding: 0
     line-height: 100%
     color: $sch-purple
     font-weight: 600
+
+    +for-tablet-landscape-up
+      font-size: 1.8em
 
     .scholars
       font-weight: 300

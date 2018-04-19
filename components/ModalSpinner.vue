@@ -31,15 +31,18 @@ export default class ModalSpinner extends Vue {
   align-items: center
   flex-direction: column
   transition: background-color 200ms linear
+  padding: 15px
 
   .container
-    width: 500px
     padding: 20px 30px
     background-color: $white
     border-radius: $border-radius
     border: 1px solid $form-border-color
     transition: transform 200ms ease
     transform: scale(1)
+
+    +for-tablet-landscape-up
+      width: 500px
 
     .title
       text-align: center

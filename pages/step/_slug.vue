@@ -127,11 +127,11 @@ export default class PageStep extends Vue {
 </script>
 
 <style lang="sass" scoped>
-
-
-
 .cta-group
-  margin-top: 80px
+  margin-top: 0
+
+  +for-tablet-landscape-up
+    margin-top: 80px
 
   .cta-right
     float: right

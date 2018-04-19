@@ -27,11 +27,11 @@ export default class InputRadioGroup extends Vue {
   @Prop()
   required: boolean
 
-  value_validate: string
+  value_validate: string = this.value || '';
 
   update(value) {
-    this.$emit('change', value);
     this.value_validate = value;
+    this.$emit('change', value);
   }
 }
 </script>
@@ -42,18 +42,21 @@ export default class InputRadioGroup extends Vue {
   flex-wrap: wrap
   justify-content: flex-start
   align-items: center
+  margin-right: -15px
 
   .input-radio
     position: relative
     margin: 0 15px 15px 0
     cursor: pointer
+    flex-grow: 1
+    flex-basis: 80px
+    max-width: 150px
 
     &:hover
       background-color: darken($background-gray, 6%)
 
     span
       display: block
-      width: 110px
       padding: 10px
       border: 1px solid $form-border-color
       text-transform: uppercase

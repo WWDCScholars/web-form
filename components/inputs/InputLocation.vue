@@ -45,7 +45,7 @@ export default class InputLocation extends Vue {
   @Prop()
   required: boolean
 
-  value_validate: { lat: number; lng: number }
+  value_validate: { lat: number; lng: number } = this.value || { lat: 0, lng: 0 }
 
   inputValue: string = ''
   zoom: number = 1
@@ -56,7 +56,7 @@ export default class InputLocation extends Vue {
   }
 
   created() {
-    if (this.value) {
+    if (this.value && this.value.lat !== 0 && this.value.lng !== 0) {
       this.setInputValueFromCoords(this.value);
     }
   }
@@ -67,8 +67,8 @@ export default class InputLocation extends Vue {
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng()
     };
-    this.$emit('change', value);
     this.value_validate = value;
+    this.$emit('change', value);
     this.inputValue = place.formatted_address;
     this.$refs.map['fitBounds'](place.geometry.viewport);
   }

@@ -58,11 +58,12 @@ export default class InputText extends Vue {
   @Prop()
   maxLength: number
 
-  value_validate: string
+  value_validate: string = this.value || ' ';
 
   update(value) {
-    this.$emit('input', value);
+    console.log('update to', value);
     this.value_validate = value;
+    this.$emit('input', value);
   }
 
   get length() {
@@ -87,6 +88,7 @@ export default class InputText extends Vue {
     border: 1px solid $form-border-color
     border-radius: $border-radius
     color: $sch-gray
+    appearance: none
     transition: border-color 100ms linear, box-shadow 100ms linear
 
   .title
