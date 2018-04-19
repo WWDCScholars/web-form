@@ -1,4 +1,4 @@
-export default async ({ env, store, $cloudKit, redirect, app }) => {
+export default async ({ env, store, $cloudKit, app }) => {
   $cloudKit.on('authenticated', async (userIdentity) => {
     const userRecord = await $cloudKit.fetchRecord(userIdentity.userRecordName);
 
@@ -15,7 +15,7 @@ export default async ({ env, store, $cloudKit, redirect, app }) => {
     // if scholar already submitted for the current year, redirect to thankyou
     for (let wwdcYear of scholarRecord.fields.wwdcYears.value) {
       if (wwdcYear.recordName === env.WWDC_YEAR) {
-        redirect('/thankyou');
+        app.router.push('/thankyou');
         return;
       }
     }
@@ -38,6 +38,11 @@ export default async ({ env, store, $cloudKit, redirect, app }) => {
   });
 
   $cloudKit.on('unauthenticated', () => {
-    redirect('/');
+    app.router.replace('/');
+  });
+
+  $cloudKit.on('setupAuthError', () => {
+    app.router.replace('/');
+    $cloudKit.setupAuth();
   });
 };
