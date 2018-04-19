@@ -1,6 +1,6 @@
 <template lang="pug">
-.container-fluid.page-thankyou
-  .thankyou
+.page-thankyou
+  .container-fluid.thankyou
     h2.color-blue Thanks for joining us!
     h3.color-blue We will review your profile as soon as possible.
     p.
