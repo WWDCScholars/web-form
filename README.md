@@ -1,23 +1,71 @@
-### WWDCScholars form for WWDCScholars/WWDCStudents website and app.
+<p align="center"><a href="https://wwdcscholars.com" target="_blank"><img width="90" height="90" src="https://raw.githubusercontent.com/WWDCScholars/web-form/master/.github/logo.png"></a></p>
 
-You can find out more about us at our portfolio website: http://www.wwdcscholars.com or download our app at https://itunes.apple.com/us/app/scholars-of-wwdc/id999731893?mt=8
+# WWDCScholars Form
+WWDCScholars is a community of [Apple WWDC Scholarship](https://developer.apple.com/wwdc/scholarships/) winners. Every year bright minds from all around the world compete against each other for a free ticket to Apple's yearly developers conference. The scholarship recipients share their winning projects in [our iOS App](https://itunes.apple.com/us/app/scholars-of-wwdc/id999731893?mt=8) and on [our website (wwdcscholars.com)](https://wwdcscholars.com).
 
-We are currently working on our new website and app for WWDCScholars. 
+This repository contains the [Vue.js](https://vuejs.org) based sign-up form for scholarship winners.
 
-Website: https://github.com/WWDCScholars/WWDC-Scholars-Web-2015
+## Getting Started
+WWDCScholars is based on [Apple's BaaS, CloudKit](https://developer.apple.com/icloud/cloudkit/). To use this project you need to obtain credentials for [CloudKit](https://developer.apple.com/library/content/documentation/DataManagement/Conceptual/CloudKitQuickStart/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014987), the [Google Maps API](https://developers.google.com/maps/) and the [Sentry Error Tracking Service](https://sentry.io/).
 
-iOS App: https://github.com/WWDCScholars/WWDCScholars-iOS
-
-We have bold plans this year including consolidating all the previous batches of scholars known as WWDCStudents and add in the upcoming scholars of 2016 and more to our website and app.
-
-If you are a previous WWDCScholar or WWDCStudents and want to contribute to improve this form or have any questions, chat with us on  [![Join the chat!](https://img.shields.io/badge/WWDCScholars-JOIN%20CHAT-604887.svg)](https://gitter.im/WWDCScholars/WWDCScholarsHQ)
-
-If you've just heard about WWDCScholars and want to know more about it, you can check it out here at https://developer.apple.com/wwdc/scholarships/
-
-* * *
-The API keys for this project have been removed. In order to get this project to work, you will need to create an .env file with your keys in it in the root directory of the project and uncomment the two lines at server.js 
-
-```javascript
-var dotenv = require('dotenv'); 
-dotenv.load();
+#### Create a `.env` file at the root of this project that looks like this:
 ```
+CLOUDKIT_CONTAINER_IDENTIFIER="<CloudKit Container Identifier>"
+CLOUDKIT_API_TOKEN="<CloudKit API Token>"
+CLOUDKIT_ENVIRONMENT="<CloudKit Environment>"
+
+GOOGLE_MAPS_API_KEY="<Google Maps API Key>"
+
+SENTRY_DSN="<Sentry DSN>"
+SENTRY_ENVIRONMENT="<Sentry Environment>"
+
+WWDC_YEAR="<The WWDCYear key to use>"
+```
+
+#### Install dependencies
+```
+$ yarn install // or npm
+```
+
+#### Build and run the app
+- In development mode using a local development server with hot-reload, etc.
+  ```
+  $ yarn dev
+  ```
+- In production mode for static hosting
+  ```
+  $ yarn generate
+  ```
+- In production mode with server-side rendering support
+  ```
+  $ yarn build
+  $ yarn start // start the server
+  ```
+When building for production you can find the results in `dist/`.
+
+A 404 page can be found at `dist/404.html`. You can use it in nginx like this:
+```
+server {
+  ...
+  root /path/to/build/output;
+  error_page 404 /404.html;
+}
+```
+
+## Contributing
+We are always on the lookout for new ideas and improvements to the current version of this project. Do you want to help us shape the future of WWDCScholars? Check out what we are currently working on in the [issues](https://github.com/WWDCScholars/web-form).
+
+In case you have a technical question or need some guidance, don't hesitate to open a new issue yourselves.
+
+## Author
+I'm [Moritz Sternemann](https://github.com/moritzsternemann), a computer-science student at [Technical University of Munich](https://www.tum.de/).
+- GitHub: [@moritzsternemann](https://github.com/moritzsternemann)
+- Email: [opensource@moritzsternemann.de](mailto:opensource@moritzsternemann.de)
+- Twitter: [@strnmn](https://twitter.com/strnmn)
+
+## Related Projects
+- [iOS App (github.com/WWDCScholars/iOS-app)](https://github.com/WWDCScholars/iOS-app)
+- [Website (github.com/WWDCScholars/web-app)](https://github.com/WWDCScholars/web-app)
+
+## License
+The *WWDCScholars From* is available under the MIT license. See the [LICENSE](https://github.com/WWDCScholars/web-form/blob/master/LICENSE) file for more information.
