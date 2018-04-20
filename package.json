@@ -6,11 +6,12 @@
   "license": "MIT",
   "author": {
     "name": "Moritz Sternemann",
-    "url": "https://github.com/moritzsternemann"
+    "url": "https://github.com/moritzsternemann",
+    "email": "opensource@moritzsternemann.de"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/WWDCScholars/web-form.git"
+    "url": "git@github.com:WWDCScholars/web-form.git"
   },
   "scripts": {
     "dev": "nuxt",

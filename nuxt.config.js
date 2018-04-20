@@ -24,7 +24,8 @@ const host =
 module.exports = {
   mode: 'spa',
   env: {
-    baseUrl: process.env.BASE_URL || `http://${host}:${port}`
+    baseUrl: process.env.BASE_URL || `http://${host}:${port}`,
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY
   },
   head: {
     title: 'Join WWDCScholars!',

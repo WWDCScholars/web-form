@@ -53,7 +53,7 @@ server {
 ```
 
 ## Contributing
-We are always on the lookout for new ideas and improvements to the current version of this project. Do you want to help us shape the future of WWDCScholars? Check out what we are currently working on in the [issues](https://github.com/WWDCScholars/web-form).
+We are always on the lookout for new ideas and improvements to the current version of this project. Do you want to help us shape the future of WWDCScholars? Check out what we are currently working on in the [issues](https://github.com/WWDCScholars/web-form/issues).
 
 In case you have a technical question or need some guidance, don't hesitate to open a new issue yourselves.
 
