@@ -64,7 +64,7 @@ module.exports = {
           test: /\.(js|ts|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     },
     extractCSS: false,
