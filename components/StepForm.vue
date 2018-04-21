@@ -29,7 +29,7 @@
         v-bind="field",
         :value="field.model",
         @change="update(s, f, $event)",
-        v-validate-field="field",
+        v-validate-field:value="field",
         v-validate.reject="validationOptions(field)",
         data-vv-validate-on="change"
       )
@@ -109,7 +109,8 @@ export default class StepForm extends Vue {
 
   validationOptions(field) {
     const r = {};
-    if (field.required) { r['required'] = true; }
+    if (field.required && field.type === 'image') { r['image_required'] = true; }
+    else if (field.required) { r['required'] = true; }
     if (field.type === 'url') { r['url'] = true; }
     if (field.type === 'email') { r['email'] = true; }
     if (field.dimensions_min) { r['dimensions_min'] = [field.dimensions_min, field.dimensions_min]; }

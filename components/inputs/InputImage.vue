@@ -1,20 +1,20 @@
 <template lang="pug">
 .input-image
-  .image(v-for="(imageModel, i) in model")
+  .image(v-for="i in imageCount")
     input(
       type="file",
       :name="name",
       :accept="accept",
-      @change="onFileInputChanged(i, $event)"
+      @change="onFileInputChanged(i - 1, $event)"
     )
     img(src="~/assets/images/upload-icon.png").upload-icon
     img(
-      v-if="previews[i]"
-      :src="previews[i]"
+      v-if="previews[i - 1]"
+      :src="previews[i - 1]"
     ).preview
     button(
-      v-if="previews[i]",
-      @click="clearField(i)"
+      v-if="previews[i - 1]",
+      @click="clearField(i - 1)"
     ).cta-remove
 
   button(
@@ -24,12 +24,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Model, Prop, Watch, Vue } from 'nuxt-property-decorator';
+import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component
 export default class InputImage extends Vue {
   @Model('change')
-  value: (File | undefined)[]
+  value: { [i: number]: File }
 
   @Prop()
   name: string
@@ -42,28 +42,24 @@ export default class InputImage extends Vue {
   @Prop()
   maxCount: number
 
-  model: (File | undefined)[] = this.value || [undefined]
-  value_validate: (File | undefined) = undefined;
-
+  imageCount: number = 1
   previews: string[] = []
 
-  get imageCount() {
-    return this.model.length;
-  }
+  // value_validate: (File | undefined)[] = this.value || [undefined]
+
 
   addField() {
     if (this.imageCount >= (this.maxCount || 0)) {
       return;
     }
 
-    this.$emit('change', [...this.model, undefined]);
+    this.imageCount++;
   }
 
   clearField(index) {
     this.$set(this.previews, index, undefined);
-    this.model[index] = undefined;
-    this.value_validate = undefined;
-    this.$emit('change', this.model);
+    delete this.value[index];
+    this.$emit('change', this.value);
   }
 
   onFileInputChanged(index, event) {
@@ -78,11 +74,10 @@ export default class InputImage extends Vue {
     this.updatePreview(index, file);
 
     // add to model
-    this.model[index] = file;
-    this.value_validate = file;
+    this.value[index] = file;
 
     // emit changed model
-    this.$emit('change', this.model);
+    this.$emit('change', this.value);
   }
 
   updatePreview(index, file) {
@@ -91,11 +86,6 @@ export default class InputImage extends Vue {
       this.$set(this.previews, index, e.target['result']);
     };
     reader.readAsDataURL(file);
-  }
-
-  @Watch('value')
-  onValueChanged(val: (File | undefined)[]) {
-    this.model = val;
   }
 }
 </script>

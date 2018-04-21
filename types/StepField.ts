@@ -59,7 +59,7 @@ interface StepFieldImageJSON extends StepFieldJSON {
   maxCount?: number;
   minCount?: number;
   resizeMax?: number;
-  model: (File | undefined)[];
+  model: File[];
 }
 export class StepFieldImage extends StepField {
   public accept: string;
@@ -68,7 +68,7 @@ export class StepFieldImage extends StepField {
   public maxCount: number = 0;
   public minCount: number = 1;
   public resizeMax: number = 0;
-  public model: (File | undefined)[] = [undefined];
+  public model: { [i: number]: File } = {};
 
   public constructor(data: StepFieldImageJSON) {
     super(data);
@@ -78,16 +78,16 @@ export class StepFieldImage extends StepField {
     if (data.maxCount) { this.maxCount = data.maxCount; }
     if (data.minCount) { this.minCount = data.minCount; }
     if (data.resizeMax) { this.resizeMax = data.resizeMax; }
-    if (data.model) { this.model = data.model; }
+    if (data.model) {
+      this.model = data.model.reduce((acc, cur, i) => {
+        acc[i] = cur;
+        return acc;
+      }, {});
+    }
   }
 
   public get completed(): boolean {
-    for (let i = 0; i < this.minCount; i++) {
-      if (!this.model[i]) {
-        return false;
-      }
-    }
-    return true;
+    return Object.keys(this.model).length >= this.minCount;
   }
 }
 

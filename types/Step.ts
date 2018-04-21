@@ -72,8 +72,8 @@ export default class Step {
               longitude: field.model['lng']
             };
           } else if (field.type === 'image') {
-            const results = field.model
-              .filter(item => item instanceof File)
+            const results = Object.keys(field.model)
+              .map(key => field.model[key])
               .map(file => {
                 return loadImage(file)
                   .then(image => {
