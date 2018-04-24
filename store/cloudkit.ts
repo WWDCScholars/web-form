@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Raven from 'raven-js';
 import Step from '~/types/Step';
 
 export const state = () => ({
@@ -23,6 +24,10 @@ export const actions = {
     const api = Vue.prototype.$cloudKit;
     // serialize steps
     const fields = await Step.serializeSteps(steps) as any;
+    Raven.captureBreadcrumb({
+      message: 'serialized fields',
+      category: 'submit'
+    });
 
     // save yearInfo, update socialMedia
     const scholarSocialMediaRecordName = state.currentScholarSocialMedia ? state.currentScholarSocialMedia.recordName : undefined;
@@ -32,6 +37,10 @@ export const actions = {
         api.save('ScholarSocialMedia', scholarSocialMediaRecordName, scholarSocialMediaRecordChangeTag, fields.socialMedia)
     ]);
     commit('setScholarSocialMedia', socialMediaRecord);
+    Raven.captureBreadcrumb({
+      message: 'saved WWDCYearInfo & ScholarSocialMedia',
+      category: 'submit'
+    });
 
     // set yearInfo, socialMedia and year references on the scholar
     fields.scholar.socialMedia = {
@@ -63,6 +72,10 @@ export const actions = {
     const currentScholarRecordChangeTag = state.currentScholar ? state.currentScholar.recordChangeTag : undefined;
     const newScholar = await api.save('Scholar', currentScholarRecordName, currentScholarRecordChangeTag, fields.scholar);
     commit('setScholar', newScholar);
+    Raven.captureBreadcrumb({
+      message: 'saved Scholar',
+      category: 'submit'
+    });
 
     // update the scholar reference on yearInfo and socialMedia
     await Promise.all([
@@ -74,6 +87,10 @@ export const actions = {
         scholar: { recordName: newScholar.recordName, action: 'DELETE_SELF' }
       })
     ]);
+    Raven.captureBreadcrumb({
+      message: 'updated WWDCYearInfo & ScholarSocialMedia',
+      category: 'submit'
+    });
 
     // fetch user record from user identity
     if (!api.user.userRecordName) { // TODO: hmm, should never be the case
@@ -81,10 +98,18 @@ export const actions = {
       api.user = userIdentity;
     }
     const userRecord = await api.fetchRecord(api.user.userRecordName);
+    Raven.captureBreadcrumb({
+      message: 'fetched userRecord',
+      category: 'submit'
+    });
 
     // link scholar in user record
-    api.save('Users', userRecord.recordName, userRecord.recordChangeTag, {
+    await api.save('Users', userRecord.recordName, userRecord.recordChangeTag, {
       scholar: { recordName: newScholar.recordName, action: 'NONE' }
+    });
+    Raven.captureBreadcrumb({
+      message: 'updated Users',
+      category: 'submit'
     });
   },
   async linkScholar({ state, commit, dispatch }, scholarRecord) {

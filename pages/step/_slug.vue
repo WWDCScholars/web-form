@@ -38,6 +38,7 @@ const CloudKitAction = namespace('cloudkit', Action);
   middleware: 'auth'
 } as any)
 export default class PageStep extends Vue {
+  $raven: any
   submitInProgress: boolean = false
 
   @StepsState('steps')
@@ -88,6 +89,14 @@ export default class PageStep extends Vue {
   }
 
   previousStep() {
+    this.$raven.captureBreadcrumb({
+      message: 'previous',
+      category: 'step',
+      data: {
+        oldSlug: this.step.slug,
+        newSlug: this.previousSlug()
+      }
+    });
     this.$router.push({
       name: 'step-slug',
       params: { slug: this.previousSlug() }
@@ -95,6 +104,14 @@ export default class PageStep extends Vue {
   }
 
   nextStep() {
+    this.$raven.captureBreadcrumb({
+      message: 'next',
+      category: 'step',
+      data: {
+        oldSlug: this.step.slug,
+        newSlug: this.nextSlug()
+      }
+    });
     this.$router.push({
       name: 'step-slug',
       params: { slug: this.nextSlug() }
@@ -115,6 +132,10 @@ export default class PageStep extends Vue {
       return;
     }
     this.submitInProgress = true;
+    this.$raven.captureBreadcrumb({
+      message: 'submit',
+      category: 'step'
+    });
 
     await this.submitToCloudKit(this.steps);
 

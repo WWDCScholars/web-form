@@ -20,6 +20,7 @@ const host =
   process.env.HOST ||
   process.env.npm_package_config_nuxt_host ||
   'localhost';
+const sentry = process.env.NODE_ENV === 'production' ? ['@nuxtjs/sentry'] : [];
 
 module.exports = {
   mode: 'spa',
@@ -60,6 +61,7 @@ module.exports = {
   ],
   build: {
     extend (config, ctx) {
+      config.devtool = 'source-map';
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -69,14 +71,14 @@ module.exports = {
         });
       }
     },
-    extractCSS: false,
     analyze: {
       analyzerMode: 'static'
     }
   },
   modules: [
     '~/modules/typescript.js',
-    '@nuxtjs/sentry',
+
+    ...sentry,
 
     // load global sass variables & mixins
     ['nuxt-sass-resources-loader', '@/assets/sass/imports/_index.sass'],
@@ -108,7 +110,11 @@ module.exports = {
     config: {
       environment: process.env.SENTRY_ENVIRONMENT,
       release: version,
-      autoBreadcrumbs: { ui: false }
+      autoBreadcrumbs: {
+        'ui': false,
+        'location': true,
+        'xhr': true
+      }
     }
   }
 };

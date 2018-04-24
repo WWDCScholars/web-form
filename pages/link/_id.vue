@@ -59,6 +59,7 @@ enum StepIndex {
 } as any)
 export default class PageLink extends Vue {
   $cloudKit: any
+  $raven: any
 
   stepIndex: StepIndex = StepIndex.start;
   email: string = ''
@@ -90,6 +91,7 @@ export default class PageLink extends Vue {
   }
 
   nextStep() {
+    const oldStepIndex = this.stepIndex;
     switch (this.stepIndex) {
     case StepIndex.start:
       this.stepIndex = StepIndex.find;
@@ -98,9 +100,18 @@ export default class PageLink extends Vue {
       this.stepIndex = StepIndex.found;
       break;
     }
+    this.$raven.captureBreadcrumb({
+      message: 'nextStep',
+      category: 'link',
+      data: {
+        oldStepIndex: oldStepIndex,
+        newStepIndex: this.stepIndex
+      }
+    });
   }
 
   prevStep() {
+    const oldStepIndex = this.stepIndex;
     switch (this.stepIndex) {
     case StepIndex.found:
       this.stepIndex = StepIndex.find;
@@ -109,6 +120,14 @@ export default class PageLink extends Vue {
       this.stepIndex = StepIndex.start;
       break;
     }
+    this.$raven.captureBreadcrumb({
+      message: 'prevStep',
+      category: 'link',
+      data: {
+        oldStepIndex: oldStepIndex,
+        newStepIndex: this.stepIndex
+      }
+    });
   }
 
   async find() {
