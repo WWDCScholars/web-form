@@ -37,7 +37,8 @@ module.exports = {
       { name: 'description', content: 'Are you WWDC 2018 Scholarship Winner? Sign up now!' },
       { name: 'keywords', content: 'WWDCScholars,WWDC,Scholars,Form,Website,App,Apple' },
       { name: 'author', content: 'WWDCScholars' },
-      { name: 'og:image', content: '/images/fb-og-image.png' }
+      { name: 'og:image', content: '/images/fb-og-image.png' },
+      { name: 'version', content: `v${version}` }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/images/favicon.ico' },
