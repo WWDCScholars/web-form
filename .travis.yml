@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- node
+- '9'
 
 if: tag =~ ^v\d+.\d+.\d+$
 
@@ -16,6 +16,7 @@ env:
 script:
 - yarn lint
 - yarn generate
+- yarn release:sentry
 
 before_deploy:
 - cd dist

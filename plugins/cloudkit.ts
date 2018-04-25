@@ -79,9 +79,12 @@ export default async ({ env, store, $cloudKit, app }) => {
     }
     Raven.captureBreadcrumb({
       message: 'setupAuthError',
-      category: 'authentication'
+      category: 'authentication',
+      data: {
+        error: e
+      }
     });
-    Raven.captureException(e);
+    // Raven.captureException(e);
     $cloudKit.retrySetupAuth = true;
     app.router.replace('/');
     $cloudKit.setupAuth();

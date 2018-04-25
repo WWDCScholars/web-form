@@ -19,7 +19,8 @@
     "start": "cross-env NODE_ENV=production nuxt start",
     "generate": "cross-env NODE_ENV=production nuxt generate",
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore .",
-    "release": "standard-version"
+    "release": "./.github/release.sh",
+    "release:sentry": "./.github/release_sentry.sh"
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.1.1",

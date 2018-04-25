@@ -109,7 +109,7 @@ module.exports = {
     dsn: process.env.SENTRY_DSN,
     config: {
       environment: process.env.SENTRY_ENVIRONMENT,
-      release: version,
+      release: `v${version}`,
       autoBreadcrumbs: {
         'ui': false,
         'location': true,
