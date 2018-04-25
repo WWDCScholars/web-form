@@ -8,7 +8,7 @@ This repository contains the [Vue.js](https://vuejs.org) based sign-up form for 
 ## Getting Started
 WWDCScholars is based on [Apple's BaaS, CloudKit](https://developer.apple.com/icloud/cloudkit/). To use this project you need to obtain credentials for [CloudKit](https://developer.apple.com/library/content/documentation/DataManagement/Conceptual/CloudKitQuickStart/Introduction/Introduction.html#//apple_ref/doc/uid/TP40014987), the [Google Maps API](https://developers.google.com/maps/) and the [Sentry Error Tracking Service](https://sentry.io/).
 
-#### Create a `.env` file at the root of this project that looks like this:
+#### The project uses the following environment variables which can be included using a `.env` file or just as standard environment variables
 ```
 CLOUDKIT_CONTAINER_IDENTIFIER="<CloudKit Container Identifier>"
 CLOUDKIT_API_TOKEN="<CloudKit API Token>"
@@ -16,10 +16,12 @@ CLOUDKIT_ENVIRONMENT="<CloudKit Environment>"
 
 GOOGLE_MAPS_API_KEY="<Google Maps API Key>"
 
+WWDC_YEAR="<The WWDCYear key to use>"
+
+# Optional for issue reporting
 SENTRY_DSN="<Sentry DSN>"
 SENTRY_ENVIRONMENT="<Sentry Environment>"
-
-WWDC_YEAR="<The WWDCYear key to use>"
+SENTRY_AUTH_TOKEN="<Sentry API Auth Token>"
 ```
 
 #### Install dependencies
