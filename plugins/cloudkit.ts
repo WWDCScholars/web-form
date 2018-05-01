@@ -17,6 +17,10 @@ export default async ({ env, store, $cloudKit, app }) => {
 
       // if no scholar field, user has no linked scholar yet
       if (!userRecord.fields.scholar) {
+        Raven.captureBreadcrumb({
+          message: 'no linked scholar',
+          category: 'authentication'
+        });
         app.router.push('/link');
         return;
       }
