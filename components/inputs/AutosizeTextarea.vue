@@ -12,13 +12,10 @@ import autosize from 'autosize';
 @Component
 export default class AutosizeTextarea extends Vue {
   @Model('input')
-  value: string
+  value!: string
 
   mounted() {
     autosize(this.$el);
   }
 }
 </script>
-
-<style lang="sass" scoped>
-</style>

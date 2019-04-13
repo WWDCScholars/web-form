@@ -7,7 +7,7 @@
       :accept="accept",
       @change="onFileInputChanged(i - 1, $event)"
     )
-    img(src="~/assets/images/upload-icon.png").upload-icon
+    img(src="~assets/images/upload-icon.png").upload-icon
     img(
       v-if="previews[i - 1]"
       :src="previews[i - 1]"
@@ -29,18 +29,18 @@ import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
 @Component
 export default class InputImage extends Vue {
   @Model('change')
-  value: { [i: number]: File }
+  value!: { [i: number]: File }
 
-  @Prop()
-  name: string
-  @Prop()
-  accept: string
-  @Prop()
-  required: boolean
-  @Prop()
-  multiple: boolean
-  @Prop()
-  maxCount: number
+  @Prop({ required: true })
+  name!: string
+  @Prop({ default: 'image/*' })
+  accept!: string
+  @Prop({ default: false })
+  required!: boolean
+  @Prop({ default: false })
+  multiple!: boolean
+  @Prop({ default: 1 })
+  maxCount!: number
 
   imageCount: number = 1
   previews: string[] = []
@@ -83,7 +83,9 @@ export default class InputImage extends Vue {
   updatePreview(index, file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      this.$set(this.previews, index, e.target['result']);
+      if (e.target) {
+        this.$set(this.previews, index, e.target['result']);
+      }
     };
     reader.readAsDataURL(file);
   }
@@ -164,7 +166,7 @@ export default class InputImage extends Vue {
     background-color: $white
     border: 1px solid $form-border-color
     border-radius: $border-radius
-    background-image: url("~/assets/images/add-icon.png")
+    background-image: url("~assets/images/add-icon.png")
     background-repeat: no-repeat
     background-size: 40px 40px
     background-position: center

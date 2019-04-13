@@ -45,18 +45,18 @@ import AutosizeTextarea from './AutosizeTextarea.vue';
 })
 export default class InputText extends Vue {
   @Model('input')
-  value: string
+  value!: string
 
-  @Prop()
-  type: string
-  @Prop()
-  name: string
-  @Prop()
-  placeholder: string
-  @Prop()
-  required: boolean
-  @Prop()
-  maxLength: number
+  @Prop({ default: 'text' })
+  type!: string
+  @Prop({ required: true })
+  name!: string
+  @Prop({ default: '' })
+  placeholder!: string
+  @Prop({ default: false })
+  required!: boolean
+  @Prop({ default: 0})
+  maxLength!: number
 
   value_validate: string = this.value || ' ';
 

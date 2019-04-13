@@ -11,7 +11,9 @@ export function loadImage(file: File): Promise<any> {
       image.onload = (imageEvent) => {
         resolve(image);
       };
-      image.src = readerEvent.target['result'];
+      if (readerEvent.target) {
+        image.src = readerEvent.target['result'];
+      }
     };
     reader.readAsDataURL(file);
   });

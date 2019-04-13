@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import Raven from 'raven-js';
 import Step from '~/types/Step';
 
 export const state = () => ({
@@ -20,11 +19,11 @@ export const mutations = {
 };
 
 export const actions = {
-  async submit({ state, commit }, steps: Step[]) {
+  async submit({ state, commit, $sentry }, steps: Step[]) {
     const api = Vue.prototype.$cloudKit;
     // serialize steps
     const fields = await Step.serializeSteps(steps) as any;
-    Raven.captureBreadcrumb({
+    $sentry.captureBreadcrumb({
       message: 'serialized fields',
       category: 'submit'
     });
@@ -37,7 +36,7 @@ export const actions = {
         api.save('ScholarSocialMedia', scholarSocialMediaRecordName, scholarSocialMediaRecordChangeTag, fields.socialMedia)
     ]);
     commit('setScholarSocialMedia', socialMediaRecord);
-    Raven.captureBreadcrumb({
+    $sentry.captureBreadcrumb({
       message: 'saved WWDCYearInfo & ScholarSocialMedia',
       category: 'submit'
     });
@@ -72,7 +71,7 @@ export const actions = {
     const currentScholarRecordChangeTag = state.currentScholar ? state.currentScholar.recordChangeTag : undefined;
     const newScholar = await api.save('Scholar', currentScholarRecordName, currentScholarRecordChangeTag, fields.scholar);
     commit('setScholar', newScholar);
-    Raven.captureBreadcrumb({
+    $sentry.captureBreadcrumb({
       message: 'saved Scholar',
       category: 'submit'
     });
@@ -87,7 +86,7 @@ export const actions = {
         scholar: { recordName: newScholar.recordName, action: 'DELETE_SELF' }
       })
     ]);
-    Raven.captureBreadcrumb({
+    $sentry.captureBreadcrumb({
       message: 'updated WWDCYearInfo & ScholarSocialMedia',
       category: 'submit'
     });
@@ -98,7 +97,7 @@ export const actions = {
       api.user = userIdentity;
     }
     const userRecord = await api.fetchRecord(api.user.userRecordName);
-    Raven.captureBreadcrumb({
+    $sentry.captureBreadcrumb({
       message: 'fetched userRecord',
       category: 'submit'
     });
@@ -107,7 +106,7 @@ export const actions = {
     await api.save('Users', userRecord.recordName, userRecord.recordChangeTag, {
       scholar: { recordName: newScholar.recordName, action: 'NONE' }
     });
-    Raven.captureBreadcrumb({
+    $sentry.captureBreadcrumb({
       message: 'updated Users',
       category: 'submit'
     });

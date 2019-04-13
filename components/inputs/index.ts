@@ -1,13 +1,5 @@
-import InputDate from './InputDate.vue';
-import InputImage from './InputImage.vue';
-import InputLocation from './InputLocation.vue';
-import InputRadioGroup from './InputRadioGroup.vue';
-import InputText from './InputText.vue';
-
-export {
-  InputDate,
-  InputImage,
-  InputLocation,
-  InputRadioGroup,
-  InputText
-};
+export { default as InputText } from './InputText.vue'
+export { default as InputDate } from './InputDate.vue'
+export { default as InputImage } from './InputImage.vue'
+export { default as InputLocation } from './InputLocation.vue'
+export { default as InputRadioGroup } from './InputRadioGroup.vue'

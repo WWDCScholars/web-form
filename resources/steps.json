@@ -6,9 +6,8 @@
     "ckParameterName": "scholar",
     "sections": [{
         "title": "Please upload a profile image",
-        "ckParameterName": "wwdcYearInfo",
         "fields": [{
-          "name": "profilePicture_small",
+          "name": "profilePicture",
           "readableName": "profile picture",
           "type": "image",
           "accept": "image/*",
@@ -19,14 +18,14 @@
       }, {
         "title": "Enter some basic details about yourself",
         "fields": [{
-          "name": "firstName",
+          "name": "givenName",
           "type": "text",
-          "placeholder": "First Name",
+          "placeholder": "Given Name",
           "styleClass": "field-width-50"
         }, {
-          "name": "lastName",
+          "name": "familyName",
           "type": "text",
-          "placeholder": "Last Name",
+          "placeholder": "Family Name",
           "styleClass": "field-width-50"
         }, {
           "name": "email",
@@ -58,7 +57,7 @@
     "sections": [{
       "title": "Describe yourself in less than 300 characters",
       "fields": [{
-        "name": "shortBio",
+        "name": "biography",
         "readableName": "Bio",
         "type": "textarea",
         "maxLength": 300
@@ -74,6 +73,11 @@
       "title": "Where else can people find you?",
       "ckParameterName": "socialMedia",
       "fields": [{
+        "name": "discord",
+        "type": "text",
+        "placeholder": "Discord Username",
+        "required": false
+      }, {
         "name": "website",
         "type": "url",
         "placeholder": "Personal Website URL",
@@ -109,7 +113,7 @@
 
   {
     "slug": "2-application",
-    "title": "Now for the fun part. Show us your WWDC 2018 submission!",
+    "title": "Now for the fun part. Show us your WWDC 2019 submission!",
     "color": "green",
     "ckParameterName": "wwdcYearInfo",
     "sections": [{
@@ -121,7 +125,7 @@
         "readableName": "applicant group(s)"
       }]
     }, {
-      "title": "Please provide a screenshot of your acceptance email for this year to validate your profile",
+      "title": "Please provide a screenshot of your acceptance email for this year to validate your submission",
       "fields": [{
         "name": "acceptanceEmail",
         "readableName": "acceptance email",
@@ -152,7 +156,7 @@
         "placeholder": "YouTube URL",
         "required": false
       }, {
-        "name": "githubAppLink",
+        "name": "githubLink",
         "readableName": "GitHub link",
         "type": "url",
         "placeholder": "GitHub URL",

@@ -38,12 +38,12 @@ declare const google: any;
 })
 export default class InputLocation extends Vue {
   @Model('change', { default: () => ({ lat: 0, lng: 0 }) })
-  value: { lat: number; lng: number }
+  value!: { lat: number; lng: number }
 
-  @Prop()
-  placeholder: string
-  @Prop()
-  required: boolean
+  @Prop({ required: true })
+  placeholder!: string
+  @Prop({ default: false })
+  required!: boolean
 
   value_validate: { lat: number; lng: number } = this.value || { lat: 0, lng: 0 }
 

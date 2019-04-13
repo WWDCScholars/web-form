@@ -18,14 +18,14 @@ import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
 @Component
 export default class InputRadioGroup extends Vue {
   @Model('change')
-  value: string
+  value!: string
 
-  @Prop()
-  name: string
-  @Prop()
-  options: string[]
-  @Prop()
-  required: boolean
+  @Prop({ required: true })
+  name!: string
+  @Prop({ required: true })
+  options!: string[]
+  @Prop({ default: false })
+  required!: boolean
 
   value_validate: string = this.value || '';
 

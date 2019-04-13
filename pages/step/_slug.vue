@@ -24,14 +24,14 @@
 
 <script lang="ts">
 import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
-import { State, Action, namespace } from 'vuex-class';
+import { namespace } from 'vuex-class';
 import Step from '~/types/Step';
 import StepForm from '~/components/StepForm.vue';
 import ModalSpinner from '~/components/ModalSpinner.vue';
 import StepSection from '~/types/StepSection';
 
-const StepsState = namespace('steps', State);
-const CloudKitAction = namespace('cloudkit', Action);
+const Steps = namespace('steps');
+const CloudKit = namespace('cloudkit');
 
 @Component({
   components: { StepForm, ModalSpinner },
@@ -41,10 +41,10 @@ export default class PageStep extends Vue {
   $raven: any
   submitInProgress: boolean = false
 
-  @StepsState('steps')
-  steps: Map<string, Step>
+  @Steps.State
+  steps!: Map<string, Step>
 
-  @CloudKitAction('submit')
+  @CloudKit.Action('submit')
   submitToCloudKit
 
   validate({ params, store }): boolean {

@@ -24,16 +24,16 @@ import 'flatpickr/dist/flatpickr.css';
 })
 export default class InputDate extends Vue {
   @Model('input', { default: () => new Date() })
-  value: string | Date
+  value!: string | Date
 
-  @Prop()
-  placeholder: string
-  @Prop()
-  required: boolean
-  @Prop()
-  onlyPast: boolean
-  @Prop()
-  displayFormat: string
+  @Prop({ required: true })
+  placeholder!: string
+  @Prop({ default: false })
+  required!: boolean
+  @Prop({ default: false })
+  onlyPast!: boolean
+  @Prop({ required: true })
+  displayFormat!: string
 
   value_validate: string | Date = this.value || ''
 

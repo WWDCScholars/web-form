@@ -84,7 +84,7 @@ const StepsAction = namespace('steps', Action);
 })
 export default class StepForm extends Vue {
   @Prop({ required: true })
-  step: Step
+  step!: Step
 
   @StepsMutation('updateField')
   updateField

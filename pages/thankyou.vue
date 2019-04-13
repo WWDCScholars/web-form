@@ -8,13 +8,13 @@
 
     .social-links
       a(href="https://www.facebook.com/WWDCScholars/")
-        img(src="~/assets/images/icon-facebook.png")
+        img(src="~assets/images/icon-facebook.png")
       a(href="https://twitter.com/WWDCScholars")
-        img(src="~/assets/images/icon-twitter.png")
+        img(src="~assets/images/icon-twitter.png")
       a(href="https://wwdc.slack.com")
-        img(src="~/assets/images/icon-slack.png")
+        img(src="~assets/images/icon-slack.png")
       a(href="https://t.me/wwdcapp")
-        img(src="~/assets/images/icon-telegram.png")
+        img(src="~assets/images/icon-telegram.png")
 </template>
 
 <script lang="ts">
@@ -33,7 +33,7 @@ export default class PageThankyou extends Vue {
   height: calc(100vh - #{$header-height})
   margin-bottom: -80px
   text-align: center
-  background-image: url("~/assets/images/scholars-hero.jpg")
+  background-image: url("~assets/images/scholars-hero.jpg")
   background-size: cover
   background-position: center bottom
 
