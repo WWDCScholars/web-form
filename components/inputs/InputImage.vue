@@ -29,7 +29,7 @@ import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
 @Component
 export default class InputImage extends Vue {
   @Model('change')
-  value!: { [i: number]: File }
+  value!: { [i: number]: File | string }
 
   @Prop({ required: true })
   name!: string
@@ -47,6 +47,15 @@ export default class InputImage extends Vue {
 
   // value_validate: (File | undefined)[] = this.value || [undefined]
 
+  created() {
+    Object.values(this.value).forEach((fileOrUrl, index) => {
+      if (typeof fileOrUrl === 'string') {
+        this.previews[index] = fileOrUrl
+      } else {
+        this.updatePreview(index, fileOrUrl)
+      }
+    })
+  }
 
   addField() {
     if (this.imageCount >= (this.maxCount || 0)) {

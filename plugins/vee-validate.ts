@@ -14,6 +14,9 @@ const imageSize = (file): Promise<any[]> => {
 };
 
 const imageValid = async (file, minWidth, minHeight): Promise<boolean> => {
+  if (typeof file === 'string' && file.indexOf('https') === 0) {
+    return true // skip validation for existing images (Asset downloadURL)
+  }
   const [width, height] = await imageSize(file);
   return width >= minWidth && height >= minHeight;
 };

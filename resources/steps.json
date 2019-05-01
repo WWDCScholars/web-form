@@ -5,7 +5,7 @@
     "color": "orange",
     "ckParameterName": "scholar",
     "sections": [{
-        "title": "Please upload a profile image",
+        "title": "Please upload a profile picture",
         "fields": [{
           "name": "profilePicture",
           "readableName": "profile picture",
@@ -28,10 +28,6 @@
           "placeholder": "Family Name",
           "styleClass": "field-width-50"
         }, {
-          "name": "email",
-          "type": "email",
-          "placeholder": "Email"
-        }, {
           "name": "birthday",
           "readableName": "Date of Birth",
           "type": "date",
@@ -44,7 +40,24 @@
         "fields": [{
           "name": "gender",
           "type": "radio",
-          "options": ["male", "female", "other"]
+          "options": [{
+            "label": "male",
+            "value": "male"
+          }, {
+            "label": "female",
+            "value": "female"
+          }, {
+            "label": "other",
+            "value": "other"
+          }]
+        }]
+      }, {
+        "ckParameterName": "scholarPrivate",
+        "fields": [{
+          "name": "email",
+          "type": "email",
+          "placeholder": "Email",
+          "comment": "We use your email address to make sure you won’t lose access to your account and to verify it’s you. It is not shared with anyone and will not be publicly visible."
         }]
       }]
   },
@@ -117,22 +130,29 @@
     "color": "green",
     "ckParameterName": "wwdcYearInfo",
     "sections": [{
-      "title": "What applicant group(s) do you fall under?",
+      "title": "What applicant group do you fall under?",
       "fields": [{
         "name": "appliedAs",
         "type": "radio",
-        "options": ["student", "stem", "both"],
-        "readableName": "applicant group(s)"
+        "options": [{
+          "label": "Student",
+          "value": "student"
+        }, {
+          "label": "STEM",
+          "value": "stem"
+        }, {
+          "label": "Developer Academy Member",
+          "value": "academy"
+        }],
+        "readableName": "applicant group"
       }]
     }, {
-      "title": "Please provide a screenshot of your acceptance email for this year to validate your submission",
+      "title": "Describe your winning project in less than 300 characters",
       "fields": [{
-        "name": "acceptanceEmail",
-        "readableName": "acceptance email",
-        "type": "image",
-        "accept": "image/*",
-        "styleClass": "field-image-wide",
-        "resizeMax": 500
+        "name": "description",
+        "readableName": "Project description",
+        "type": "textarea",
+        "maxLength": 300
       }]
     }, {
       "title": "Upload some screenshots that showcase your playground submission",
@@ -163,8 +183,15 @@
         "required": false
       }]
     }, {
-      "title": "You're good to go! Hit submit and we will review your profile as soon as possible!",
-      "fields": []
+      "title": "Please provide a screenshot of your acceptance email for this year to validate your submission",
+      "fields": [{
+        "name": "acceptanceEmail",
+        "readableName": "acceptance email",
+        "type": "image",
+        "accept": "image/*",
+        "styleClass": "field-image-wide",
+        "resizeMax": 500
+      }]
     }]
   }
 ]

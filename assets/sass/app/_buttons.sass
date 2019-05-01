@@ -6,20 +6,22 @@ button
 
 .btn
   background-color: $white
+  color: $sch-gray
   width: 160px
   padding: 10px
   border: 1px solid transparent
   border-radius: 6px
-  text-transform: uppercase
+  text-transform: capitalize
   text-align: center
   text-decoration: none
   font-size: 1.1em
   transition: border-color 100ms linear, background-color 100ms linear
 
-  &:disabled
-    color: $sch-gray
-    background-color: $sch-gray3
-    border: 1px solid $sch-gray
+  &:disabled, &.disabled
+    color: $sch-gray !important
+    background-color: $sch-gray3 !important
+    border: 1px solid $sch-gray !important
+    pointer-events: none !important
 
 +form-colors
   $bg: dyn-temp('bg')

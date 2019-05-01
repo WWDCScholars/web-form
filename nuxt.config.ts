@@ -2,9 +2,8 @@ import NuxtConfiguration from '@nuxt/config'
 import { config as dotenv } from 'dotenv'
 dotenv()
 
-const version = require('./package.json').version;
-
-const sentry = process.env.NODE_ENV === 'production' ? ['@nuxtjs/sentry'] : [];
+const version = require('./package.json').version
+const isProduction = (process.env.NODE_ENV === 'production')
 
 const config: NuxtConfiguration = {
   mode: 'spa',
@@ -82,9 +81,6 @@ const config: NuxtConfiguration = {
    ** Nuxt.js modules
    */
   modules: [
-    // Load Sentry in production mode
-    ...sentry,
-
     // Load global SASS variables and mixins
     '@nuxtjs/style-resources',
 
@@ -96,7 +92,14 @@ const config: NuxtConfiguration = {
       containerIdentifier: process.env.CLOUDKIT_CONTAINER_IDENTIFIER,
       apiToken: process.env.CLOUDKIT_API_TOKEN,
       environment: process.env.CLOUDKIT_ENVIRONMENT
-    }]
+    }],
+
+    // Axios for linking api
+    '@nuxtjs/proxy',
+    '@nuxtjs/axios',
+
+    // Load sentry
+    '@nuxtjs/sentry'
   ],
 
   /*
@@ -107,9 +110,26 @@ const config: NuxtConfiguration = {
   },
 
   /*
+   ** Linking API proxy configuration 
+   */
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3001'
+    }
+  },
+
+  /*
+   ** Linking API configuration
+   */
+  axios: {
+    baseURL: '/api'
+  },
+
+  /*
    ** Sentry configuration
    */
   sentry: {
+    // disabled: !isProduction, TODO
     dsn: process.env.SENTRY_DSN,
     config: {
       environment: process.env.SENTRY_ENVIRONMENT,

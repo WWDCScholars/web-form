@@ -44,6 +44,16 @@
         data-vv-validate-on="change"
       )
 
+      input-checkbox(
+        v-else-if="field.type === 'checkbox'",
+        v-bind="field",
+        :value="field.model",
+        @change="update(s, f, $event)",
+        v-validate-field="field",
+        v-validate="validationOptions(field)",
+        data-vv-validate-on="change"
+      )
+
       input-text(
         v-else,
         v-bind="field",
@@ -60,24 +70,25 @@
 
 <script lang="ts">
 import { Component, Prop, Inject, Vue } from 'nuxt-property-decorator';
-import { Mutation, Action, namespace } from 'vuex-class';
-import Step from '~/types/Step';
+import { namespace } from 'vuex-class';
+import { Step } from '~/model';
 import {
   InputText,
   InputDate,
   InputRadioGroup,
+  InputCheckbox,
   InputImage,
   InputLocation
 } from '~/components/inputs';
 
-const StepsMutation = namespace('steps', Mutation);
-const StepsAction = namespace('steps', Action);
+const Steps = namespace('steps');
 
 @Component({
   components: {
     InputText,
     InputDate,
     InputRadioGroup,
+    InputCheckbox,
     InputImage,
     InputLocation
   }
@@ -86,10 +97,10 @@ export default class StepForm extends Vue {
   @Prop({ required: true })
   step!: Step
 
-  @StepsMutation('updateField')
+  @Steps.Mutation('updateField')
   updateField
 
-  @StepsAction('evaluateStepCompletion')
+  @Steps.Action('evaluateStepCompletion')
   evaluateStepCompletion
 
   // on field update

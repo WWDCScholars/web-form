@@ -1,36 +1,81 @@
-import Vue from 'vue';
-import Step from '~/types/Step';
-const initialSteps = require('~/resources/steps.json');
+import Vue from 'vue'
+import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { Step } from '~/model'
+import initialSteps from '~/resources/steps.json'
 
-export const state = () => ({
-  steps: Step.slugMap(initialSteps),
-  currentStepIndex: 0
-});
+export const name = 'steps'
 
-export const getters = {
-  firstStep(state): Step {
-    const keys = Object.keys(state.steps);
-    return state.steps[keys[0]];
+export const types = {
+  updateField: 'updateField',
+  setStepFinished: 'setStepFinished',
+  fillStepsWithExistingData: 'fillStepsWithExistingData'
+}
+
+export interface State {
+  steps: { [slug: string]: Step }
+}
+
+export const state = (): State => ({
+  steps: Step.slugMap(initialSteps)
+})
+
+export const getters: GetterTree<State, State> = {
+  firstStep(state: State): Step {
+    const keys = Object.keys(state.steps)
+    return state.steps[keys[0]]
+  },
+  birthday(state: State): number | string | undefined {
+    let result: number | undefined
+    for (const stepKey in state.steps) {
+      const step = state.steps[stepKey]
+      for (const section of step.sections) {
+        for (const field of section.fields) {
+          if (field.name === 'birthday') {
+            result = field.model
+          }
+        }
+      }
+    }
+    return result
   }
-};
+}
 
-export const mutations = {
-  updateField(state, { slug, section, field, value }) {
-    Vue.set(
-      state.steps[slug].sections[section].fields[field],
-      'model',
-      value
-    );
+export const actions: ActionTree<State, State> = {
+  fillSteps({ state, commit, dispatch }, data: any) {
+    commit(types.fillStepsWithExistingData, data)
+
+    // evaluate step completion
+    for (const slug of Object.keys(state.steps)) {
+      dispatch('evaluateStepCompletion', { slug, errors: false })
+    }
   },
-  setStepFinished(state, { slug, value }) {
-    Vue.set(state.steps[slug], 'finished', value);
+  evaluateStepCompletion({ state, commit }, { slug, errors }: { slug: string, errors: boolean }) {
+    const step = state.steps[slug]
+    const finished = !errors && step.evaluateCompletion()
+    if (step.finished !== finished) {
+      commit(types.setStepFinished, { slug, value: finished })
+    }
+  }
+}
+
+export const mutations: MutationTree<State> = {
+  [types.updateField](state: State, { slug, section, field, value }: { slug: string, section: string, field: string, value: any }) {
+    Vue.set(state.steps[slug].sections[section].fields[field], 'model', value)
   },
-  fillStepsWithExistingData({ steps }, { scholarFields, socialFields }) {
-    for (let key of Object.keys(steps)) {
-      for (let section of steps[key].sections) {
+  [types.setStepFinished](state: State, { slug, value }: { slug: string, value: boolean }) {
+    Vue.set(state.steps[slug], 'finished', value)
+  },
+  [types.fillStepsWithExistingData](state: State, { scholarFields, socialFields, privateFields }) {
+    for (let key of Object.keys(state.steps)) {
+      for (let section of state.steps[key].sections) {
         for (let field of section.fields) {
-          if (scholarFields[field.name]) {
-            if (field.type === 'location') {
+          if (privateFields[field.name]) {
+            field.model = privateFields[field.name].value;
+          } else if (scholarFields[field.name]) {
+            if (field.type === 'image') {
+              const url = scholarFields[field.name].value.downloadURL
+              field.model = { 0: url }
+            } else if (field.type === 'location') {
               const location = scholarFields[field.name].value;
               field.model = { lat: location.latitude, lng: location.longitude };
             } else {
@@ -43,21 +88,4 @@ export const mutations = {
       }
     }
   }
-};
-
-export const actions = {
-  fillSteps({ state, commit, dispatch }, data) {
-    commit('fillStepsWithExistingData', data);
-    // look slugs and evaluate completion
-    for (let slug of Object.keys(state.steps)) {
-      dispatch('evaluateStepCompletion', { slug, errors: false });
-    }
-  },
-  evaluateStepCompletion({ commit, state }, { slug, errors }) {
-    const step = state.steps[slug];
-    const finished = !errors && step.evaluateCompletion();
-    if (step.finished !== finished) {
-      commit('setStepFinished', { slug, value: finished });
-    }
-  }
-};
+}

@@ -4,14 +4,31 @@ header.header
     span.wwdc WWDC
     span.scholars Scholars
   .spacer
-  #apple-sign-out-button
+  button(
+    v-if="isAuthenticated",
+    @click="onSignOutClicked"
+  ).btn.btn-sign-in Sign Out
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Vue } from 'nuxt-property-decorator'
+import { namespace } from 'vuex-class'
+
+import * as api from '~/store/api'
+const API = namespace(api.name)
 
 @Component
 export default class PageHeader extends Vue {
+  @API.Getter
+  isAuthenticated!: boolean
+
+  @API.Action
+  signOut
+
+  onSignOutClicked() {
+    this.signOut()
+    this.$router.replace('/')
+  }
 }
 </script>
 
@@ -44,14 +61,17 @@ export default class PageHeader extends Vue {
 
     .scholars
       font-weight: 300
-</style>
 
-<style lang="sass">
-.header .apple-auth-button
-  width: auto !important
-  padding: 0 14px !important
-  border-color: $sch-purple !important
-
-  svg
-    fill: $sch-purple !important
+  .btn-sign-in
+    display: block
+    width: auto
+    margin-left: auto
+    margin-right: auto
+    padding: 10px 20px
+    font-weight: 500
+    color: black
+    border: 1px solid black
+    border-radius: $border-radius
+    text-decoration: none
+    text-transform: none
 </style>

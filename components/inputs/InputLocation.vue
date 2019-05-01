@@ -29,7 +29,6 @@
 <script lang="ts">
 import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
 import InputText from '~/components/inputs/InputText.vue';
-declare const google: any;
 
 @Component({
   components: {
@@ -55,7 +54,8 @@ export default class InputLocation extends Vue {
     scrollWheel: false
   }
 
-  created() {
+  async created() {
+    await this['$gmapApiPromiseLazy']()
     if (this.value && this.value.lat !== 0 && this.value.lng !== 0) {
       this.setInputValueFromCoords(this.value);
     }
