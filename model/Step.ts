@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import newPica from 'pica/dist/pica';
 import { loadImage, getSize } from '~/helpers/imageHelpers';
 import StepSection, { StepSectionJSON } from './StepSection';
@@ -67,14 +67,16 @@ export default class Step {
           }
 
           if (field.type === 'location') {
-            ret[currentParameterName][field.name] = {
+            ret[currentParameterName][field.name] = { value: {
               latitude: field.model['lat'],
               longitude: field.model['lng']
-            };
+            }};
           } else if (field.type === 'image') {
             const results = Object.keys(field.model)
               .map(key => field.model[key])
               .map(file => {
+                // if file is string (Asset downloadURL), just skip it. It didn't change
+                if (typeof file === 'string') return
                 return loadImage(file)
                   .then(image => {
                     const [width, height] = getSize(image['width'], image['height'], field['resizeMax']);
@@ -88,14 +90,14 @@ export default class Step {
               });
             const images = await Promise.all(results);
             if (field['multiple'] === true) {
-              ret[currentParameterName][field.name] = images;
-            } else {
-              ret[currentParameterName][field.name] = images[0];
+              ret[currentParameterName][field.name] = { value: images };
+            } else if (images[0] !== undefined) {
+              ret[currentParameterName][field.name] = { value: images[0] };
             }
           } else if (field.type === 'date') {
-            ret[currentParameterName][field.name] = moment(field.model).valueOf();
+            ret[currentParameterName][field.name] = { value: dayjs(field.model).valueOf() };
           } else {
-            ret[currentParameterName][field.name] = field.model;
+            ret[currentParameterName][field.name] = { value: field.model };
           }
         }
         currentParameterName = step.ckParameterName;

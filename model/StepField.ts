@@ -41,10 +41,10 @@ export default class StepField {
 }
 
 interface StepFieldRadioJSON extends StepFieldJSON {
-  options: string[];
+  options: { label: string, value: string }[];
 }
 export class StepFieldRadio extends StepField {
-  public options: string[];
+  public options: { label: string, value: string }[];
 
   public constructor(data: StepFieldRadioJSON) {
     super(data);
@@ -59,7 +59,7 @@ interface StepFieldImageJSON extends StepFieldJSON {
   maxCount?: number;
   minCount?: number;
   resizeMax?: number;
-  model: File[];
+  model: (File | string)[];
 }
 export class StepFieldImage extends StepField {
   public accept: string;
@@ -68,7 +68,7 @@ export class StepFieldImage extends StepField {
   public maxCount: number = 0;
   public minCount: number = 1;
   public resizeMax: number = 0;
-  public model: { [i: number]: File } = {};
+  public model: { [i: number]: File | string } = {};
 
   public constructor(data: StepFieldImageJSON) {
     super(data);

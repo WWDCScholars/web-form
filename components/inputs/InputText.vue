@@ -49,7 +49,7 @@ export default class InputText extends Vue {
 
   @Prop({ default: 'text' })
   type!: string
-  @Prop({ required: true })
+  @Prop({ default: '' })
   name!: string
   @Prop({ default: '' })
   placeholder!: string

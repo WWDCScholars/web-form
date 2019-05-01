@@ -13,13 +13,13 @@ const fieldTypes = {
 
 export interface StepSectionJSON {
   title: string;
-  ckParameterName: string;
+  ckParameterName?: string;
   fields: StepFieldJSON[];
 }
 
 export default class StepSection {
   public title: string;
-  public ckParameterName: string;
+  public ckParameterName?: string;
   public fields: StepField[];
 
   public constructor(data: StepSectionJSON) {

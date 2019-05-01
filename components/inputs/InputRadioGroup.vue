@@ -5,11 +5,11 @@
       type="radio",
       :name.once="name",
       :required.once="required",
-      :value="option",
-      :checked="option === value"
+      :value="option.value",
+      :checked="option.value === value"
       @change="update($event.target.value)"
     )
-    span {{ option }}
+    span {{ option.label }}
 </template>
 
 <script lang="ts">
@@ -23,7 +23,7 @@ export default class InputRadioGroup extends Vue {
   @Prop({ required: true })
   name!: string
   @Prop({ required: true })
-  options!: string[]
+  options!: { label: string, value: string }[]
   @Prop({ default: false })
   required!: boolean
 
@@ -48,18 +48,15 @@ export default class InputRadioGroup extends Vue {
     position: relative
     margin: 0 15px 15px 0
     cursor: pointer
-    flex-grow: 1
-    flex-basis: 80px
-    max-width: 150px
+    min-width: 150px
 
     &:hover
       background-color: darken($background-gray, 6%)
 
     span
       display: block
-      padding: 10px
+      padding: 10px 15px
       border: 1px solid $form-border-color
-      text-transform: uppercase
       border-radius: $border-radius
       color: $sch-gray
       background-color: $white

@@ -3,15 +3,18 @@
   page-header
   .content-wrapper
     nuxt
+  page-footer
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 import PageHeader from '~/components/PageHeader.vue';
+import PageFooter from '~/components/PageFooter.vue';
 
 @Component({
   components: {
-    PageHeader
+    PageHeader,
+    PageFooter
   }
 })
 export default class LayoutDefault extends Vue {
@@ -20,8 +23,5 @@ export default class LayoutDefault extends Vue {
 
 <style lang="sass" scoped>
 .page
-  padding-bottom: 30px
-
-  +for-tablet-landscape-up
-    padding-bottom: 80px
+  padding-bottom: 20px
 </style>

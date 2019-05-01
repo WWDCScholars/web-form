@@ -6,46 +6,35 @@
   step-form(:step="step")
 
   .cta-group
-    button(
+    nuxt-link(
       v-if="currentStepNumber != 0",
-      @click="previousStep"
+      :to="previousLink"
     ).btn.btn-secondary.cta-left Previous
-    button(
-      v-if="currentStepNumber != stepCount - 1",
-      :disabled="!step.finished",
-      @click="nextStep"
+    nuxt-link(
+      :class="{ 'disabled': !step.finished }",
+      :to="nextLink"
     ).btn.btn-primary.cta-right Continue
-    button(
-      v-if="currentStepNumber === stepCount - 1",
-      :disabled="!submittable || submitInProgress",
-      @click="submit"
-    ).btn.btn-primary.cta-right Submit
 </template>
 
 <script lang="ts">
 import { Component, Model, Prop, Vue } from 'nuxt-property-decorator';
 import { namespace } from 'vuex-class';
-import Step from '~/types/Step';
+import { Step, StepSection } from '~/model';
 import StepForm from '~/components/StepForm.vue';
 import ModalSpinner from '~/components/ModalSpinner.vue';
-import StepSection from '~/types/StepSection';
 
-const Steps = namespace('steps');
-const CloudKit = namespace('cloudkit');
+import { name as stepsName } from '~/store/steps'
+const Steps = namespace(stepsName)
 
 @Component({
   components: { StepForm, ModalSpinner },
-  middleware: 'auth'
-} as any)
+  middleware: ['authenticated', 'unsubmitted']
+})
 export default class PageStep extends Vue {
-  $raven: any
   submitInProgress: boolean = false
 
   @Steps.State
   steps!: Map<string, Step>
-
-  @CloudKit.Action('submit')
-  submitToCloudKit
 
   validate({ params, store }): boolean {
     if (!store.state.steps.steps[params.slug]) {
@@ -76,74 +65,28 @@ export default class PageStep extends Vue {
     return `form-color-${this.step.color}`;
   }
 
-  nextSlug(): string {
-    const keys = Object.keys(this.steps);
-    const i = keys.indexOf(this.step.slug);
-    return keys[i + 1];
-  }
+  get nextLink(): object {
+    const keys = Object.keys(this.steps)
+    const i = keys.indexOf(this.step.slug)
 
-  previousSlug(): string {
-    const keys = Object.keys(this.steps);
-    const i = keys.indexOf(this.step.slug);
-    return keys[i - 1];
-  }
-
-  previousStep() {
-    this.$raven.captureBreadcrumb({
-      message: 'previous',
-      category: 'step',
-      data: {
-        oldSlug: this.step.slug,
-        newSlug: this.previousSlug()
-      }
-    });
-    this.$router.push({
-      name: 'step-slug',
-      params: { slug: this.previousSlug() }
-    });
-  }
-
-  nextStep() {
-    this.$raven.captureBreadcrumb({
-      message: 'next',
-      category: 'step',
-      data: {
-        oldSlug: this.step.slug,
-        newSlug: this.nextSlug()
-      }
-    });
-    this.$router.push({
-      name: 'step-slug',
-      params: { slug: this.nextSlug() }
-    });
-  }
-
-  get submittable(): boolean {
-    for (let slug in this.steps) {
-      if (!this.steps[slug].finished) {
-        return false;
-      }
+    if (i === keys.length - 1) {
+      return { name: 'step-legal' }
     }
-    return true;
-  }
 
-  async submit() {
-    if (!this.submittable || this.submitInProgress) {
-      return;
+    return {
+      name: 'step-slug',
+      params: { slug: keys[i + 1] }
     }
-    this.submitInProgress = true;
-    this.$raven.captureBreadcrumb({
-      message: 'submit',
-      category: 'step'
-    });
-
-    await this.submitToCloudKit(this.steps);
-
-    this.submitInProgress = false;
-    this.$router.push({ name: 'thankyou' });
   }
 
-  mounted() {}
+  get previousLink(): object {
+    const keys = Object.keys(this.steps)
+    const i = keys.indexOf(this.step.slug)
+    return {
+      name: 'step-slug',
+      params: { slug: keys[i - 1] }
+    }
+  }
 }
 </script>
 
