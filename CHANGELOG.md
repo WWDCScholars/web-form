@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.0"></a>
+# [3.2.0-pre.0](https://github.com/WWDCScholars/web-form/compare/v3.0.2...v3.2.0-pre.0) (2019-05-01)
+
+
+### Features
+
+* Added breadcrumb for non linked users ([7e218bd](https://github.com/WWDCScholars/web-form/commit/7e218bd))
+* Added version meta header field ([6febfff](https://github.com/WWDCScholars/web-form/commit/6febfff))
+
+
+
 <a name="3.0.2"></a>
 ## [3.0.2](https://github.com/WWDCScholars/web-form/compare/v3.0.1...v3.0.2) (2018-04-25)
 
