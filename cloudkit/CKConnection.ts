@@ -1,4 +1,5 @@
 import CloudKit from 'tsl-apple-cloudkit'
+import AuthTokenStore from './AuthTokenStore'
 import { EventEmitter } from 'events'
 
 export interface CloudKitConfig {
@@ -23,7 +24,10 @@ export default class CKConnection extends EventEmitter {
           persist: true
         },
         environment: config.environment
-      }]
+      }],
+      services: {
+        authTokenStore: new AuthTokenStore()
+      }
     } as any)
   }
 
