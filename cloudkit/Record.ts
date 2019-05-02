@@ -92,6 +92,10 @@ export default class Record implements CloudKit.RecordLike {
     return this.fromRecordReceived(createdRecord)
   }
 
+  public async delete(): Promise<void> {
+    await ck.deleteRecordFromPublicDatabase(this.recordName)
+  }
+
   public async save(): Promise<void> {
     if (!this.recordName || !this.recordChangeTag) {
       throw new Error('Cannot save Record without recordName or recordChangeTag')

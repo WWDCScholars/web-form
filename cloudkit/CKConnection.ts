@@ -1,5 +1,4 @@
 import CloudKit from 'tsl-apple-cloudkit'
-import Record, { RecordFields } from './Record'
 import { EventEmitter } from 'events'
 
 export interface CloudKitConfig {
@@ -97,5 +96,9 @@ export default class CKConnection extends EventEmitter {
       throw response.errors[0]
     }
     return response.records[0]
+  }
+
+  public async deleteRecordFromPublicDatabase(record: string): Promise<void> {
+    await this.publicDatabase.deleteRecords([record])
   }
 }
