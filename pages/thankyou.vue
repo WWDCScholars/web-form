@@ -28,7 +28,7 @@ export default class PageThankyou extends Vue {}
   height: calc(100vh - #{$header-height})
   margin-bottom: -85px
   text-align: center
-  background-image: url("~assets/images/scholars-hero.jpg")
+  background-image: url("/images/scholars-hero.jpg")
   background-size: cover
   background-position: center bottom
 
