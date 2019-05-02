@@ -2,18 +2,23 @@
 transition(name="modal")
   .modal-mask
     .container
-      h3.title:  slot
+      h3.title {{ title }}
       spinner
+      h4(v-if="subtitle").subtitle {{ subtitle }}
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
 import Spinner from './Spinner.vue';
 
 @Component({
   components: { Spinner }
 })
 export default class ModalSpinner extends Vue {
+  @Prop({ required: true })
+  title!: string
+  @Prop({ default: null })
+  subtitle?: string
 }
 </script>
 
@@ -47,6 +52,13 @@ export default class ModalSpinner extends Vue {
     .title
       text-align: center
       margin-top: 30px
+
+    .subtitle
+      text-align: center
+      font-size: 1em
+      font-style: italic
+      color: $sch-gray
+      margin-bottom: 20px
 
 +form-colors
   $bg: dyn-temp('bg')

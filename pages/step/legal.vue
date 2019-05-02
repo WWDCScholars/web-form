@@ -1,7 +1,10 @@
 <template lang="pug">
 .container-fluid.step(class="form-color-blue")
-  modal-spinner(v-if="submitInProgress")
-    | Beaming your profile to space...
+  modal-spinner(
+    v-if="submitInProgress",
+    title="Beaming your profile to space...",
+    subtitle="Depending on your internet connection, this might take a while."
+  )
 
   .step-form.form
     h3 Last, we have to go over some legal stuff
