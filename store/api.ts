@@ -154,14 +154,14 @@ export const actions: ActionTree<State, State> = {
         ...fields.wwdcYearInfo,
         appType: { value: 'offline' }
       }
-    } as any)
+    })
     let socialMedia: ScholarSocialMedia
     if (state.scholarSocialMedia) {
       socialMedia = ScholarSocialMedia.clone(state.scholarSocialMedia)
       socialMedia.setFields(fields.socialMedia)
       await socialMedia.save()
     } else {
-      socialMedia = await ScholarSocialMedia.create({ fields: fields.socialMedia } as any)
+      socialMedia = await ScholarSocialMedia.create({ fields: fields.socialMedia })
     }
     this.$sentry.addBreadcrumb({
       category: 'submit',
@@ -209,13 +209,13 @@ export const actions: ActionTree<State, State> = {
       ])
     } else {
       // create new Scholar
-      const scholarRecordToCreate = {
+      const scholarRecordToCreate: CloudKit.RecordToCreateSimple = {
         fields: {
           ...fields.scholar,
           gdprConsentAt: { value: new Date().getTime() }
         }
       }
-      const createdScholar = await Scholar.create(scholarRecordToCreate as any)
+      const createdScholar = await Scholar.create(scholarRecordToCreate)
 
       // create new ScholarPrivate
       const scholarPrivateRecordToCreate = {
@@ -228,7 +228,7 @@ export const actions: ActionTree<State, State> = {
           }}
         }
       }
-      const createdScholarPrivate = await ScholarPrivate.create(scholarPrivateRecordToCreate as any)
+      const createdScholarPrivate = await ScholarPrivate.create(scholarPrivateRecordToCreate)
 
       // set scholarPrivate reference on Scholar
       createdScholar.scholarPrivate = {
