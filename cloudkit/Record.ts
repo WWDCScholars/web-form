@@ -1,6 +1,11 @@
 import merge from 'lodash.merge'
 import { ck, CloudKit, Query } from '.'
 
+declare module 'tsl-apple-cloudkit' {
+  type RecordToCreateSimple = Pick<RecordToCreate, Exclude<keyof RecordToCreate, 'recordType'>>
+  type RecordFields = { [name: string]: RecordField }
+}
+
 interface RecordBuilder<R> {
   recordType: string
   new(): R
@@ -77,10 +82,13 @@ export default class Record implements CloudKit.RecordLike {
 
   public static async create<T extends Record>(
     this: RecordBuilder<T>,
-    record: CloudKit.RecordToCreate
+    record: CloudKit.RecordToCreateSimple
   ): Promise<T> {
-    record.recordType = this.recordType
-    const createdRecord = await ck.createOrUpdateRecordInPublicDatabase(record)
+    const recordToCreate: CloudKit.RecordToCreate = {
+      recordType: this.recordType,
+      ...record
+    }
+    const createdRecord = await ck.createOrUpdateRecordInPublicDatabase(recordToCreate)
     return this.fromRecordReceived(createdRecord)
   }
 
