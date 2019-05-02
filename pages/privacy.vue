@@ -222,7 +222,8 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 
-export default class PageImprint extends Vue {}
+@Component
+export default class PagePrivacyPolicy extends Vue {}
 </script>
 
 <style lang="sass" scoped>
