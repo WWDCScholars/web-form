@@ -152,7 +152,8 @@ export const actions: ActionTree<State, State> = {
     const yearInfo = await WWDCYearInfo.create({
       fields: {
         ...fields.wwdcYearInfo,
-        appType: { value: 'offline' }
+        appType: { value: 'offline' },
+        status: { value: 'pending' }
       }
     })
     let socialMedia: ScholarSocialMedia
