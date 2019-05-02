@@ -5,6 +5,12 @@ dotenv()
 const version = require('./package.json').version
 const isProduction = (process.env.NODE_ENV === 'production')
 
+const proxyConfiguration = isProduction ? {} : { proxy: {
+  '/api': { target: 'http://localhost:3001' }
+}}
+
+const axiosBaseURL = isProduction ? '/api' : process.env.LINK_API_BASE_URL
+
 const config: NuxtConfiguration = {
   mode: 'spa',
 
@@ -110,19 +116,15 @@ const config: NuxtConfiguration = {
   },
 
   /*
-   ** Linking API proxy configuration 
+   ** Linking API proxy configuration
    */
-  proxy: {
-    '/api': {
-      target: 'http://localhost:3001'
-    }
-  },
+  ...proxyConfiguration,
 
   /*
    ** Linking API configuration
    */
   axios: {
-    baseURL: '/api'
+    baseURL: axiosBaseURL
   },
 
   /*
