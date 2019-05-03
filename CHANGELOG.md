@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.1"></a>
+# [3.2.0-pre.1](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.0...v3.2.0-pre.1) (2019-05-03)
+
+
+### Bug Fixes
+
+* Added CORS header to allow link api cross origin access ([02d589f](https://github.com/WWDCScholars/web-form/commit/02d589f))
+* Added Imprint and Privacy missing Component decorator ([6fc473a](https://github.com/WWDCScholars/web-form/commit/6fc473a))
+
+
+### Features
+
+* Added prerelease npm script ([b746f33](https://github.com/WWDCScholars/web-form/commit/b746f33))
+* Added Record delete method ([162c9f3](https://github.com/WWDCScholars/web-form/commit/162c9f3))
+* Added subtitle to modal spinner ([30ee7bd](https://github.com/WWDCScholars/web-form/commit/30ee7bd))
+* Implemented custom cookie handling ([51169b5](https://github.com/WWDCScholars/web-form/commit/51169b5))
+* Pin Imprint and Privacy links to bottom of the page ([f8b5168](https://github.com/WWDCScholars/web-form/commit/f8b5168))
+* Proxy and Axios configuration based on environment ([d42940e](https://github.com/WWDCScholars/web-form/commit/d42940e))
+* Set WWDCYearInfo status to 'pending' by default ([ec87eca](https://github.com/WWDCScholars/web-form/commit/ec87eca))
+
+
+### Performance Improvements
+
+* Moved scholars hero image to static folder ([a0dafe2](https://github.com/WWDCScholars/web-form/commit/a0dafe2))
+
+
+
 <a name="3.2.0-pre.0"></a>
 # [3.2.0-pre.0](https://github.com/WWDCScholars/web-form/compare/v3.0.2...v3.2.0-pre.0) (2019-05-01)
 
