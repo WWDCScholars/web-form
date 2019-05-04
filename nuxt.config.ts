@@ -156,6 +156,13 @@ const config: NuxtConfiguration = {
         fs: 'empty'
       }
     }
+  },
+
+  /*
+   ** Generate a 404 page
+   */
+  generate: {
+    fallback: '404.html'
   }
 }
 
