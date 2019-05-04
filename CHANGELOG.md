@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.2"></a>
+# [3.2.0-pre.2](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.1...v3.2.0-pre.2) (2019-05-04)
+
+
+### Bug Fixes
+
+* **AuthTokenStore:** Fix cookie deletion and getting ([da69133](https://github.com/WWDCScholars/web-form/commit/da69133))
+* Adjusted content-wrapper top position ([cfdf1bf](https://github.com/WWDCScholars/web-form/commit/cfdf1bf))
+* Removed unnecessary env injection, swapped axios base url ([1af0e96](https://github.com/WWDCScholars/web-form/commit/1af0e96))
+
+
+
 <a name="3.2.0-pre.1"></a>
 # [3.2.0-pre.1](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.0...v3.2.0-pre.1) (2019-05-03)
 
