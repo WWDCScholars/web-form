@@ -9,7 +9,7 @@ const proxyConfiguration = isProduction ? {} : { proxy: {
   '/api': { target: 'http://localhost:3001' }
 }}
 
-const axiosBaseURL = isProduction ? '/api' : process.env.LINK_API_BASE_URL
+const axiosBaseURL = isProduction ? process.env.LINK_API_BASE_URL : '/api'
 
 const config: NuxtConfiguration = {
   mode: 'spa',
