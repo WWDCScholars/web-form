@@ -9,7 +9,7 @@ const proxyConfiguration = isProduction ? {} : { proxy: {
   '/api': { target: 'http://localhost:3001' }
 }}
 
-const axiosBaseURL = isProduction ? process.env.LINK_API_BASE_URL : '/api'
+const axiosBaseURL = isProduction ? '/api' : process.env.LINK_API_BASE_URL
 
 const config: NuxtConfiguration = {
   mode: 'spa',
@@ -50,6 +50,13 @@ const config: NuxtConfiguration = {
         sizes: '120x120'
       }
     ]
+  },
+
+  /*
+   ** Inject process environment variables
+   */
+  env: {
+    ...process.env as any
   },
 
   /*
