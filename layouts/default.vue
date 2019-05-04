@@ -28,7 +28,5 @@ export default class LayoutDefault extends Vue {
 
   .content-wrapper
     position: relative
-    top: $header-height
-    padding-bottom: $header-height
     min-height: calc(100vh - #{$header-height + $footer-height} - 50px - 15px)
 </style>
