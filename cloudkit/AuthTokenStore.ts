@@ -1,22 +1,27 @@
 export default class AuthTokenStore {
-  putToken(containerIdentifier: string, authToken: string): void {
+  putToken(containerIdentifier: string, authToken: string | undefined): void {
     const date = new Date()
 
-    // set time to expire in 14 days
-    date.setTime(date.getTime() + (14 * 24 * 60 * 60 * 1000))
+    if (authToken) {
+      // set time to expire in 14 days
+      date.setTime(date.getTime() + (14 * 24 * 60 * 60 * 1000))
+    } else {
+      // set time to 1970-01-01
+      date.setTime(0)
+    }
 
     // set the cookie
-    document.cookie = `${containerIdentifier}=${authToken}; expires=${date.toUTCString()}; path=/`
+    document.cookie = `${containerIdentifier}=${authToken || ''}; expires=${date.toUTCString()}; path=/`
   }
 
-  getToken(containerIdentifier: string): string {
+  getToken(containerIdentifier: string): string | undefined {
     const value = '; ' + document.cookie
     const parts = value.split('; ' + containerIdentifier + '=')
 
     if (parts.length === 2) {
-      return parts.pop()!.split(';').shift() || ''
+      return parts.pop()!.split(';').shift()
     }
 
-    return ''
+    return undefined
   }
 }
