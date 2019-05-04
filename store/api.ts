@@ -122,7 +122,6 @@ export const actions: ActionTree<State, State> = {
     }
   },
   async onUnauthenticated({ commit }, container: CloudKit.Container): Promise<void> {
-    console.log('onUnauthenticated')
     const auth = container['_auth']
     commit(types.setUserIdentity, undefined)
     commit(types.setSignInURL, auth._signInURL)
