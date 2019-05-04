@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.4"></a>
+# [3.2.0-pre.4](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.3...v3.2.0-pre.4) (2019-05-04)
+
+
+### Bug Fixes
+
+* Fixed swapped axios base urls ([8471c10](https://github.com/WWDCScholars/web-form/commit/8471c10))
+* Made signOut asynchronous ([f2fd08d](https://github.com/WWDCScholars/web-form/commit/f2fd08d))
+
+
+
 <a name="3.2.0-pre.3"></a>
 # [3.2.0-pre.3](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.2...v3.2.0-pre.3) (2019-05-04)
 
