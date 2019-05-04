@@ -53,6 +53,7 @@
   "devDependencies": {
     "@nuxt/typescript": "^2.6.1",
     "@sentry/cli": "^1.41.0",
+    "@types/dotenv": "^6.1.1",
     "@types/googlemaps": "^3.30.19",
     "@types/node": "^10.12.18",
     "cross-env": "^5.2.0",
