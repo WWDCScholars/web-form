@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.3"></a>
+# [3.2.0-pre.3](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.2...v3.2.0-pre.3) (2019-05-04)
+
+
+### Bug Fixes
+
+* Added env injection back in (needed in production) ([eb51ddc](https://github.com/WWDCScholars/web-form/commit/eb51ddc))
+
+
+
 <a name="3.2.0-pre.2"></a>
 # [3.2.0-pre.2](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.1...v3.2.0-pre.2) (2019-05-04)
 
