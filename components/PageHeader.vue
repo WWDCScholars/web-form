@@ -25,8 +25,8 @@ export default class PageHeader extends Vue {
   @API.Action
   signOut
 
-  onSignOutClicked() {
-    this.signOut()
+  async onSignOutClicked() {
+    await this.signOut()
     this.$router.replace('/')
   }
 }

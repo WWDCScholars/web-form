@@ -126,12 +126,13 @@ export const actions: ActionTree<State, State> = {
     commit(types.setUserIdentity, undefined)
     commit(types.setSignInURL, auth._signInURL)
   },
-  signOut({ commit }) {
+  async signOut({ commit }): Promise<void> {
     commit(types.setUserIdentity, null)
     commit(types.setScholar, null)
     commit(types.setScholarSocialMedia, null)
     commit(types.setScholarPrivate, null)
     ck.signOut()
+    return
   },
 
   // model
