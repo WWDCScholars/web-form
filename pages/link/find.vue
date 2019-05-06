@@ -75,7 +75,7 @@ export default class PageLinkFind extends Vue {
       this.scholar = { givenName: result.givenName, familyName: result.familyName }
     } catch {
       this.$nuxt.$loading.fail!()
-      this.errorComment = 'Please make sure this is the same email address you used in the past.'
+      this.errorComment = 'Please make sure this is the same email address as you used in the past.'
     }
   }
 
