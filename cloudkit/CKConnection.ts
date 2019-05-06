@@ -54,7 +54,9 @@ export default class CKConnection extends EventEmitter {
     this.gotoUnauthenticatedState()
   }
 
-  public signOut() {
+  public async signOut(): Promise<void> {
+    this.defaultAuth._setSession(null)
+    await this.defaultAuth._fetchAndHandleCurrentUserIdentity()
     this.defaultAuth.signOut()
   }
 
