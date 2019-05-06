@@ -44,8 +44,7 @@ import { Component, Model, Prop, Vue } from 'nuxt-property-decorator'
 import { namespace } from 'vuex-class'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import { Step, StepSection } from '~/model'
-import StepForm from '~/components/StepForm.vue'
+import { Step } from '~/model'
 import ModalSpinner from '~/components/ModalSpinner.vue'
 import { InputCheckbox } from '~/components/inputs'
 
@@ -57,7 +56,7 @@ import { name as apiName } from '~/store/api'
 const API = namespace(apiName)
 
 @Component({
-  components: { StepForm, ModalSpinner, InputCheckbox },
+  components: { ModalSpinner, InputCheckbox },
   middleware: ['authenticated', 'unsubmitted']
 })
 export default class PageStepLegal extends Vue {
