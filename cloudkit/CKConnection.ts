@@ -56,7 +56,6 @@ export default class CKConnection extends EventEmitter {
 
   public signOut() {
     this.defaultAuth.signOut()
-    this.gotoUnauthenticatedState()
   }
 
   private gotoAuthenticatedState(userIdentity: CloudKit.UserIdentity) {
