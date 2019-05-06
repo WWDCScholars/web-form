@@ -1,6 +1,8 @@
 <template lang="pug">
 .link-steps-find
   .link-step.link-step-find(v-if="!scholar")
+    p.
+      Please provide the email address you used to sign up at WWDCScholars.
     input-text(
       name="signedUpBefore_email",
       type="email",
@@ -20,34 +22,42 @@
       button(@click="find", :disabled="findDisabled || errors.any()").btn.btn-primary.cta-right Find
 
   .link-step.link-step-found(v-else)
-    p.
-      To link your existing profile to your iCloud account, you have to verify your email address.
-      When you click #[i Yes], we will send an email to the address you specified. Please follow the instructions in the email to link your existing profile to your iCloud account.
     h4 Are you #[b {{ scholarName }}]?
 
+    p.
+      To link your existing profile to your iCloud account, you have to verify your email address.
+      When you click #[i Link my Profile], we will send an email to the address you specified. Please follow the instructions in the email to link your existing profile to your iCloud account.
+
+    input-checkbox(
+      name="gdprConsent",
+      placeholder="I agree to the <a target=\"_blank\" href=\"/privacy\">privacy policy</a> and want to link my profile to my iCloud account.",
+      v-model="gdprConsent"
+    )
+
     .cta-group
-      button(@click="reset").btn.btn-secondary No
-      button(@click="sendEmail").btn.btn-primary Yes
+      button(@click="reset").btn.btn-secondary Try Again
+      button(@click="sendEmail", :disabled="!gdprConsent").btn.btn-primary Link my Profile
 
     .comment {{ errorComment }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
-import { InputText } from '~/components/inputs'
+import { InputText, InputCheckbox } from '~/components/inputs'
 import { CloudKit } from '~/model'
 
 import * as api from '~/store/api'
 const API = namespace(api.name)
 
 @Component({
-  components: { InputText }
+  components: { InputText, InputCheckbox }
 })
 export default class PageLinkFind extends Vue {
   findDisabled: boolean = true
   errorComment: string = ''
   email: string = ''
   scholar: { givenName: string, familyName: string } | null = null
+  gdprConsent: boolean = false
 
   @API.State
   userIdentity!: CloudKit.UserIdentity
@@ -72,6 +82,7 @@ export default class PageLinkFind extends Vue {
       })
       this.$nuxt.$loading.finish()
 
+      this.errorComment = ''
       this.scholar = { givenName: result.givenName, familyName: result.familyName }
     } catch {
       this.$nuxt.$loading.fail!()
@@ -80,12 +91,13 @@ export default class PageLinkFind extends Vue {
   }
 
   reset() {
+    this.gdprConsent = false
     this.scholar = null
     this.email = ''
   }
 
   async sendEmail() {
-    if (!this.email) {
+    if (!this.email || !this.gdprConsent) {
       return
     }
 

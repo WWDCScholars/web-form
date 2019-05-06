@@ -8,7 +8,10 @@
     Now it's time you showcase your talent and connect with the other winners you will be spending the week with in San Jose!
 
   p.
-    Sign in with your Apple ID below to get started. We use CloudKit for authentication and we do not get to see any of your login details as everything is handled between Apple and you.
+    Sign in with your Apple ID below to get started. We use iCloud for authentication and we do not get to see any of your login details as everything is handled between Apple and you.
+
+  p: i.
+    Do you want to link your existing WWDCScholars profile to your iCloud account to make your profile visible on our website? Sign in below and follow the instructions!
 
   hr
 
@@ -33,6 +36,9 @@ export default class PageIndex extends Vue {
 </script>
 
 <style lang="sass" scoped>
+i
+  font-size: 0.9em
+
 .signin-wrapper
   display: flex
   justify-content: center

@@ -24,6 +24,9 @@ export default class PageLink extends Vue {}
     > *
       margin-bottom: 14px
 
+    a
+      color: $sch-blue
+
     .input-error
       font-size: 0.8em
       margin-left: 2px

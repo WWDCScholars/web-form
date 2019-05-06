@@ -1,9 +1,9 @@
 <template lang="pug">
 .link-step.link-step-0
   p.
-    If you did, please provide the email address you used for your old account, so we can link it with your new one and display past WWDC scholarships on your profile.
+    If you did, please provide the email address you used for your old account, so we can link it with your new one and display past WWDC Scholarships on your profile.
   p.
-    If you never had WWDCScholars account before, select #[i First-time Scholar].
+    If you never had WWDCScholars profile before, select #[i First-time Scholar].
 
   .cta-group
     nuxt-link(to="/link/find").btn.btn-secondary Signed Up Before
