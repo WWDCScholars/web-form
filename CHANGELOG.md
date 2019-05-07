@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.6"></a>
+# [3.2.0-pre.6](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.5...v3.2.0-pre.6) (2019-05-07)
+
+
+### Bug Fixes
+
+* Added background to icons ([1a2aadd](https://github.com/WWDCScholars/web-form/commit/1a2aadd))
+* Fixed grammar ([90daa8d](https://github.com/WWDCScholars/web-form/commit/90daa8d))
+* Get new sign in URL after sign out ([740bb53](https://github.com/WWDCScholars/web-form/commit/740bb53))
+* Layout and wording improvements ([085b74a](https://github.com/WWDCScholars/web-form/commit/085b74a))
+* Return null instead of undefined in AuthTokenStore ([de1b22a](https://github.com/WWDCScholars/web-form/commit/de1b22a))
+* Sign Out improvements ([678d022](https://github.com/WWDCScholars/web-form/commit/678d022))
+* Updated Discord link on thankyou page ([65099b1](https://github.com/WWDCScholars/web-form/commit/65099b1))
+
+
+### Features
+
+* Added GDPR consent to linking process ([a22d1e0](https://github.com/WWDCScholars/web-form/commit/a22d1e0))
+
+
+
 <a name="3.2.0-pre.5"></a>
 # [3.2.0-pre.5](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.4...v3.2.0-pre.5) (2019-05-04)
 
