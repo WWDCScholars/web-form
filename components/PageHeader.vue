@@ -67,7 +67,7 @@ export default class PageHeader extends Vue {
     width: auto
     margin-left: auto
     margin-right: auto
-    padding: 10px 20px
+    padding: 8px 20px
     font-weight: 500
     color: black
     border: 1px solid black

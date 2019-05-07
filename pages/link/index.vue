@@ -1,5 +1,7 @@
 <template lang="pug">
 .link-step.link-step-0
+  h3.color-blue Have you signed up for an account at WWDCScholars before?
+
   p.
     If you did, please provide the email address you used for your old account, so we can link it with your new one and display past WWDC Scholarships on your profile.
   p.

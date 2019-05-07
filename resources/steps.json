@@ -150,7 +150,7 @@
       "title": "Describe your winning project in less than 300 characters",
       "fields": [{
         "name": "description",
-        "readableName": "Project description",
+        "readableName": "project description",
         "type": "textarea",
         "maxLength": 300
       }]

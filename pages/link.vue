@@ -1,7 +1,6 @@
 <template lang="pug">
 .container-fluid.color-gray
-  h2.color-blue Welcome to WWDCScholars!
-  h3.color-blue Have you signed up for an account at WWDCScholars before?
+  h2.color-blue Link your Profile
 
   .link-form.form-color-blue
     nuxt-child
