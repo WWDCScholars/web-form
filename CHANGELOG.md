@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.7"></a>
+# [3.2.0-pre.7](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.6...v3.2.0-pre.7) (2019-05-09)
+
+
+
 <a name="3.2.0-pre.6"></a>
 # [3.2.0-pre.6](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.5...v3.2.0-pre.6) (2019-05-07)
 
