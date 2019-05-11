@@ -46,7 +46,7 @@ export const getters: GetterTree<State, State> = {
     return !!state.scholar
   },
   hasSubmitted(state: State): boolean {
-    if (!state.scholar) {
+    if (!state.scholar || !state.scholar.wwdcYears) {
       return false
     }
 
@@ -90,9 +90,11 @@ export const actions: ActionTree<State, State> = {
       })
 
       // if scholar already submitted for the current year, redirect to thankyou
-      for (const wwdcYear of scholar.wwdcYears) {
-        if (wwdcYear.recordName === process.env.WWDC_YEAR) {
-          return
+      if (scholar.wwdcYears) {
+        for (const wwdcYear of scholar.wwdcYears) {
+          if (wwdcYear.recordName === process.env.WWDC_YEAR) {
+            return
+          }
         }
       }
 
