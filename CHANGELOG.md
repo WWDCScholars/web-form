@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.10"></a>
+# [3.2.0-pre.10](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.9...v3.2.0-pre.10) (2019-05-11)
+
+
+### Bug Fixes
+
+* Specify path when deleting cookie ([47c27ba](https://github.com/WWDCScholars/web-form/commit/47c27ba))
+
+
+
 <a name="3.2.0-pre.9"></a>
 # [3.2.0-pre.9](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.8...v3.2.0-pre.9) (2019-05-11)
 
