@@ -16,6 +16,7 @@ export default class Scholar extends Record {
   @Field public socialMedia!: CloudKit.Reference
   @Field public wwdcYearInfos!: CloudKit.Reference[]
   @Field public wwdcYears!: CloudKit.Reference[]
+  @Field public wwdcYearsApproved!: CloudKit.Reference[]
   @Field public gdprConsentAt?: number
 
   public yearInfos: { [year: string]: WWDCYearInfo } = {}

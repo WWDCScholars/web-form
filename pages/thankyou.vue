@@ -2,9 +2,18 @@
 .page-thankyou
   .container-fluid.thankyou
     h2.color-blue Thanks for joining us!
-    h3.color-blue We will review your profile as soon as possible.
-    p.
+    h3(v-if="!isSubmissionApproved").color-blue We will review your profile as soon as possible.
+    h3(v-else).color-blue Your profile is live at #[a(href="https://wwdcscholars.com") WWDCScholars.com]
+
+    p(v-if="!isSubmissionApproved").
       In the meantime, you should check out the other great ways to connect with fellow Scholarship winners. We have listed some of them below.
+      #[br]#[br]
+      Reminder: In order to validate your submission, please forward your
+      acceptance email to the following email address: #[i {{verificationEmailAdress}}]
+    p(v-else).
+      Don't forget to check out the other great ways to connect with fellow
+      Scholarship winners. We have listed some of them below.
+
 
     .social-links
       a(href="https://twitter.com/WWDCScholars")
@@ -14,12 +23,37 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Vue } from 'nuxt-property-decorator'
+import { namespace } from 'vuex-class'
+import { Scholar, CloudKit } from '~/model'
+
+import { name as apiName } from '~/store/api'
+const API = namespace(apiName)
 
 @Component({
   middleware: ['authenticated', 'submitted']
 })
-export default class PageThankyou extends Vue {}
+export default class PageThankyou extends Vue {
+  @API.State
+  userIdentity!: CloudKit.UserIdentity
+
+  @API.State
+  scholar!: Scholar
+
+  get verificationEmailAdress(): string {
+    return `verify+${this.userIdentity.userRecordName}@wwdcscholars.com`
+  }
+
+  get isSubmissionApproved(): boolean {
+    if (!this.scholar.wwdcYearsApproved) {
+      return false
+    }
+
+    return this.scholar.wwdcYearsApproved
+      .filter(year => year.recordName === process.env.WWDC_YEAR)
+      .length === 1
+  }
+}
 </script>
 
 <style lang="sass" scoped>
@@ -46,6 +80,9 @@ export default class PageThankyou extends Vue {}
 .thankyou
   position: relative
   z-index: 200
+
+  h3 a
+    color: $sch-blue
 
 .social-links
   margin: 60px 0 35px
