@@ -27,7 +27,7 @@ import { name as stepsName } from '~/store/steps'
 const Steps = namespace(stepsName)
 
 @Component({
-  middleware: ['authenticated', 'unsubmitted']
+  middleware: ['authenticated', 'profile', 'unsubmitted']
 })
 export default class PageStepStart extends Vue {
   @Steps.Getter
