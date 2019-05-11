@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.8"></a>
+# [3.2.0-pre.8](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.7...v3.2.0-pre.8) (2019-05-11)
+
+
+### Bug Fixes
+
+* Added spam folder hint to email sent page ([343ada3](https://github.com/WWDCScholars/web-form/commit/343ada3))
+
+
+### Features
+
+* Add https:// prefix to url fields if missing ([4c418e6](https://github.com/WWDCScholars/web-form/commit/4c418e6))
+* Added linking completed page ([d7a3964](https://github.com/WWDCScholars/web-form/commit/d7a3964))
+* Indicate when the submission was approved ([d4cf335](https://github.com/WWDCScholars/web-form/commit/d4cf335))
+* Replaced acceptance email screenshot with email forward request ([db07922](https://github.com/WWDCScholars/web-form/commit/db07922))
+
+
+
 <a name="3.2.0-pre.7"></a>
 # [3.2.0-pre.7](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.6...v3.2.0-pre.7) (2019-05-09)
 
