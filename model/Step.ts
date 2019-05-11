@@ -96,6 +96,12 @@ export default class Step {
             }
           } else if (field.type === 'date') {
             ret[currentParameterName][field.name] = { value: dayjs(field.model).valueOf() };
+          } else if (field.type === 'url') {
+            if (field.model.indexOf('http://') === 0 || field.model.indexOf('https://') === 0) {
+              ret[currentParameterName][field.name] = { value: field.model };
+            } else {
+              ret[currentParameterName][field.name] = { value: `https://${field.model}` };
+            }
           } else {
             ret[currentParameterName][field.name] = { value: field.model };
           }
