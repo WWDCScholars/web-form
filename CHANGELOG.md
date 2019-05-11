@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.9"></a>
+# [3.2.0-pre.9](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.8...v3.2.0-pre.9) (2019-05-11)
+
+
+### Bug Fixes
+
+* Don't show start page when there is no profile yet ([3c3e28a](https://github.com/WWDCScholars/web-form/commit/3c3e28a))
+
+
+
 <a name="3.2.0-pre.8"></a>
 # [3.2.0-pre.8](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.7...v3.2.0-pre.8) (2019-05-11)
 
