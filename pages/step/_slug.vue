@@ -70,7 +70,7 @@ export default class PageStep extends Vue {
     const i = keys.indexOf(this.step.slug)
 
     if (i === keys.length - 1) {
-      return { name: 'step-legal' }
+      return { name: 'step-final' }
     }
 
     return {

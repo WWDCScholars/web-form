@@ -182,16 +182,6 @@
         "placeholder": "GitHub URL",
         "required": false
       }]
-    }, {
-      "title": "Please provide a screenshot of your acceptance email for this year to validate your submission",
-      "fields": [{
-        "name": "acceptanceEmail",
-        "readableName": "acceptance email",
-        "type": "image",
-        "accept": "image/*",
-        "styleClass": "field-image-wide",
-        "resizeMax": 500
-      }]
     }]
   }
 ]

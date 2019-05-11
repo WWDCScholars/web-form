@@ -7,9 +7,27 @@
   )
 
   .step-form.form
-    h3 Last, we have to go over some legal stuff
+    h3 Last, we have to go over some formalities
+
+    .group
+      h4.
+        In order to validate your submission, please forward your acceptance
+        email to the following email address:
+
+      .field: copyable(:value.once="verificationEmailAdress").copy-email
+
+      .field
+        input-checkbox(
+          name="acceptanceEmailForwarded",
+          :placeholder="`I forwarded my acceptance email to ${verificationEmailAdress}`",
+          v-model="acceptanceEmailForwarded"
+        )
+
     .group(v-if="showParentalConsent")
-      h4 Since you’re below 18 years of age, your parents need to approve that they’re ok with the fact that your information will become publicly available if you register for WWDCScholars.
+      h4.
+        Since you’re below 18 years of age, your parents need to approve that
+        they’re ok with the fact that your information will become publicly
+        available if you register for WWDCScholars.
 
       .field
         input-checkbox(
@@ -28,9 +46,6 @@
           v-model="gdprConsent"
         )
 
-    .group
-      h4 Hit submit and we will review your profile as soon as possible!
-
   .cta-group
     nuxt-link(:to="previousLink").btn.btn-secondary.cta-left Previous
     button(
@@ -46,7 +61,9 @@ import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Step } from '~/model'
 import ModalSpinner from '~/components/ModalSpinner.vue'
+import Copyable from '~/components/Copyable.vue'
 import { InputCheckbox } from '~/components/inputs'
+import { CloudKit } from '~/model'
 
 dayjs.extend(customParseFormat)
 
@@ -56,17 +73,21 @@ import { name as apiName } from '~/store/api'
 const API = namespace(apiName)
 
 @Component({
-  components: { ModalSpinner, InputCheckbox },
+  components: { ModalSpinner, Copyable, InputCheckbox },
   middleware: ['authenticated', 'unsubmitted']
 })
-export default class PageStepLegal extends Vue {
+export default class PageStepFinal extends Vue {
   submitInProgress: boolean = false
 
   parentalConsent: boolean = false
   gdprConsent: boolean = false
+  acceptanceEmailForwarded: boolean = false
 
   @Steps.State
   steps!: Map<string, Step>
+
+  @API.State
+  userIdentity!: CloudKit.UserIdentity
 
   @Steps.Getter('birthday')
   scholarBirthday?: number | string
@@ -100,6 +121,10 @@ export default class PageStepLegal extends Vue {
     return age < 18
   }
 
+  get verificationEmailAdress(): string {
+    return `verify+${this.userIdentity.userRecordName}@wwdcscholars.com`
+  }
+
   get submittable(): boolean {
     for (let slug in this.steps) {
       if (!this.steps[slug].finished) {
@@ -108,10 +133,10 @@ export default class PageStepLegal extends Vue {
     }
 
     if (this.showParentalConsent) {
-      return this.parentalConsent && this.gdprConsent
+      return this.parentalConsent && this.gdprConsent && this.acceptanceEmailForwarded
     }
 
-    return this.gdprConsent
+    return this.gdprConsent && this.acceptanceEmailForwarded
   }
 
   async submit() {
