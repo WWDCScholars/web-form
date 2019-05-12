@@ -84,6 +84,9 @@ export default class PageThankyou extends Vue {
   h3 a
     color: $sch-blue
 
+  p i
+    word-wrap: break-word
+
 .social-links
   margin: 60px 0 35px
 

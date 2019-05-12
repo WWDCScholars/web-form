@@ -53,6 +53,7 @@ export default class InputCheckbox extends Vue {
     align-items: flex-start
     margin-top: -20px
     cursor: pointer
+    width: 100%
 
     .mark
       position: relative
@@ -84,6 +85,8 @@ export default class InputCheckbox extends Vue {
       margin-top: 3px
       margin-left: 6px
       color: $sch-gray
+      word-wrap: break-word
+      max-width: calc(100% - 28px - 6px)
 
     &:hover .mark:after
       border-color: $sch-gray2

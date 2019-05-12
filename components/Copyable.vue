@@ -4,12 +4,7 @@ a(@click="onClick").copyable
   .bubble(:class="{ 'clicked': clicked }")
     .before copy
     .after copied
-  input(
-    type="text",
-    :value="value",
-    readonly,
-    ref="input"
-  ).input
+  textarea(ref="input").input {{ value }}
 </template>
 
 <script lang="ts">
