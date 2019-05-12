@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0-pre.11"></a>
+# [3.2.0-pre.11](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.10...v3.2.0-pre.11) (2019-05-12)
+
+
+### Bug Fixes
+
+* Word wrap long email address in Copyable and InputCheckbox ([3379adf](https://github.com/WWDCScholars/web-form/commit/3379adf))
+
+
+
 <a name="3.2.0-pre.10"></a>
 # [3.2.0-pre.10](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.9...v3.2.0-pre.10) (2019-05-11)
 
