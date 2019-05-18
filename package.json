@@ -20,7 +20,7 @@
     "generate": "cross-env NODE_ENV=production nuxt generate",
     "lint": "tslint --project .",
     "release": "standard-version",
-    "prerelease": "standard-version --prerelease pre",
+    "release:pre": "standard-version --prerelease pre",
     "release:push": "./.github/release.sh",
     "release:sentry": "./.github/release_sentry.sh"
   },
