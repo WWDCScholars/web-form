@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.1"></a>
+## [3.2.1](https://github.com/WWDCScholars/web-form/compare/v3.2.0...v3.2.1) (2019-05-18)
+
+
+### Bug Fixes
+
+* Added www subdomain to occurences of wwdcscholars.com ([9beab14](https://github.com/WWDCScholars/web-form/commit/9beab14))
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.11...v3.2.0) (2019-05-18)
 
