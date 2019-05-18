@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.11...v3.2.0) (2019-05-18)
+
+
+### Features
+
+* Add affiliation note to imprint ([1bd42ae](https://github.com/WWDCScholars/web-form/commit/1bd42ae))
+
+
+
 <a name="3.2.0-pre.11"></a>
 # [3.2.0-pre.11](https://github.com/WWDCScholars/web-form/compare/v3.2.0-pre.10...v3.2.0-pre.11) (2019-05-12)
 
