@@ -14,7 +14,7 @@
       our homepage.
 
     .cta-group
-      a(href="https://wwdcscholars.com").btn.btn-secondary Go to Homepage
+      a(href="https://www.wwdcscholars.com").btn.btn-secondary Go to Homepage
       nuxt-link(:to="firstStepLink").btn.btn-primary Sign Up for 2019
 </template>
 

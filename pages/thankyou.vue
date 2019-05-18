@@ -3,7 +3,7 @@
   .container-fluid.thankyou
     h2.color-blue Thanks for joining us!
     h3(v-if="!isSubmissionApproved").color-blue We will review your profile as soon as possible.
-    h3(v-else).color-blue Your profile is live at #[a(href="https://wwdcscholars.com") WWDCScholars.com]
+    h3(v-else).color-blue Your profile is live at #[a(href="https://www.wwdcscholars.com") WWDCScholars.com]
 
     p(v-if="!isSubmissionApproved").
       In the meantime, you should check out the other great ways to connect with fellow Scholarship winners. We have listed some of them below.
