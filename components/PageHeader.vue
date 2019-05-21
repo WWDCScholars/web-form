@@ -1,8 +1,9 @@
 <template lang="pug">
 header.header
-  h1
-    span.wwdc WWDC
-    span.scholars Scholars
+  nuxt-link(to="/").header-link
+    h1
+      span.wwdc WWDC
+      span.scholars Scholars
   .spacer
   button(
     v-if="isAuthenticated",
@@ -47,6 +48,9 @@ export default class PageHeader extends Vue {
 
   .spacer
     flex-grow: 1
+
+  .header-link
+    text-decoration: none
 
   h1
     font-size: 1.6em
