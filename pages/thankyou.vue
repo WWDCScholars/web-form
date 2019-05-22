@@ -45,7 +45,7 @@ export default class PageThankyou extends Vue {
   }
 
   get isSubmissionApproved(): boolean {
-    if (!this.scholar.wwdcYearsApproved) {
+    if (!this.scholar || !this.scholar.wwdcYearsApproved) {
       return false
     }
 
