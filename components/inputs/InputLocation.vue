@@ -62,7 +62,7 @@ export default class InputLocation extends Vue {
   }
 
   setPlace(place) {
-    if (!place) { return; }
+    if (!place || !place.geometry || !place.geometry.location) { return; }
     const value = {
       lat: place.geometry.location.lat(),
       lng: place.geometry.location.lng()
