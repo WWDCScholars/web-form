@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.1"></a>
+## [3.3.1](https://github.com/WWDCScholars/web-form/compare/v3.3.0...v3.3.1) (2019-05-22)
+
+
+### Bug Fixes
+
+* Check for scholar existance on thank you page ([1437755](https://github.com/WWDCScholars/web-form/commit/1437755))
+* Don't load and always create ScholarPrivate so that it belongs to the user ([acc083f](https://github.com/WWDCScholars/web-form/commit/acc083f))
+* Guard location input setPlace for existing values ([a132bac](https://github.com/WWDCScholars/web-form/commit/a132bac))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/WWDCScholars/web-form/compare/v3.2.1...v3.3.0) (2019-05-21)
 
