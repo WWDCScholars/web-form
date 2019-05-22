@@ -100,12 +100,12 @@ export const actions: ActionTree<State, State> = {
 
       // else we have a scholar from a previous year
       // fetch existing socialMedia and scholarPrivate
-      const [socialMediaRecord, scholarPrivateRecord] = await Promise.all([
+      const [socialMediaRecord/*, scholarPrivateRecord*/] = await Promise.all([
         ScholarSocialMedia.fetch(scholar.socialMedia.recordName),
-        ScholarPrivate.fetch(scholar.scholarPrivate.recordName)
+        // ScholarPrivate.fetch(scholar.scholarPrivate.recordName)
       ])
       commit(types.setScholarSocialMedia, socialMediaRecord)
-      commit(types.setScholarPrivate, scholarPrivateRecord)
+      // commit(types.setScholarPrivate, scholarPrivateRecord)
       this.$sentry.addBreadcrumb({
         message: 'fetched socialMedia and scholarPrivate record',
         category: 'authentication'
@@ -115,7 +115,7 @@ export const actions: ActionTree<State, State> = {
       dispatch('steps/fillSteps', {
         scholarFields: scholar.fields,
         socialFields: socialMediaRecord.fields,
-        privateFields: scholarPrivateRecord.fields
+        // privateFields: scholarPrivateRecord.fields
       }, { root: true })
     }
     catch (e) {
@@ -193,56 +193,60 @@ export const actions: ActionTree<State, State> = {
       action: CloudKit.ReferenceAction.NONE
     })
 
-    // if Scholar and ScholarPrivate exist, update using new fields, else create ones
+    // always create new ScholarPrivate so that it belongs to the user
+    const scholarPrivateRecordToCreate = {
+      fields: {
+        email: fields.scholarPrivate.email,
+        birthday: fields.scholar.birthday
+      }
+    }
+    const createdScholarPrivate = await ScholarPrivate.create(scholarPrivateRecordToCreate)
+
+    // if Scholar exists, update using new fields, else create one
     let scholar: Scholar
-    let scholarPrivate: ScholarPrivate
-    if (state.scholar && state.scholarPrivate) {
+    if (state.scholar) {
       scholar = Scholar.clone(state.scholar)
       scholar.setFields(fields.scholar)
       scholar.gdprConsentAt = new Date().getTime()
 
-      scholarPrivate = ScholarPrivate.clone(state.scholarPrivate)
-      scholarPrivate.setFields(fields.scholarPrivate)
-      scholarPrivate.birthday = scholar.birthday!
+      scholar.scholarPrivate = {
+        recordName: createdScholarPrivate.recordName,
+        action: CloudKit.ReferenceAction.DELETE_SELF
+      }
+
+      createdScholarPrivate.scholar = {
+        recordName: scholar.recordName,
+        action: CloudKit.ReferenceAction.DELETE_SELF
+      }
 
       await Promise.all([
         scholar.save(),
-        scholarPrivate.save()
+        createdScholarPrivate.save()
       ])
     } else {
       // create new Scholar
       const scholarRecordToCreate: CloudKit.RecordToCreateSimple = {
         fields: {
           ...fields.scholar,
-          gdprConsentAt: { value: new Date().getTime() }
-        }
-      }
-      const createdScholar = await Scholar.create(scholarRecordToCreate)
-
-      // create new ScholarPrivate
-      const scholarPrivateRecordToCreate = {
-        fields: {
-          email: fields.scholarPrivate.email,
-          birthday: fields.scholar.birthday,
-          scholar: { value: {
-            recordName: createdScholar.recordName,
+          gdprConsentAt: { value: new Date().getTime() },
+          scholarPrivate: { value: {
+            recordName: createdScholarPrivate.recordName,
             action: CloudKit.ReferenceAction.DELETE_SELF
           }}
         }
       }
-      const createdScholarPrivate = await ScholarPrivate.create(scholarPrivateRecordToCreate)
+      const createdScholar = await Scholar.create(scholarRecordToCreate)
 
-      // set scholarPrivate reference on Scholar
-      createdScholar.scholarPrivate = {
-        recordName: createdScholarPrivate.recordName,
+      // set scholar reference on ScholarPrivate
+      createdScholarPrivate.scholar = {
+        recordName: createdScholar.recordName,
         action: CloudKit.ReferenceAction.DELETE_SELF
       }
 
-      // save updated Scholar
-      await createdScholar.save()
+      // save updated ScholarPrivate
+      await createdScholarPrivate.save()
 
       scholar = createdScholar
-      scholarPrivate = createdScholarPrivate
     }
     this.$sentry.addBreadcrumb({
       category: 'submit',
@@ -297,7 +301,7 @@ export const actions: ActionTree<State, State> = {
     // done, set state for middleware
     commit(types.setScholar, scholar)
     commit(types.setScholarSocialMedia, socialMedia)
-    commit(types.setScholarPrivate, scholarPrivate)
+    commit(types.setScholarPrivate, createdScholarPrivate)
   }
 }
 
