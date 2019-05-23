@@ -5,14 +5,16 @@
     h3(v-if="!isSubmissionApproved").color-blue We will review your profile as soon as possible.
     h3(v-else).color-blue Your profile is live at #[a(href="https://www.wwdcscholars.com") WWDCScholars.com]
 
-    p(v-if="!isSubmissionApproved").
-      In the meantime, you should check out the other great ways to connect with fellow Scholarship winners. We have listed some of them below.
-      #[br]#[br]
-      Reminder: In order to validate your submission, please forward your
-      acceptance email to the following email address: #[i {{verificationEmailAdress}}]
-    p(v-else).
-      Don't forget to check out the other great ways to connect with fellow
-      Scholarship winners. We have listed some of them below.
+    .description(v-if="!isSubmissionApproved")
+      p.
+        In the meantime, you should check out the other great ways to connect with fellow Scholarship winners. We have listed some of them below.
+      p(v-if="verificationEmailAdress").
+        Reminder: In order to validate your submission, please forward your
+        acceptance email to the following email address: #[i {{verificationEmailAdress}}]
+    .description(v-else)
+      p.
+        Don't forget to check out the other great ways to connect with fellow
+        Scholarship winners. We have listed some of them below.
 
 
     .social-links
@@ -40,7 +42,11 @@ export default class PageThankyou extends Vue {
   @API.State
   scholar!: Scholar
 
-  get verificationEmailAdress(): string {
+  get verificationEmailAdress(): string | null {
+    if (!this.userIdentity || !this.userIdentity.userRecordName) {
+      return null
+    }
+
     return `verify+${this.userIdentity.userRecordName}@wwdcscholars.com`
   }
 
