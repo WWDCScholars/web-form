@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.4"></a>
+## [3.3.4](https://github.com/WWDCScholars/web-form/compare/v3.3.3...v3.3.4) (2019-05-23)
+
+
+### Bug Fixes
+
+* Use proper release version ([13698f9](https://github.com/WWDCScholars/web-form/commit/13698f9))
+
+
+
 <a name="3.3.3"></a>
 ## [3.3.3](https://github.com/WWDCScholars/web-form/compare/v3.3.2...v3.3.3) (2019-05-23)
 
