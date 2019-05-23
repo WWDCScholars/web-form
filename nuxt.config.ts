@@ -136,7 +136,7 @@ const config: NuxtConfiguration = {
     dsn: process.env.SENTRY_DSN,
     config: {
       environment: process.env.SENTRY_ENVIRONMENT,
-      release: `web-form@v${version}`,
+      release: `form@v${version}`,
       autoBreadcrumbs: {
         'ui': false,
         'location': true,

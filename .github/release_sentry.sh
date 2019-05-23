@@ -11,7 +11,7 @@ PRJ=form
 URL=https://join.wwdcscholars.com
 
 # Get version (current tag)
-VERSION=`git describe --tags`
+VERSION=form@`git describe --tags`
 
 # Create new version in sentry
 sentry-cli releases -o $ORG -p $PRJ new --finalize $VERSION
