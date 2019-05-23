@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.2"></a>
+## [3.3.2](https://github.com/WWDCScholars/web-form/compare/v3.3.1...v3.3.2) (2019-05-23)
+
+
+### Bug Fixes
+
+* Build verification email address only if userIdentity exists ([b4c0471](https://github.com/WWDCScholars/web-form/commit/b4c0471))
+* Don't fill private fields ([a60dac0](https://github.com/WWDCScholars/web-form/commit/a60dac0))
+
+
+
 <a name="3.3.1"></a>
 ## [3.3.1](https://github.com/WWDCScholars/web-form/compare/v3.3.0...v3.3.1) (2019-05-22)
 
