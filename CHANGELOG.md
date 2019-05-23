@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.5"></a>
+## [3.3.5](https://github.com/WWDCScholars/web-form/compare/v3.3.4...v3.3.5) (2019-05-23)
+
+
+### Bug Fixes
+
+* Upgrade tar dependency ([bcac20e](https://github.com/WWDCScholars/web-form/commit/bcac20e))
+
+
+
 <a name="3.3.4"></a>
 ## [3.3.4](https://github.com/WWDCScholars/web-form/compare/v3.3.3...v3.3.4) (2019-05-23)
 
