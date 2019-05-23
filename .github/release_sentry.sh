@@ -16,4 +16,4 @@ VERSION=`git describe --tags`
 # Create new version in sentry
 sentry-cli releases -o $ORG -p $PRJ new --finalize $VERSION
 sentry-cli releases -o $ORG -p $PRJ set-commits --auto $VERSION
-sentry-cli releases -o $ORG -p $PRJ files $VERSION upload-sourcemaps --url-prefix $URL ./dist
+sentry-cli releases -o $ORG -p $PRJ files $VERSION upload-sourcemaps --no-rewrite --url-prefix $URL ./dist
