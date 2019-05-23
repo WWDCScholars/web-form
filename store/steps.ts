@@ -69,9 +69,9 @@ export const mutations: MutationTree<State> = {
     for (let key of Object.keys(state.steps)) {
       for (let section of state.steps[key].sections) {
         for (let field of section.fields) {
-          if (privateFields[field.name]) {
+          /*if (privateFields[field.name]) {
             field.model = privateFields[field.name].value;
-          } else if (scholarFields[field.name]) {
+          } else */if (scholarFields[field.name]) {
             if (field.type === 'image') {
               const url = scholarFields[field.name].value.downloadURL
               field.model = { 0: url }
