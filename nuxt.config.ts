@@ -4,6 +4,7 @@ dotenv()
 
 const version = require('./package.json').version
 const isProduction = (process.env.NODE_ENV === 'production')
+const isLocal = (process.env.LOCAL === '1')
 
 const proxyConfiguration = isProduction ? {} : { proxy: {
   '/api': { target: 'http://localhost:3001' }
@@ -135,7 +136,7 @@ const config: NuxtConfiguration = {
     dsn: process.env.SENTRY_DSN,
     config: {
       environment: process.env.SENTRY_ENVIRONMENT,
-      release: `v${version}`,
+      release: `web-form@v${version}`,
       autoBreadcrumbs: {
         'ui': false,
         'location': true,
@@ -154,6 +155,11 @@ const config: NuxtConfiguration = {
     extend(config: any) {
       config.node = {
         fs: 'empty'
+      }
+
+      // enable source maps
+      if (isLocal) {
+        config.devtool = '#source-map'
       }
     }
   },
