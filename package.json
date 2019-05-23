@@ -17,12 +17,13 @@
     "dev": "cross-env NODE_ENV=development nuxt",
     "build": "cross-env NODE_ENV=production nuxt build",
     "start": "cross-env NODE_ENV=production nuxt start",
-    "generate": "cross-env NODE_ENV=production nuxt generate",
     "lint": "tslint --project .",
-    "release": "standard-version",
-    "release:pre": "standard-version --prerelease pre",
-    "release:push": "./.github/release.sh",
-    "release:sentry": "./.github/release_sentry.sh"
+    "release:create": "standard-version",
+    "release:create:pre": "standard-version --prerelease pre",
+    "release:build": "cross-env NODE_ENV=production LOCAL=1 nuxt build",
+    "release:sentry": "./.github/release_sentry.sh",
+    "release:publish": "git push --follow-tags",
+    "release": "npm run release:create && npm run release:build && npm run release:sentry && npm run release:publish"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.4.1",
@@ -50,7 +51,7 @@
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.6.3",
-    "@sentry/cli": "^1.42.0",
+    "@sentry/cli": "^1.43.0",
     "@types/dotenv": "^6.1.1",
     "@types/googlemaps": "^3.30.19",
     "@types/lodash.merge": "^4.6.6",
