@@ -4,13 +4,23 @@ dotenv()
 
 const version = require('./package.json').version
 const isProduction = (process.env.NODE_ENV === 'production')
+const isDevelopment = (process.env.NODE_ENV === 'development')
 const isLocal = (process.env.LOCAL === '1')
 
-const proxyConfiguration = isProduction ? {} : { proxy: {
+let envPrefix: string
+if (process.env.NODE_ENV === 'production') {
+  envPrefix = 'PROD'
+} else if (process.env.NODE_ENV === 'staging') {
+  envPrefix = 'STAGE'
+} else {
+  envPrefix = 'DEV'
+}
+
+const proxyConfiguration = !isDevelopment ? {} : { proxy: {
   '/api': { target: 'http://localhost:3001' }
 }}
 
-const axiosBaseURL = isProduction ? process.env.LINK_API_BASE_URL : '/api'
+const axiosBaseURL = !isDevelopment ? process.env.LINK_API_BASE_URL : '/api'
 
 const config: NuxtConfiguration = {
   mode: 'spa',
@@ -96,9 +106,9 @@ const config: NuxtConfiguration = {
 
     // CloudKit connection
     ['~/cloudkit/nuxt-module', {
-      containerIdentifier: process.env.CLOUDKIT_CONTAINER_IDENTIFIER,
-      apiToken: process.env.CLOUDKIT_API_TOKEN,
-      environment: process.env.CLOUDKIT_ENVIRONMENT
+      containerIdentifier: `${envPrefix}_${process.env.CLOUDKIT_CONTAINER_IDENTIFIER}`,
+      apiToken: `${envPrefix}_${process.env.CLOUDKIT_API_TOKEN}`,
+      environment: `${envPrefix}_${process.env.CLOUDKIT_ENVIRONMENT}`
     }],
 
     // Axios for linking api
