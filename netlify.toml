@@ -1,0 +1,21 @@
+[build]
+  base = "."
+  publish = "dist"
+
+# Production version, deployed by CI
+[context.production]
+  command = "npm run build:prod"
+
+# Staging version, deployed by push to master
+[context.master]
+  command = "npm run build:stage"
+
+# Previews for pull requests
+[context.deploy-preview]
+  command = "npm run build:stage"
+
+# SPA redirect
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
