@@ -3,7 +3,6 @@ import { config as dotenv } from 'dotenv'
 dotenv()
 
 const version = require('./package.json').version
-const isProduction = (process.env.NODE_ENV === 'production')
 const isDevelopment = (process.env.NODE_ENV === 'development')
 const isLocal = (process.env.LOCAL === '1')
 
@@ -142,7 +141,7 @@ const config: NuxtConfiguration = {
    ** Sentry configuration
    */
   sentry: {
-    // disabled: !isProduction, TODO
+    disabled: isDevelopment,
     dsn: process.env.SENTRY_DSN,
     config: {
       environment: process.env.SENTRY_ENVIRONMENT,
