@@ -177,7 +177,7 @@ export const actions: ActionTree<State, State> = {
     }}
 
     // if scholar already exists append, else create wwdcYear and wwdcYearInfo references
-    if (state.scholar) {
+    if (state.scholar && state.scholar.wwdcYearInfos && state.scholar.wwdcYears) {
       fields.scholar.wwdcYearInfos = { value: [...state.scholar.wwdcYearInfos] }
       fields.scholar.wwdcYears = { value: [...state.scholar.wwdcYears] }
     } else {
