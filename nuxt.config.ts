@@ -105,9 +105,9 @@ const config: NuxtConfiguration = {
 
     // CloudKit connection
     ['~/cloudkit/nuxt-module', {
-      containerIdentifier: `${envPrefix}_${process.env.CLOUDKIT_CONTAINER_IDENTIFIER}`,
-      apiToken: `${envPrefix}_${process.env.CLOUDKIT_API_TOKEN}`,
-      environment: `${envPrefix}_${process.env.CLOUDKIT_ENVIRONMENT}`
+      containerIdentifier: process.env[`${envPrefix}_CLOUDKIT_CONTAINER_IDENTIFIER`],
+      apiToken: process.env[`${envPrefix}_CLOUDKIT_API_TOKEN`],
+      environment: process.env[`${envPrefix}_CLOUDKIT_ENVIRONMENT`]
     }],
 
     // Axios for linking api
