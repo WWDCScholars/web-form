@@ -141,7 +141,7 @@ const config: NuxtConfiguration = {
    ** Sentry configuration
    */
   sentry: {
-    disabled: isDevelopment,
+    disabled: false,
     dsn: process.env.SENTRY_DSN,
     config: {
       environment: process.env.SENTRY_ENVIRONMENT,
