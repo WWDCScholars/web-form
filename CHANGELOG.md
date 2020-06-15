@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/WWDCScholars/web-form/compare/v3.3.5...v3.4.0) (2020-06-15)
+
+
+### Bug Fixes
+
+* CloudKit environment variable names ([671e03a](https://github.com/WWDCScholars/web-form/commit/671e03a))
+* Fix typo in page title ([bdf9556](https://github.com/WWDCScholars/web-form/commit/bdf9556))
+* Initialize wwdcYears and wwdcYearInfos empty if the fields don't exist yet ([e24672b](https://github.com/WWDCScholars/web-form/commit/e24672b))
+* Never disable sentry to resolve problem running in development mode ([74ba76d](https://github.com/WWDCScholars/web-form/commit/74ba76d))
+
+
+### Features
+
+* Update wording for 2020, online, and Swift Student Challenge ([6b76161](https://github.com/WWDCScholars/web-form/commit/6b76161))
+
+
+
 <a name="3.3.5"></a>
 ## [3.3.5](https://github.com/WWDCScholars/web-form/compare/v3.3.4...v3.3.5) (2019-05-23)
 
