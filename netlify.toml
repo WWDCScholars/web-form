@@ -3,11 +3,11 @@
   publish = "dist"
 
 # Production version, deployed by CI
-[context.production]
+[context.master]
   command = "npm run build:prod"
 
 # Staging version, deployed by push to master
-[context.master]
+[context.develop]
   command = "npm run build:stage"
 
 # Previews for pull requests
