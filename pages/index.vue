@@ -1,11 +1,11 @@
 <template lang="pug">
 .container-fluid.color-gray
   h2.color-blue Welcome to WWDCScholars!
-  h3.color-blue Are you a 2019 Scholarship Winner?
+  h3.color-blue Are you a 2020 Swift Student Challenge Winner?
   p.
     First of all - congratulations! Whether you're a first-time winner, or a returning Scholar, you've achieved something special and should be very proud!
   p.
-    Now it's time you showcase your talent and connect with the other winners you will be spending the week with in San Jose!
+    Now it's time you showcase your talent and connect with the other winners!
 
   p.
     Sign in with your Apple ID below to get started. We use iCloud for authentication and we do not get to see any of your login details as everything is handled between Apple and you.

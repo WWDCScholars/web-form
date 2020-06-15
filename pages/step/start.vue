@@ -2,20 +2,19 @@
 .container-fluid.link-form.form-color-orange
   .link-step
     h3.color-orange Linking complete
-    h4.color-orange Have you won a WWDC 2019 Scholarship?
+    h4.color-orange Have you won the WWDC 2020 Swift Student Challenge?
 
     p.
-      If you did, select #[i Sign Up For 2019], fill out the form and connect with
-      all the other Scholarship winners from around the world!
+      If you did, select #[i Sign Up For 2020], fill out the form and connect with
+      all the other Swift Student Challenge winners from around the world!
 
     p.
       If you linked your existing WWDCScholars profile to your iCloud account and
-      don't want to submit a WWDC 2019 profile, you can check out your profile on
-      our homepage.
+      don't want to submit a WWDC 2020 profile, you can check out your profile on our homepage.
 
     .cta-group
       a(href="https://www.wwdcscholars.com").btn.btn-secondary Go to Homepage
-      nuxt-link(:to="firstStepLink").btn.btn-primary Sign Up for 2019
+      nuxt-link(:to="firstStepLink").btn.btn-primary Sign Up for 2020
 </template>
 
 <script lang="ts">

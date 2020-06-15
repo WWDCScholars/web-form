@@ -7,14 +7,14 @@
 
     .description(v-if="!isSubmissionApproved")
       p.
-        In the meantime, you should check out the other great ways to connect with fellow Scholarship winners. We have listed some of them below.
+        In the meantime, you should check out the other great ways to connect with fellow Swift Student Challenge winners. We have listed some of them below.
       p(v-if="verificationEmailAdress").
         Reminder: In order to validate your submission, please forward your
         acceptance email to the following email address: #[i {{verificationEmailAdress}}]
     .description(v-else)
       p.
         Don't forget to check out the other great ways to connect with fellow
-        Scholarship winners. We have listed some of them below.
+        Swift Student Challenge winners. We have listed some of them below.
 
 
     .social-links
