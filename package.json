@@ -20,7 +20,7 @@
     "start": "cross-env NODE_ENV=production nuxt start",
     "release:create": "standard-version",
     "release:create:pre": "standard-version --prerelease pre",
-    "release:build": "cross-env NODE_ENV=production LOCAL=1 nuxt build:prod",
+    "release:build": "cross-env NODE_ENV=production LOCAL=1 nuxt build",
     "release:sentry": "./.github/release_sentry.sh",
     "release:publish": "git push --follow-tags",
     "release": "npm run release:create && npm run release:build && npm run release:publish && npm run release:sentry"
