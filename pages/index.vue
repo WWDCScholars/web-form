@@ -1,22 +1,24 @@
 <template lang="pug">
 .container-fluid.color-gray
   h2.color-blue Welcome to WWDCScholars!
-  h3.color-blue Are you a 2020 Swift Student Challenge Winner?
   p.
-    First of all - congratulations! Whether you're a first-time winner, or a returning Scholar, you've achieved something special and should be very proud!
-  p.
-    Now it's time you showcase your talent and connect with the other winners!
+    We are currently working to update the sign-up form for WWDC 2020. Be sure to #[a(href="https://twitter.com/WWDCScholars") follow us on Twitter @WWDCScholars] to know as soon as you can add your submission!
+  //- h3.color-blue Are you a 2020 Swift Student Challenge Winner?
+  //- p.
+  //-   First of all - congratulations! Whether you're a first-time winner, or a returning Scholar, you've achieved something special and should be very proud!
+  //- p.
+  //-   Now it's time you showcase your talent and connect with the other winners!
 
-  p.
-    Sign in with your Apple ID below to get started. We use iCloud for authentication and we do not get to see any of your login details as everything is handled between Apple and you.
+  //- p.
+  //-   Sign in with your Apple ID below to get started. We use iCloud for authentication and we do not get to see any of your login details as everything is handled between Apple and you.
 
-  p: i.
-    Do you want to link your existing WWDCScholars profile to your iCloud account to make your profile visible on our website? Sign in below and follow the instructions!
+  //- p: i.
+  //-   Do you want to link your existing WWDCScholars profile to your iCloud account to make your profile visible on our website? Sign in below and follow the instructions!
 
-  hr
+  //- hr
 
-  .signin-wrapper
-    a(:href="signInURL").btn.btn-sign-in Sign in with Apple ID
+  //- .signin-wrapper
+  //-   a(:href="signInURL").btn.btn-sign-in Sign in with Apple ID
 </template>
 
 <script lang="ts">
@@ -36,6 +38,9 @@ export default class PageIndex extends Vue {
 </script>
 
 <style lang="sass" scoped>
+p a
+  color: $apl-black
+
 i
   font-size: 0.9em
 
