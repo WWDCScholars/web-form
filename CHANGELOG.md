@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/WWDCScholars/web-form/compare/v3.4.3...v3.5.0) (2020-06-17)
+
+
+### Features
+
+* Add acceptance email field to submission step ([420f1dd](https://github.com/WWDCScholars/web-form/commit/420f1dd))
+* Can use html in comment value of field ([cd95a5f](https://github.com/WWDCScholars/web-form/commit/cd95a5f))
+* Remove acceptance email forward stuff ([63121da](https://github.com/WWDCScholars/web-form/commit/63121da))
+
+
+
 <a name="3.4.3"></a>
 ## [3.4.3](https://github.com/WWDCScholars/web-form/compare/v3.4.2...v3.4.3) (2020-06-16)
 
