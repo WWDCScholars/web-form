@@ -8,9 +8,6 @@
     .description(v-if="!isSubmissionApproved")
       p.
         In the meantime, you should check out the other great ways to connect with fellow Swift Student Challenge winners. We have listed some of them below.
-      p(v-if="verificationEmailAdress").
-        Reminder: In order to validate your submission, please forward your
-        acceptance email to the following email address: #[i {{verificationEmailAdress}}]
     .description(v-else)
       p.
         Don't forget to check out the other great ways to connect with fellow
@@ -41,14 +38,6 @@ export default class PageThankyou extends Vue {
 
   @API.State
   scholar!: Scholar
-
-  get verificationEmailAdress(): string | null {
-    if (!this.userIdentity || !this.userIdentity.userRecordName) {
-      return null
-    }
-
-    return `verify+${this.userIdentity.userRecordName}@wwdcscholars.com`
-  }
 
   get isSubmissionApproved(): boolean {
     if (!this.scholar || !this.scholar.wwdcYearsApproved) {

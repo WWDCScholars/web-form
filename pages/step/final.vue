@@ -7,21 +7,7 @@
   )
 
   .step-form.form
-    h3 Last, we have to go over some formalities
-
-    .group
-      h4.
-        In order to validate your submission, please forward your acceptance
-        email to the following email address:
-
-      .field: copyable(:value.once="verificationEmailAdress").copy-email
-
-      .field
-        input-checkbox(
-          name="acceptanceEmailForwarded",
-          :placeholder="`I forwarded my acceptance email to ${verificationEmailAdress}`",
-          v-model="acceptanceEmailForwarded"
-        )
+    h3 Last, we have to go over a few formalities
 
     .group(v-if="showParentalConsent")
       h4.
@@ -61,8 +47,7 @@ import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Step } from '~/model'
 import ModalSpinner from '~/components/ModalSpinner.vue'
-import Copyable from '~/components/Copyable.vue'
-import { InputCheckbox } from '~/components/inputs'
+import { InputCheckbox, InputImage } from '~/components/inputs'
 import { CloudKit } from '~/model'
 
 dayjs.extend(customParseFormat)
@@ -73,7 +58,7 @@ import { name as apiName } from '~/store/api'
 const API = namespace(apiName)
 
 @Component({
-  components: { ModalSpinner, Copyable, InputCheckbox },
+  components: { ModalSpinner, InputCheckbox, InputImage },
   middleware: ['authenticated', 'unsubmitted']
 })
 export default class PageStepFinal extends Vue {
@@ -81,7 +66,6 @@ export default class PageStepFinal extends Vue {
 
   parentalConsent: boolean = false
   gdprConsent: boolean = false
-  acceptanceEmailForwarded: boolean = false
 
   @Steps.State
   steps!: Map<string, Step>
@@ -121,10 +105,6 @@ export default class PageStepFinal extends Vue {
     return age < 18
   }
 
-  get verificationEmailAdress(): string {
-    return `verify+${this.userIdentity.userRecordName}@wwdcscholars.com`
-  }
-
   get submittable(): boolean {
     for (let slug in this.steps) {
       if (!this.steps[slug].finished) {
@@ -133,10 +113,10 @@ export default class PageStepFinal extends Vue {
     }
 
     if (this.showParentalConsent) {
-      return this.parentalConsent && this.gdprConsent && this.acceptanceEmailForwarded
+      return this.parentalConsent && this.gdprConsent
     }
 
-    return this.gdprConsent && this.acceptanceEmailForwarded
+    return this.gdprConsent
   }
 
   async submit() {
