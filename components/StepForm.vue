@@ -65,7 +65,7 @@
       )
 
       .input-error(v-if="errors.has(field.name)") {{ errors.first(field.name) }}
-      .comment(v-if="field.comment") {{ field.comment }}
+      .comment(v-if="field.comment", v-html="field.comment")
 </template>
 
 <script lang="ts">
@@ -169,4 +169,7 @@ export default class StepForm extends Vue {
   .comment
     color: $sch-gray
     margin-top: 15px
+
+    a
+      color: $sch-gray
 </style>
