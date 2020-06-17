@@ -182,6 +182,17 @@
         "placeholder": "GitHub URL",
         "required": false
       }]
+    }, {
+      "title": "In order to validate your submission, please upload a screenshot of the Events Section of your Apple Developer Profile",
+      "fields": [{
+        "name": "acceptanceEmail",
+        "readableName": "acceptance email",
+        "type": "image",
+        "accept": "image/*",
+        "styleClass": "field-image-wide",
+        "resizeMax": 1000,
+        "comment": "You can find <a href=\"https://developer.apple.com/account/#/events\" target=\"_blank\")>your Apple Developer Profile here (developer.apple.com/account/#/events)</a>. Make sure the <i>WWDC2020 Swift Student Challenge Winner</i> entry and your name in the top-right corner are clearly visible in the screenshot."
+      }]
     }]
   }
 ]
