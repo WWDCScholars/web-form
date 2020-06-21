@@ -155,7 +155,7 @@
         "maxLength": 300
       }]
     }, {
-      "title": "Upload some screenshots that showcase your playground submission",
+      "title": "Upload up to five screenshots that showcase your playground submission",
       "fields": [{
         "name": "screenshots",
         "readableName": "screenshots",
