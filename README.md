@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.wwdcscholars.com" target="_blank"><img width="90" height="90" src="https://raw.githubusercontent.com/WWDCScholars/web-form/master/.github/logo.png"></a></p>
+<p align="center"><a href="https://www.wwdcscholars.com" target="_blank"><img width="90" height="90" src="https://raw.githubusercontent.com/WWDCScholars/web-form/main/.github/logo.png"></a></p>
 
 # WWDCScholars Form
 WWDCScholars is a community of [Apple WWDC Scholarship](https://developer.apple.com/wwdc/scholarships/) winners. Every year bright minds from all around the world compete against each other for a free ticket to Apple's yearly developers conference. The scholarship recipients share their winning projects in [our iOS App](https://itunes.apple.com/us/app/scholars-of-wwdc/id999731893?mt=8) and on [our website (wwdcscholars.com)](https://www.wwdcscholars.com).
@@ -70,4 +70,4 @@ I'm [Moritz Sternemann](https://github.com/moritzsternemann), a computer-science
 - [Website (github.com/WWDCScholars/web-app)](https://github.com/WWDCScholars/web-app)
 
 ## License
-The *WWDCScholars From* is available under the MIT license. See the [LICENSE](https://github.com/WWDCScholars/web-form/blob/master/LICENSE) file for more information.
+The *WWDCScholars From* is available under the MIT license. See the [LICENSE](https://github.com/WWDCScholars/web-form/blob/main/LICENSE) file for more information.
