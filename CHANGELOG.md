@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.7.0"></a>
+# [3.7.0](https://github.com/WWDCScholars/web-form/compare/v3.6.0...v3.7.0) (2021-05-31)
+
+
+### Features
+
+* Update for WWDC 2021 ([12b4eb6](https://github.com/WWDCScholars/web-form/commit/12b4eb6))
+
+
+
 <a name="3.6.0"></a>
 # [3.6.0](https://github.com/WWDCScholars/web-form/compare/v3.5.0...v3.6.0) (2020-06-21)
 
