@@ -36,7 +36,7 @@ const config: NuxtConfiguration = {
         hid: 'description',
         name: 'description',
         content:
-          'Are you a WWDC 2020 Swift Student Challenge Winner? Sign up now!'
+          'Are you a WWDC 2021 Swift Student Challenge Winner? Sign up now!'
       },
       { name: 'keywords', content: 'WWDCScholars,WWDC,Scholars,Apple' },
       { name: 'author', content: 'WWDCScholars' },

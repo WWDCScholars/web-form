@@ -126,7 +126,7 @@
 
   {
     "slug": "2-application",
-    "title": "Now for the fun part. Show us your WWDC 2020 submission!",
+    "title": "Now for the fun part. Show us your WWDC 2021 submission!",
     "color": "green",
     "ckParameterName": "wwdcYearInfo",
     "sections": [{
@@ -191,7 +191,7 @@
         "accept": "image/*",
         "styleClass": "field-image-wide",
         "resizeMax": 1000,
-        "comment": "You can find <a href=\"https://developer.apple.com/account/#/events\" target=\"_blank\")>your Apple Developer Profile here (developer.apple.com/account/#/events)</a>. Make sure the <i>WWDC2020 Swift Student Challenge Winner</i> entry and your name in the top-right corner are clearly visible in the screenshot."
+        "comment": "You can find <a href=\"https://developer.apple.com/account/#/events\" target=\"_blank\")>your Apple Developer Profile here (developer.apple.com/account/#/events)</a>. Make sure the <i>WWDC2021 Swift Student Challenge Winner</i> entry and your name in the top-right corner are clearly visible in the screenshot."
       }]
     }]
   }

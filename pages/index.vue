@@ -1,7 +1,7 @@
 <template lang="pug">
 .container-fluid.color-gray
   h2.color-blue Welcome to WWDCScholars!
-  h3.color-blue Are you a 2020 Swift Student Challenge Winner?
+  h3.color-blue Are you a 2021 Swift Student Challenge Winner?
   p.
     First of all - congratulations! Whether you're a first-time winner, or a returning Scholar, you've achieved something special and should be very proud!
   p.
