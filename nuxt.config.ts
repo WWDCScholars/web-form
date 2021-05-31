@@ -110,6 +110,9 @@ const config: NuxtConfiguration = {
       environment: process.env[`${envPrefix}_CLOUDKIT_ENVIRONMENT`]
     }],
 
+    // Load Plausible Analytics
+    'vue-plausible',
+
     // Axios for linking api
     '@nuxtjs/proxy',
     '@nuxtjs/axios',
@@ -135,6 +138,14 @@ const config: NuxtConfiguration = {
    */
   axios: {
     baseURL: axiosBaseURL
+  },
+
+  /*
+   ** Plausible Analytics configuration
+   */
+   plausible: {
+    domain: process.env[`${envPrefix}_PLAUSIBLE_DOMAIN`],
+    apiHost: process.env[`${envPrefix}_PLAUSIBLE_API_HOST`]
   },
 
   /*
