@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.8.2"></a>
+## [3.8.2](https://github.com/WWDCScholars/web-form/compare/v3.8.1...v3.8.2) (2021-06-01)
+
+
+### Bug Fixes
+
+* Update discord link on thankyou page ([b44337e](https://github.com/WWDCScholars/web-form/commit/b44337e)), closes [#13](https://github.com/WWDCScholars/web-form/issues/13)
+
+
+
 <a name="3.8.1"></a>
 ## [3.8.1](https://github.com/WWDCScholars/web-form/compare/v3.8.0...v3.8.1) (2021-05-31)
 
