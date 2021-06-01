@@ -17,7 +17,7 @@
     .social-links
       a(href="https://twitter.com/WWDCScholars")
         img(src="~assets/images/icon-twitter-large.png")
-      a(href="https://discord.gg/eKAfJYs")
+      a(href="https://wwdcscholars.com/discord")
         img(src="~assets/images/icon-discord-large.png")
 </template>
 
