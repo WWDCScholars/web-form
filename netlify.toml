@@ -14,6 +14,13 @@
 [context.deploy-preview]
   command = "npm run build:stage"
 
+# Plausible Proxy
+[[redirects]]
+  from = "/stats/api/event"
+  to = "https://plausible.io/api/event"
+  status = 200
+  force = true
+
 # SPA redirect
 [[redirects]]
   from = "/*"
