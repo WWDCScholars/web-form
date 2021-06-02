@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.9.0"></a>
+# [3.9.0](https://github.com/WWDCScholars/web-form/compare/v3.8.3...v3.9.0) (2021-06-02)
+
+
+### Features
+
+* Add Instagram and Apple Developer Profile fields ([065250b](https://github.com/WWDCScholars/web-form/commit/065250b))
+
+
+
 <a name="3.8.3"></a>
 ## [3.8.3](https://github.com/WWDCScholars/web-form/compare/v3.8.2...v3.8.3) (2021-06-01)
 
