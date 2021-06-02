@@ -101,9 +101,19 @@
         "placeholder": "GitHub URL",
         "required": false
       }, {
+        "name": "itunes",
+        "type": "url",
+        "placeholder": "App Store Developer Page URL",
+        "required": false
+      }, {
         "name": "twitter",
         "type": "url",
         "placeholder": "Twitter URL",
+        "required": false
+      }, {
+        "name": "instagram",
+        "type": "url",
+        "placeholder": "Instagram URL",
         "required": false
       }, {
         "name": "facebook",
