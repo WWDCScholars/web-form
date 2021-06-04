@@ -36,18 +36,18 @@
           "displayFormat": "Y-m-d"
         }]
       }, {
-        "title": "Gender",
+        "title": "Pronouns",
         "fields": [{
           "name": "gender",
           "type": "radio",
           "options": [{
-            "label": "male",
+            "label": "he / him",
             "value": "male"
           }, {
-            "label": "female",
+            "label": "she / her",
             "value": "female"
           }, {
-            "label": "other",
+            "label": "they / them",
             "value": "other"
           }]
         }]
