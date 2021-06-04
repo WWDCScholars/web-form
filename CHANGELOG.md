@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.10.0"></a>
+# [3.10.0](https://github.com/WWDCScholars/web-form/compare/v3.9.0...v3.10.0) (2021-06-04)
+
+
+### Features
+
+* Rename gender field to pronouns ([2e64312](https://github.com/WWDCScholars/web-form/commit/2e64312))
+
+
+
 <a name="3.9.0"></a>
 # [3.9.0](https://github.com/WWDCScholars/web-form/compare/v3.8.3...v3.9.0) (2021-06-02)
 
