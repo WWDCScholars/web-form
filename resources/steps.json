@@ -13,7 +13,7 @@
           "accept": "image/*",
           "dimensions_min": 250,
           "resizeMax": 500,
-          "comment": "This needs to be an image of you with a resolution of at least 250x250"
+          "comment": "This needs to be an image of you or a Memoji with a resolution of at least 250x250"
         }]
       }, {
         "title": "Enter some basic details about yourself",
