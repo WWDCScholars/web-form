@@ -61,8 +61,9 @@ export default class InputText extends Vue {
   value_validate: string = this.value || ' ';
 
   update(value) {
-    this.value_validate = value;
-    this.$emit('input', value);
+    const trimmed = value.trim();
+    this.value_validate = trimmed;
+    this.$emit('input', trimmed);
   }
 
   get length() {
