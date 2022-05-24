@@ -14,15 +14,22 @@
 [context.deploy-preview]
   command = "npm run build:stage"
 
-# Plausible Proxy
-[[redirects]]
-  from = "/stats/api/event"
-  to = "https://plausible.io/api/event"
-  status = 200
-  force = true
-
-# SPA redirect
+# Redirect to main page
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "https://www.wwdcscholars.com/join?utm_medium=referral&utm_source=join"
+  status = 302
+  force = true
+
+# # Plausible Proxy
+# [[redirects]]
+#   from = "/stats/api/event"
+#   to = "https://plausible.io/api/event"
+#   status = 200
+#   force = true
+
+# # SPA redirect
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
